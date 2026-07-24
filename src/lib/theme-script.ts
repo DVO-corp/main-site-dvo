@@ -14,10 +14,10 @@ export const themeInitScript = `
   // themselves only under this class, so a no-JS visitor sees every section.
   document.documentElement.classList.add("js");
   try {
+    // Dark is the brand default: only an explicit "light" choice overrides it,
+    // the OS preference does not.
     var stored = localStorage.getItem("${THEME_STORAGE_KEY}");
-    var theme = stored === "light" || stored === "dark"
-      ? stored
-      : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    var theme = stored === "light" ? "light" : "dark";
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.documentElement.style.colorScheme = theme;
   } catch (e) {

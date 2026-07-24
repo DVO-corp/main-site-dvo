@@ -19,15 +19,13 @@ export const COMPANY = {
 } as const;
 
 /**
- * Contact endpoints.
- *
- * TODO(owner): replace the placeholder handles below with the real ones.
- * They are intentionally kept in one place so no component hardcodes them.
+ * Contact endpoints. Kept in one place so no component hardcodes them —
+ * header, footer, contact page, CTA blocks and JSON-LD all read from here.
  */
 export const CONTACTS = {
-  email: "hello@dvocorp.com",
-  telegramUsername: "dvocorp",
-  telegramUrl: "https://t.me/dvocorp",
+  email: "help@dvocorp.com",
+  telegramUsername: "lIlIlIlI_liiiiI",
+  telegramUrl: "https://t.me/lIlIlIlI_liiiiI",
   /** Shown as a fallback when a visitor prefers a scheduled call. */
   responseWindowHours: 24,
 } as const;
@@ -43,7 +41,6 @@ export const PRODUCTS = {
 
 export const SOCIAL = [
   { id: "telegram", label: "Telegram", href: CONTACTS.telegramUrl },
-  { id: "github", label: "GitHub", href: "https://github.com/DVO-corp" },
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -121,83 +118,139 @@ export function absoluteUrl(pathname: string): string {
 export type TechGroupId =
   | "orchestration"
   | "cicd"
-  | "observability"
   | "cloud"
+  | "iac"
+  | "network"
+  | "observability"
+  | "data"
   | "ai"
-  | "data";
+  | "platform";
 
+/**
+ * The technology showcase.
+ *
+ * Deliberately curated rather than exhaustive: each group lists the tools a
+ * prospective client would recognise and buy on, not every package we have
+ * ever touched. Adding an item here also moves the counter on the home page,
+ * which is derived from TECH_COUNT below.
+ */
 export const TECH_STACK: { id: TechGroupId; items: string[] }[] = [
   {
     id: "orchestration",
     items: [
       "Kubernetes",
+      "AWS EKS",
       "K3s",
       "Docker",
       "Helm",
-      "Terraform",
-      "Ansible",
-      "Nginx",
-      "Traefik",
+      "Argo CD",
+      "Horizontal Pod Autoscaler",
+      "KEDA",
+      "Kubernetes RBAC",
     ],
   },
   {
     id: "cicd",
     items: [
-      "GitLab CI",
+      "GitLab CI/CD",
       "GitHub Actions",
-      "Argo CD",
       "GitOps",
-      "Docker Registry",
-      "Renovate",
-    ],
-  },
-  {
-    id: "observability",
-    items: [
-      "Grafana",
-      "Prometheus",
-      "Loki",
-      "Grafana Alloy",
-      "Alertmanager",
-      "Uptime Kuma",
+      "GitLab Runner",
+      "Kaniko",
+      "AWS ECR",
+      "Zero-downtime deploy",
+      "Rollback",
     ],
   },
   {
     id: "cloud",
     items: [
-      "Hetzner",
-      "AWS",
-      "DigitalOcean",
-      "Cloudflare",
-      "Proxmox",
-      "S3 / MinIO",
-      "Restic",
+      "Amazon EC2",
+      "Amazon S3",
+      "Amazon EBS",
+      "AWS NLB",
+      "AWS CloudFront",
+      "Amazon SES",
+      "AWS IAM",
+      "Hetzner Cloud",
+      "GPU g4dn",
     ],
   },
   {
-    id: "ai",
+    id: "iac",
     items: [
-      "ComfyUI",
-      "PyTorch",
-      "CUDA",
-      "vLLM",
-      "Ollama",
-      "Whisper",
-      "FFmpeg",
-      "Triton",
+      "Terraform",
+      "Terraform modules",
+      "Infrastructure as Code",
+      "Ansible",
+      "DNS as code",
+      "Cloudflare API",
+    ],
+  },
+  {
+    id: "network",
+    items: [
+      "NGINX Ingress",
+      "Traefik",
+      "Cloudflare",
+      "Cloudflare WAF",
+      "cert-manager",
+      "Let's Encrypt",
+      "TLS / SSL",
+      "Network Policies",
+      "Load balancing",
+    ],
+  },
+  {
+    id: "observability",
+    items: [
+      "Prometheus",
+      "VictoriaMetrics",
+      "Grafana",
+      "Loki",
+      "Grafana Alloy",
+      "Alertmanager",
+      "kube-prometheus-stack",
+      "Sentry",
     ],
   },
   {
     id: "data",
     items: [
       "PostgreSQL",
+      "MySQL / MariaDB",
+      "ClickHouse",
       "Redis",
-      "RabbitMQ",
-      "Celery",
-      "FastAPI",
-      "Node.js",
+      "S3 / MinIO",
+      "Prisma",
+      "Backup & restore",
+    ],
+  },
+  {
+    id: "ai",
+    items: [
+      "ComfyUI",
+      "FFmpeg",
+      "GPU workers",
+      "Shared GPU pools",
+      "RunPod",
+      "Vast.ai",
+      "Speech-to-text",
+      "Task queues",
+    ],
+  },
+  {
+    id: "platform",
+    items: [
+      "Linux",
+      "Ubuntu",
+      "Bash",
       "Python",
-      "Go",
+      "Node.js",
+      "REST API",
+      "Webhooks",
+      "Telegram Bot API",
+      "Git",
     ],
   },
 ];

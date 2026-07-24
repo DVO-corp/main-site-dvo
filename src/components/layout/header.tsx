@@ -49,8 +49,10 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
     <header
       className={cn(
         "sticky top-0 z-50 w-full border-b transition-colors duration-300",
+        // Once the page scrolls, content passes under the bar — it has to be
+        // near-opaque or the text behind it shows through the navigation.
         scrolled
-          ? "glass border-border"
+          ? "border-border bg-background/95 shadow-sm backdrop-blur-xl backdrop-saturate-150"
           : "border-transparent bg-background/40 backdrop-blur-sm",
       )}
     >

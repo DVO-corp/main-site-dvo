@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { THEME_STORAGE_KEY } from "@/lib/theme-script";
@@ -24,9 +25,17 @@ function getSnapshot() {
   return document.documentElement.classList.contains("dark");
 }
 
-/** Dark is the pre-render default; the init script corrects it before paint. */
+/** Dark is the default everywhere; only a stored "light" overrides it. */
 function getServerSnapshot() {
   return true;
+}
+
+function storedPrefersDark() {
+  try {
+    return localStorage.getItem(THEME_STORAGE_KEY) !== "light";
+  } catch {
+    return true;
+  }
 }
 
 function applyTheme(dark: boolean) {
@@ -52,6 +61,17 @@ export function ThemeToggle({
     getSnapshot,
     getServerSnapshot,
   );
+  const pathname = usePathname();
+
+  React.useEffect(() => {
+    // Every locale renders its own <html>, so a client-side navigation can
+    // make React re-render that element and drop the class the pre-paint
+    // script set. Re-assert the stored preference after each navigation.
+    const dark = storedPrefersDark();
+    if (document.documentElement.classList.contains("dark") !== dark) {
+      applyTheme(dark);
+    }
+  }, [pathname]);
 
   const label = isDark ? labels.toLight : labels.toDark;
 

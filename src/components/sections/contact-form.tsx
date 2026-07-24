@@ -2,7 +2,14 @@
 
 import * as React from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { CircleCheck, Copy, Info, Send } from "lucide-react";
+import {
+  CircleCheck,
+  Copy,
+  Info,
+  Mail,
+  Send,
+  TriangleAlert,
+} from "lucide-react";
 import { CONTACTS, FORM } from "@/content/site";
 import type { Dictionary } from "@/content/locales";
 import { Button } from "@/components/ui/button";
@@ -188,6 +195,47 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
         <h2 className="text-xl font-semibold">{t.title}</h2>
         <p className="text-sm text-muted-foreground">{t.subtitle}</p>
       </div>
+
+      {/*
+        Up-front notice rather than a surprise after submitting: while there is
+        no endpoint, the form cannot deliver anything, so point people at the
+        channels that do work before they spend time filling it in.
+      */}
+      {FORM.demoMode && (
+        <div className="flex flex-col gap-3 rounded-lg border border-warning/40 bg-warning/[0.07] p-4">
+          <div className="flex items-start gap-3">
+            <TriangleAlert
+              className="mt-0.5 size-4 shrink-0 text-warning"
+              aria-hidden
+            />
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-semibold">{t.notice.title}</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {t.notice.text}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 pl-7">
+            <a
+              href={`mailto:${CONTACTS.email}`}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1.5 font-mono text-xs transition-colors hover:border-primary/50"
+            >
+              <Mail className="size-3.5" aria-hidden />
+              {CONTACTS.email}
+            </a>
+            <a
+              href={CONTACTS.telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1.5 font-mono text-xs transition-colors hover:border-primary/50"
+            >
+              <Send className="size-3.5" aria-hidden />@
+              {CONTACTS.telegramUsername}
+            </a>
+          </div>
+        </div>
+      )}
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Field

@@ -44,6 +44,8 @@ export const ru: Dictionary = {
     sendAnother: "Отправить ещё один запрос",
     calculate: "Подобрать решение",
     reset: "Сбросить",
+    copy: "Скопировать",
+    copied: "Скопировано",
     openInNewTab: "откроется в новой вкладке",
   },
 
@@ -470,12 +472,15 @@ export const ru: Dictionary = {
       subtitle:
         "Работаем с инструментами, у которых есть активная поддержка и понятная эксплуатация.",
       groups: {
-        orchestration: "Оркестрация и серверная часть",
+        orchestration: "Оркестрация и контейнеры",
         cicd: "CI/CD и доставка",
+        cloud: "Облако и вычисления",
+        iac: "Инфраструктура как код",
+        network: "Сеть, ingress и безопасность",
         observability: "Мониторинг и логи",
-        cloud: "Облака, сеть и хранилища",
+        data: "Базы данных и хранилища",
         ai: "AI и обработка медиа",
-        data: "Данные и бэкенд",
+        platform: "Системы и разработка",
       },
     },
 
@@ -962,38 +967,44 @@ export const ru: Dictionary = {
         {
           id: "edge",
           title: "Edge",
-          text: "Домены, TLS, CDN и защита от базовых атак. Cloudflare перед вашими сервисами.",
-          items: ["DNS", "TLS", "CDN", "WAF", "Rate limiting"],
+          text: "Домены, TLS, CDN и защита от базовых атак. Cloudflare и Traefik перед вашими сервисами.",
+          items: ["DNS", "TLS", "CDN", "WAF", "Traefik", "Rate limiting"],
         },
         {
           id: "platform",
           title: "Платформа",
-          text: "Kubernetes или K3s с ingress-контроллером, секретами и изолированными средами.",
-          items: ["Kubernetes", "K3s", "Ingress", "Helm", "Secrets"],
+          text: "Kubernetes или K3s с ingress-контроллером, секретами и изолированными средами. В облаке это чаще всего AWS EKS.",
+          items: ["Kubernetes", "AWS EKS", "K3s", "Ingress", "Helm", "Secrets"],
         },
         {
           id: "workloads",
           title: "Нагрузки",
           text: "Ваши сервисы, воркеры и плановые задачи с лимитами ресурсов и автомасштабированием.",
-          items: ["API", "CPU workers", "GPU workers", "Cron", "Queues"],
+          items: ["API", "Python", "CPU workers", "GPU workers", "Cron", "Queues"],
         },
         {
           id: "data",
           title: "Данные",
           text: "Базы данных, кеш, объектное хранилище и резервные копии с проверкой восстановления.",
-          items: ["PostgreSQL", "Redis", "S3 / MinIO", "Backups"],
+          items: ["PostgreSQL", "Redis", "S3 / MinIO", "AWS EBS", "Backups"],
         },
         {
           id: "delivery",
           title: "Доставка",
-          text: "Сборка образов, тесты, автоматический деплой и GitOps-синхронизация состояния.",
-          items: ["GitHub Actions", "GitLab CI", "Registry", "Argo CD"],
+          text: "Сборка образов, тесты, автоматический деплой и GitOps-синхронизация состояния. Инфраструктура описана как код.",
+          items: ["GitHub Actions", "GitLab CI", "Registry", "Argo CD", "Terraform"],
         },
         {
           id: "observability",
           title: "Наблюдаемость",
           text: "Метрики, логи, дашборды и уведомления — чтобы видеть состояние системы до инцидента.",
-          items: ["Prometheus", "Grafana", "Loki", "Alerts"],
+          items: ["Prometheus", "VictoriaMetrics", "Grafana", "Loki", "Alerts"],
+        },
+        {
+          id: "foundation",
+          title: "Серверы и базовые сервисы",
+          text: "Виртуальные машины, операционная система и управляемые сервисы провайдера — то, на чём стоит всё остальное.",
+          items: ["Linux", "Ubuntu", "AWS EC2", "Hetzner Cloud", "Amazon SES", "Bash"],
         },
       ],
     },
@@ -1247,6 +1258,13 @@ export const ru: Dictionary = {
   },
 
   contact: {
+    details: {
+      title: "Контакты текстом",
+      subtitle:
+        "Почта и Telegram обычным текстом — удобно выделить или скопировать одним нажатием.",
+      emailLabel: "Почта",
+      telegramLabel: "Telegram",
+    },
     hero: {
       badge: "Contact",
       title: "Расскажите о проекте",
@@ -1285,6 +1303,10 @@ export const ru: Dictionary = {
     form: {
       title: "Форма запроса",
       subtitle: "Заполните то, что знаете сейчас. Уточнить детали можно позже.",
+      notice: {
+        title: "Форма пока не работает",
+        text: "Приём заявок через сайт ещё не подключён. Напишите, пожалуйста, сразу на почту или в Telegram — так мы точно получим запрос и ответим быстрее.",
+      },
       fields: {
         name: "Имя",
         namePlaceholder: "Как к вам обращаться",

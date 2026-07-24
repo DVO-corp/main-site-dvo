@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Check, Languages } from "lucide-react";
 import {
@@ -69,8 +68,14 @@ export function LanguageSwitcher({
           role="menu"
           className="absolute right-0 z-50 mt-2 w-44 overflow-hidden rounded-lg border border-border bg-card p-1 shadow-xl"
         >
+          {/*
+            A plain <a>, not next/link: each locale is its own document root,
+            so switching languages must be a full page load. A client-side
+            transition would re-render <html> and drop the theme class that
+            the pre-paint script put there.
+          */}
           {LOCALES.map((code) => (
-            <Link
+            <a
               key={code}
               role="menuitem"
               href={swapLocale(pathname, code)}
@@ -86,7 +91,7 @@ export function LanguageSwitcher({
               {code === locale && (
                 <Check className="size-4 text-primary" aria-hidden />
               )}
-            </Link>
+            </a>
           ))}
         </div>
       )}

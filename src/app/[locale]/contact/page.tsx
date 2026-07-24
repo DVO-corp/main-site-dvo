@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/common/json-ld";
 import { PageHero } from "@/components/common/page-hero";
 import { Reveal } from "@/components/common/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
+import { ContactDetails } from "@/components/sections/contact-details";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -75,6 +76,10 @@ export default async function ContactPage({
           </Reveal>
 
           <div className="flex flex-col gap-6">
+            <Reveal>
+              <ContactDetails dict={dict} />
+            </Reveal>
+
             <Reveal delay={0.06} className="flex flex-col gap-4">
               <h2 className="text-lg font-semibold">
                 {contact.channels.title}

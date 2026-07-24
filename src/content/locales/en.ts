@@ -44,6 +44,8 @@ export const en: Dictionary = {
     sendAnother: "Send another request",
     calculate: "Suggest a setup",
     reset: "Reset",
+    copy: "Copy",
+    copied: "Copied",
     openInNewTab: "opens in a new tab",
   },
 
@@ -470,12 +472,15 @@ export const en: Dictionary = {
       subtitle:
         "We work with tools that are actively maintained and straightforward to operate.",
       groups: {
-        orchestration: "Orchestration and servers",
+        orchestration: "Orchestration and containers",
         cicd: "CI/CD and delivery",
+        cloud: "Cloud and compute",
+        iac: "Infrastructure as code",
+        network: "Networking, ingress and security",
         observability: "Monitoring and logs",
-        cloud: "Cloud, network and storage",
+        data: "Databases and storage",
         ai: "AI and media processing",
-        data: "Data and backend",
+        platform: "Systems and development",
       },
     },
 
@@ -962,38 +967,44 @@ export const en: Dictionary = {
         {
           id: "edge",
           title: "Edge",
-          text: "Domains, TLS, CDN and protection against basic attacks. Cloudflare in front of your services.",
-          items: ["DNS", "TLS", "CDN", "WAF", "Rate limiting"],
+          text: "Domains, TLS, CDN and protection against basic attacks. Cloudflare and Traefik in front of your services.",
+          items: ["DNS", "TLS", "CDN", "WAF", "Traefik", "Rate limiting"],
         },
         {
           id: "platform",
           title: "Platform",
-          text: "Kubernetes or K3s with an ingress controller, secrets and isolated environments.",
-          items: ["Kubernetes", "K3s", "Ingress", "Helm", "Secrets"],
+          text: "Kubernetes or K3s with an ingress controller, secrets and isolated environments. In the cloud that usually means AWS EKS.",
+          items: ["Kubernetes", "AWS EKS", "K3s", "Ingress", "Helm", "Secrets"],
         },
         {
           id: "workloads",
           title: "Workloads",
           text: "Your services, workers and scheduled jobs with resource limits and autoscaling.",
-          items: ["API", "CPU workers", "GPU workers", "Cron", "Queues"],
+          items: ["API", "Python", "CPU workers", "GPU workers", "Cron", "Queues"],
         },
         {
           id: "data",
           title: "Data",
           text: "Databases, cache, object storage and backups with verified restores.",
-          items: ["PostgreSQL", "Redis", "S3 / MinIO", "Backups"],
+          items: ["PostgreSQL", "Redis", "S3 / MinIO", "AWS EBS", "Backups"],
         },
         {
           id: "delivery",
           title: "Delivery",
-          text: "Image builds, tests, automated deploys and GitOps state synchronisation.",
-          items: ["GitHub Actions", "GitLab CI", "Registry", "Argo CD"],
+          text: "Image builds, tests, automated deploys and GitOps state synchronisation, with the infrastructure described as code.",
+          items: ["GitHub Actions", "GitLab CI", "Registry", "Argo CD", "Terraform"],
         },
         {
           id: "observability",
           title: "Observability",
           text: "Metrics, logs, dashboards and alerts — so you see the system state before an incident.",
-          items: ["Prometheus", "Grafana", "Loki", "Alerts"],
+          items: ["Prometheus", "VictoriaMetrics", "Grafana", "Loki", "Alerts"],
+        },
+        {
+          id: "foundation",
+          title: "Servers and platform services",
+          text: "Virtual machines, the operating system and the provider's managed services — what everything else stands on.",
+          items: ["Linux", "Ubuntu", "AWS EC2", "Hetzner Cloud", "Amazon SES", "Bash"],
         },
       ],
     },
@@ -1247,6 +1258,13 @@ export const en: Dictionary = {
   },
 
   contact: {
+    details: {
+      title: "Contacts as plain text",
+      subtitle:
+        "Email and Telegram in plain text — easy to select, or copy with one click.",
+      emailLabel: "Email",
+      telegramLabel: "Telegram",
+    },
     hero: {
       badge: "Contact",
       title: "Tell us about your project",
@@ -1285,6 +1303,10 @@ export const en: Dictionary = {
     form: {
       title: "Request form",
       subtitle: "Fill in what you know now. Details can be clarified later.",
+      notice: {
+        title: "The form is not working yet",
+        text: "Submissions through the site are not connected. Please write to us directly by email or on Telegram — that way the request definitely reaches us and you get a faster reply.",
+      },
       fields: {
         name: "Name",
         namePlaceholder: "What should we call you",

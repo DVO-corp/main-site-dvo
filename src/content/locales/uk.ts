@@ -47,6 +47,8 @@ export const uk = {
     sendAnother: "Надіслати ще один запит",
     calculate: "Підібрати рішення",
     reset: "Скинути",
+    copy: "Скопіювати",
+    copied: "Скопійовано",
     openInNewTab: "відкриється в новій вкладці",
   },
 
@@ -473,12 +475,15 @@ export const uk = {
       subtitle:
         "Працюємо з інструментами, які мають активну підтримку й зрозумілу експлуатацію.",
       groups: {
-        orchestration: "Оркестрація та серверна частина",
+        orchestration: "Оркестрація та контейнери",
         cicd: "CI/CD і доставка",
+        cloud: "Хмара та обчислення",
+        iac: "Інфраструктура як код",
+        network: "Мережа, ingress і безпека",
         observability: "Моніторинг і логи",
-        cloud: "Хмари, мережа та сховища",
+        data: "Бази даних і сховища",
         ai: "AI та обробка медіа",
-        data: "Дані й бекенд",
+        platform: "Системи й розробка",
       },
     },
 
@@ -966,38 +971,44 @@ export const uk = {
         {
           id: "edge",
           title: "Edge",
-          text: "Домени, TLS, CDN і захист від базових атак. Cloudflare перед вашими сервісами.",
-          items: ["DNS", "TLS", "CDN", "WAF", "Rate limiting"],
+          text: "Домени, TLS, CDN і захист від базових атак. Cloudflare і Traefik перед вашими сервісами.",
+          items: ["DNS", "TLS", "CDN", "WAF", "Traefik", "Rate limiting"],
         },
         {
           id: "platform",
           title: "Платформа",
-          text: "Kubernetes або K3s з ingress-контролером, секретами й ізольованими середовищами.",
-          items: ["Kubernetes", "K3s", "Ingress", "Helm", "Secrets"],
+          text: "Kubernetes або K3s з ingress-контролером, секретами й ізольованими середовищами. У хмарі це найчастіше AWS EKS.",
+          items: ["Kubernetes", "AWS EKS", "K3s", "Ingress", "Helm", "Secrets"],
         },
         {
           id: "workloads",
           title: "Навантаження",
           text: "Ваші сервіси, воркери та планові задачі з лімітами ресурсів і автомасштабуванням.",
-          items: ["API", "CPU workers", "GPU workers", "Cron", "Queues"],
+          items: ["API", "Python", "CPU workers", "GPU workers", "Cron", "Queues"],
         },
         {
           id: "data",
           title: "Дані",
           text: "Бази даних, кеш, обʼєктне сховище й резервні копії з перевіркою відновлення.",
-          items: ["PostgreSQL", "Redis", "S3 / MinIO", "Backups"],
+          items: ["PostgreSQL", "Redis", "S3 / MinIO", "AWS EBS", "Backups"],
         },
         {
           id: "delivery",
           title: "Доставка",
-          text: "Складання образів, тести, автоматичний деплой і GitOps-синхронізація стану.",
-          items: ["GitHub Actions", "GitLab CI", "Registry", "Argo CD"],
+          text: "Складання образів, тести, автоматичний деплой і GitOps-синхронізація стану. Інфраструктура описана як код.",
+          items: ["GitHub Actions", "GitLab CI", "Registry", "Argo CD", "Terraform"],
         },
         {
           id: "observability",
           title: "Спостережуваність",
           text: "Метрики, логи, дашборди й сповіщення — щоб бачити стан системи до інциденту.",
-          items: ["Prometheus", "Grafana", "Loki", "Alerts"],
+          items: ["Prometheus", "VictoriaMetrics", "Grafana", "Loki", "Alerts"],
+        },
+        {
+          id: "foundation",
+          title: "Сервери та базові сервіси",
+          text: "Віртуальні машини, операційна система й керовані сервіси провайдера — те, на чому стоїть усе інше.",
+          items: ["Linux", "Ubuntu", "AWS EC2", "Hetzner Cloud", "Amazon SES", "Bash"],
         },
       ],
     },
@@ -1250,6 +1261,13 @@ export const uk = {
   },
 
   contact: {
+    details: {
+      title: "Контакти текстом",
+      subtitle:
+        "Пошта й Telegram звичайним текстом — зручно виділити або скопіювати одним натисканням.",
+      emailLabel: "Пошта",
+      telegramLabel: "Telegram",
+    },
     hero: {
       badge: "Contact",
       title: "Розкажіть про проєкт",
@@ -1288,6 +1306,10 @@ export const uk = {
     form: {
       title: "Форма запиту",
       subtitle: "Заповніть те, що знаєте зараз. Уточнити деталі можна пізніше.",
+      notice: {
+        title: "Форма поки не працює",
+        text: "Прийом заявок через сайт ще не підключено. Напишіть, будь ласка, одразу на пошту або в Telegram — так ми точно отримаємо запит і відповімо швидше.",
+      },
       fields: {
         name: "Імʼя",
         namePlaceholder: "Як до вас звертатися",
