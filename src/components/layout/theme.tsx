@@ -1,0 +1,76 @@
+"use client";
+
+import * as React from "react";
+import { Moon, Sun } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { THEME_STORAGE_KEY } from "@/lib/theme-script";
+
+/**
+ * The theme lives on <html class="dark">, applied by the inline script in
+ * `lib/theme-script.ts` before first paint. React subscribes to that DOM state
+ * with `useSyncExternalStore` instead of mirroring it into component state,
+ * so there is no hydration mismatch and no render-time flash.
+ */
+const listeners = new Set<() => void>();
+
+function subscribe(onChange: () => void) {
+  listeners.add(onChange);
+  return () => {
+    listeners.delete(onChange);
+  };
+}
+
+function getSnapshot() {
+  return document.documentElement.classList.contains("dark");
+}
+
+/** Dark is the pre-render default; the init script corrects it before paint. */
+function getServerSnapshot() {
+  return true;
+}
+
+function applyTheme(dark: boolean) {
+  document.documentElement.classList.toggle("dark", dark);
+  document.documentElement.style.colorScheme = dark ? "dark" : "light";
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, dark ? "dark" : "light");
+  } catch {
+    /* storage can be unavailable in private mode — the toggle still works */
+  }
+  for (const listener of listeners) listener();
+}
+
+export function ThemeToggle({
+  labels,
+  className,
+}: {
+  labels: { toLight: string; toDark: string };
+  className?: string;
+}) {
+  const isDark = React.useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
+
+  const label = isDark ? labels.toLight : labels.toDark;
+
+  return (
+    <button
+      type="button"
+      onClick={() => applyTheme(!isDark)}
+      aria-label={label}
+      title={label}
+      className={cn(
+        "inline-flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground",
+        className,
+      )}
+    >
+      {isDark ? (
+        <Sun className="size-[1.05rem]" strokeWidth={1.7} aria-hidden />
+      ) : (
+        <Moon className="size-[1.05rem]" strokeWidth={1.7} aria-hidden />
+      )}
+    </button>
+  );
+}

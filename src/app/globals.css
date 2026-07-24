@@ -1,0 +1,413 @@
+@import "tailwindcss";
+
+/*
+ * DVO Corp design system
+ * ----------------------
+ * Dark is the primary theme; light is a first-class alternative.
+ * Tokens live as CSS custom properties so both themes share one contract,
+ * and `@theme inline` exposes them to Tailwind as real utilities
+ * (bg-background, text-muted-foreground, border-border, …).
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --radius: 0.875rem;
+
+  /* Surfaces */
+  --background: oklch(0.986 0.003 250);
+  --foreground: oklch(0.19 0.018 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.19 0.018 262);
+  --elevated: oklch(0.975 0.005 250);
+  --muted: oklch(0.955 0.006 252);
+  --muted-foreground: oklch(0.47 0.02 258);
+
+  /* Lines & focus */
+  --border: oklch(0.897 0.009 258);
+  --border-strong: oklch(0.84 0.012 258);
+  --input: oklch(0.93 0.008 258);
+  --ring: oklch(0.55 0.17 258);
+
+  /* Brand accents */
+  --primary: oklch(0.52 0.18 262);
+  --primary-foreground: oklch(0.99 0.002 250);
+  --accent: oklch(0.62 0.12 205);
+  --accent-foreground: oklch(0.99 0.002 250);
+  --violet: oklch(0.55 0.19 300);
+  --success: oklch(0.58 0.13 160);
+  --warning: oklch(0.68 0.14 75);
+
+  /* Decoration */
+  --grid-line: oklch(0.19 0.018 262 / 0.055);
+  --glow-a: oklch(0.62 0.19 262 / 0.16);
+  --glow-b: oklch(0.7 0.14 200 / 0.14);
+  --glow-c: oklch(0.62 0.2 300 / 0.12);
+  --glass: oklch(1 0 0 / 0.7);
+  --shadow-color: 262 30% 20%;
+}
+
+.dark {
+  --background: oklch(0.166 0.013 264);
+  --foreground: oklch(0.965 0.004 250);
+  --card: oklch(0.207 0.015 265);
+  --card-foreground: oklch(0.965 0.004 250);
+  --elevated: oklch(0.232 0.016 265);
+  --muted: oklch(0.245 0.016 265);
+  --muted-foreground: oklch(0.715 0.018 258);
+
+  --border: oklch(0.302 0.017 265);
+  --border-strong: oklch(0.38 0.02 265);
+  --input: oklch(0.275 0.017 265);
+  --ring: oklch(0.72 0.15 258);
+
+  --primary: oklch(0.7 0.16 262);
+  --primary-foreground: oklch(0.16 0.015 264);
+  --accent: oklch(0.82 0.12 197);
+  --accent-foreground: oklch(0.16 0.015 264);
+  --violet: oklch(0.72 0.17 300);
+  --success: oklch(0.75 0.15 162);
+  --warning: oklch(0.8 0.14 78);
+
+  --grid-line: oklch(0.9 0.02 258 / 0.06);
+  --glow-a: oklch(0.6 0.22 265 / 0.3);
+  --glow-b: oklch(0.72 0.16 200 / 0.2);
+  --glow-c: oklch(0.6 0.24 300 / 0.2);
+  --glass: oklch(0.207 0.015 265 / 0.62);
+  --shadow-color: 264 45% 4%;
+}
+
+@theme {
+  /* Extra breakpoint so two-up grids can appear on larger phones. */
+  --breakpoint-xs: 25rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-elevated: var(--elevated);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-violet: var(--violet);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 14px);
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --shadow-glow: 0 0 0 1px oklch(1 0 0 / 0.04), 0 24px 60px -24px var(--glow-a);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* The sticky header must not cover anchor targets. */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Nothing may push the layout wider than the viewport on 320px screens. */
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 30%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Firefox keeps a default scrollbar colour that clashes with the dark UI. */
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  /* Page container: comfortable from 320px up to wide desktops. */
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section {
+    padding-block: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 5.5rem;
+    }
+  }
+
+  /* Text gradient used for accented words in headings. */
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      var(--primary) 0%,
+      var(--accent) 48%,
+      var(--violet) 100%
+    );
+    background-clip: text;
+    color: transparent;
+    /* Descenders get clipped without a little breathing room. */
+    padding-bottom: 0.08em;
+  }
+
+  .glass {
+    background-color: var(--glass);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+  }
+
+  /* Thin gradient hairline used to separate major sections. */
+  .hairline {
+    height: 1px;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--border-strong),
+      transparent
+    );
+  }
+
+  .grid-surface {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .grid-mask {
+    mask-image: radial-gradient(
+      ellipse 90% 70% at 50% 0%,
+      #000 40%,
+      transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 90% 70% at 50% 0%,
+      #000 40%,
+      transparent 100%
+    );
+  }
+
+  /*
+   * Scroll reveal. The hidden state is scoped to `.js` (set by the inline head
+   * script before paint), so content is always visible without JavaScript and
+   * there is no flash of hidden content with it.
+   */
+  .js .reveal {
+    opacity: 0;
+  }
+
+  .js .reveal-up {
+    transform: translateY(18px);
+  }
+
+  .js .reveal-left {
+    transform: translateX(-18px);
+  }
+
+  .js .reveal-right {
+    transform: translateX(18px);
+  }
+
+  .js .reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Card border that lights up on hover without shifting layout. */
+  .card-hover {
+    transition:
+      border-color 240ms ease,
+      transform 240ms ease,
+      box-shadow 240ms ease;
+  }
+
+  .card-hover:hover {
+    border-color: color-mix(in oklab, var(--primary) 45%, var(--border));
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -28px var(--glow-a);
+  }
+}
+
+@layer utilities {
+  .balance {
+    text-wrap: balance;
+  }
+
+  /* Slow drift for the background grid — decorative only. */
+  @keyframes grid-drift {
+    from {
+      background-position:
+        0 0,
+        0 0;
+    }
+    to {
+      background-position:
+        48px 48px,
+        48px 48px;
+    }
+  }
+
+  .animate-grid-drift {
+    animation: grid-drift 24s linear infinite;
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 3.5s ease-in-out infinite;
+  }
+
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+
+  .animate-dash-flow {
+    animation: dash-flow 1.4s linear infinite;
+  }
+
+  /* Radix supplies the measured height; these drive the FAQ accordion. */
+  @keyframes accordion-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .animate-menu-in {
+    animation: menu-in 200ms ease-out both;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+ * Respect the OS-level motion preference everywhere, including animations
+ * driven by Framer Motion (which also reads this setting via useReducedMotion).
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Show revealed sections outright rather than snapping them in. */
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
