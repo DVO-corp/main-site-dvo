@@ -23,9 +23,15 @@ export const COMPANY = {
  * header, footer, contact page, CTA blocks and JSON-LD all read from here.
  */
 export const CONTACTS = {
-  email: "help@dvocorp.com",
-  telegramUsername: "lIlIlIlI_liiiiI",
-  telegramUrl: "https://t.me/lIlIlIlI_liiiiI",
+  /** Support and project requests. */
+  email: "support@dvocorp.com",
+  /** General and partnership enquiries. */
+  infoEmail: "info@dvocorp.com",
+  phone: "+380 63 932 08 74",
+  phoneHref: "tel:+380639320874",
+  telegramUsername: "dvocorp",
+  telegramUrl: "https://t.me/dvocorp",
+  instagramUrl: "https://instagram.com/dvocorp",
   /** Shown as a fallback when a visitor prefers a scheduled call. */
   responseWindowHours: 24,
 } as const;
@@ -41,6 +47,7 @@ export const PRODUCTS = {
 
 export const SOCIAL = [
   { id: "telegram", label: "Telegram", href: CONTACTS.telegramUrl },
+  { id: "instagram", label: "Instagram", href: CONTACTS.instagramUrl },
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -87,6 +94,8 @@ export const ROUTES = {
   products: "products",
   about: "about",
   contact: "contact",
+  privacy: "privacy",
+  terms: "terms",
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
@@ -100,6 +109,13 @@ export const NAV_ORDER: RouteKey[] = [
   "about",
   "contact",
 ];
+
+/**
+ * Legal pages. Kept out of NAV_ORDER on purpose — they belong in the footer,
+ * not the main navigation — but they are real, indexable URLs, so the sitemap
+ * appends them separately.
+ */
+export const LEGAL_ROUTES: RouteKey[] = ["privacy", "terms"];
 
 /** Builds an internal, locale-prefixed, trailing-slash path. */
 export function path(locale: Locale, route: RouteKey = "home"): string {

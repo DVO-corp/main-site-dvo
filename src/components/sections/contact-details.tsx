@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Check, Copy, Mail, Send } from "lucide-react";
+import { Check, Copy, Mail, Phone, Send } from "lucide-react";
 import { CONTACTS } from "@/content/site";
 import type { Dictionary } from "@/content/locales";
 import { cn } from "@/lib/utils";
@@ -91,6 +91,20 @@ export function ContactDetails({ dict }: { dict: Dictionary }) {
           icon={Send}
           label={t.telegramLabel}
           value={`@${CONTACTS.telegramUsername}`}
+          copyLabel={dict.actions.copy}
+          copiedLabel={dict.actions.copied}
+        />
+        <ContactRow
+          icon={Phone}
+          label={t.phoneLabel}
+          value={CONTACTS.phone}
+          copyLabel={dict.actions.copy}
+          copiedLabel={dict.actions.copied}
+        />
+        <ContactRow
+          icon={Mail}
+          label={t.infoEmailLabel}
+          value={CONTACTS.infoEmail}
           copyLabel={dict.actions.copy}
           copiedLabel={dict.actions.copied}
         />

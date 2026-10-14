@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import {
   DEFAULT_LOCALE,
+  LEGAL_ROUTES,
   LOCALES,
   LOCALE_TAGS,
   NAV_ORDER,
@@ -21,6 +22,9 @@ const PRIORITY: Record<RouteKey, number> = {
   products: 0.8,
   about: 0.6,
   contact: 0.7,
+  // Indexable and expected by ad reviewers, but never the page we want ranked.
+  privacy: 0.3,
+  terms: 0.3,
 };
 
 /**
@@ -28,7 +32,7 @@ const PRIORITY: Record<RouteKey, number> = {
  * set of hreflang alternates so search engines pair the three locales up.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes: RouteKey[] = ["home", ...NAV_ORDER];
+  const routes: RouteKey[] = ["home", ...NAV_ORDER, ...LEGAL_ROUTES];
   const lastModified = new Date();
 
   return LOCALES.flatMap((locale) =>
