@@ -31,7 +31,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 key={item.id}
                 href={item.href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="me noopener noreferrer"
                 className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
               >
                 {item.label}
@@ -130,15 +130,50 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 {CONTACTS.email}
               </a>
             </li>
+            <li>
+              <a
+                href={`mailto:${CONTACTS.infoEmail}`}
+                className="transition-colors hover:text-foreground"
+              >
+                {CONTACTS.infoEmail}
+              </a>
+            </li>
+            <li>
+              <a
+                href={CONTACTS.phoneHref}
+                className="transition-colors hover:text-foreground"
+              >
+                {CONTACTS.phone}
+              </a>
+            </li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-border">
-        <div className="container-page flex flex-col gap-2 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-page flex flex-col gap-3 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} DVO Corp. {dict.footer.rights}
           </p>
+          {/* The legal pair sits in the bottom bar, on every page — where ad
+              reviewers, app stores and cautious visitors all look for it. */}
+          <nav
+            aria-label={dict.footer.legalTitle}
+            className="flex flex-wrap gap-x-4 gap-y-1"
+          >
+            <Link
+              href={path(locale, "privacy")}
+              className="transition-colors hover:text-foreground"
+            >
+              {dict.nav.privacy}
+            </Link>
+            <Link
+              href={path(locale, "terms")}
+              className="transition-colors hover:text-foreground"
+            >
+              {dict.nav.terms}
+            </Link>
+          </nav>
           <p>{dict.footer.note}</p>
         </div>
       </div>

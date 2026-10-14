@@ -28,6 +28,7 @@ export function organizationSchema(locale: Locale): Json {
     url: SITE_URL,
     description: dict.seo.home.description,
     email: CONTACTS.email,
+    telephone: CONTACTS.phone,
     logo: {
       "@type": "ImageObject",
       url: `${SITE_URL}/logo.svg`,
@@ -41,8 +42,16 @@ export function organizationSchema(locale: Locale): Json {
       {
         "@type": "ContactPoint",
         contactType: "sales",
-        email: CONTACTS.email,
+        email: CONTACTS.infoEmail,
+        telephone: CONTACTS.phone,
         url: absoluteUrl(path(locale, "contact")),
+        availableLanguage: ["Ukrainian", "English", "Russian"],
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: CONTACTS.email,
+        telephone: CONTACTS.phone,
         availableLanguage: ["Ukrainian", "English", "Russian"],
       },
     ],
