@@ -26,7 +26,7 @@ export function ProcessVisual({
 
         <Reveal
           as="ol"
-          className="relative grid w-full max-w-5xl grid-cols-2 gap-y-10 sm:grid-cols-5"
+          className="relative grid w-full grid-cols-2 gap-y-10 sm:grid-cols-5"
         >
           <span
             aria-hidden

@@ -8,6 +8,7 @@ import { SectionHeading } from "@/components/common/section-heading";
 import { Reveal } from "@/components/common/reveal";
 import { Hero } from "@/components/sections/hero";
 import { ServicesGrid } from "@/components/sections/services-grid";
+import { ShowcaseTiles } from "@/components/sections/showcase-tiles";
 import { InfraModels } from "@/components/sections/infra-models";
 import { Proof } from "@/components/sections/proof";
 import { ProcessVisual } from "@/components/sections/process-visual";
@@ -45,6 +46,7 @@ export default async function HomePage({
       <JsonLd data={graph([faqSchema(dict.home.faq.items)])} />
 
       <Hero locale={typedLocale} dict={dict} />
+      <ShowcaseTiles locale={typedLocale} dict={dict} />
       <ServicesGrid locale={typedLocale} dict={dict} />
 
       <VisualSection
@@ -55,7 +57,7 @@ export default async function HomePage({
         <CostCompare labels={dict.visuals} />
       </VisualSection>
 
-      <section className="section pt-0">
+      <section className="section">
         <div className="container-page flex flex-col gap-10">
           <SectionHeading
             title={dict.home.models.title}
@@ -82,7 +84,7 @@ export default async function HomePage({
             title={dict.home.faq.title}
             subtitle={dict.home.faq.subtitle}
           />
-          <div className="max-w-3xl">
+          <div className="measure max-w-4xl">
             <Faq items={dict.home.faq.items} />
           </div>
         </div>

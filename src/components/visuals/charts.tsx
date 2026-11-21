@@ -174,3 +174,32 @@ export function StatusDot({ tone = "ok" }: { tone?: "ok" | "warn" }) {
     />
   );
 }
+
+/** Wraps a chart with y-axis ticks and x-axis labels, like a console widget. */
+export function ChartAxes({
+  yTicks,
+  xLabels,
+  children,
+}: {
+  /** Top to bottom. */
+  yTicks: string[];
+  xLabels: string[];
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="console-muted grid grid-cols-[auto_1fr] gap-x-2 text-[0.68rem] leading-none">
+      <div className="flex flex-col justify-between py-0.5 text-right">
+        {yTicks.map((tick) => (
+          <span key={tick}>{tick}</span>
+        ))}
+      </div>
+      <div className="border-b border-l border-[var(--c-line)]">{children}</div>
+      <span />
+      <div className="flex justify-between pt-1.5">
+        {xLabels.map((label) => (
+          <span key={label}>{label}</span>
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -182,24 +182,23 @@
 }
 
 @layer components {
-  /* Page container: comfortable from 320px up to wide desktops. */
+  /*
+   * Page container. Deliberately not a narrow centred column: content runs
+   * almost edge to edge, the way product pages do, and only caps on very
+   * wide screens. Blocks of text set their own reading width inside it.
+   */
   .container-page {
     width: 100%;
     margin-inline: auto;
-    max-width: 76rem;
-    padding-inline: 1rem;
+    max-width: 112rem;
+    padding-inline: clamp(0.75rem, 1.6vw, 1.75rem);
   }
 
-  @media (min-width: 640px) {
-    .container-page {
-      padding-inline: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container-page {
-      padding-inline: 2rem;
-    }
+  /* Narrower measure for text-led blocks inside the wide container. */
+  .measure {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 68rem;
   }
 
   .section {

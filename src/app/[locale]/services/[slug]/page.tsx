@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
@@ -21,10 +22,7 @@ import { PageHero } from "@/components/common/page-hero";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Reveal } from "@/components/common/reveal";
 import { Process } from "@/components/sections/process";
-import {
-  LANDING_DIAGRAM,
-  PlatformDiagram,
-} from "@/components/sections/platform-diagram";
+import { LANDING_DIAGRAM } from "@/components/sections/platform-diagram";
 import { Faq } from "@/components/sections/faq";
 import { CtaSection } from "@/components/sections/cta-section";
 import { VisualSection } from "@/components/sections/visual-section";
@@ -32,6 +30,17 @@ import { CostCompare } from "@/components/visuals/cost-compare";
 import { DashboardMock } from "@/components/visuals/dashboard-mock";
 
 type Params = Promise<{ locale: string; slug: string }>;
+
+/** The photo beside the heading, by the part of the system the page covers. */
+const LANDING_PHOTO: Record<string, string> = {
+  all: "/img/cables.webp",
+  iac: "/img/rack.webp",
+  cluster: "/img/aisle.webp",
+  delivery: "/img/code.webp",
+  observe: "/img/screens.webp",
+  secure: "/img/cables.webp",
+  data: "/img/rack.webp",
+};
 
 /** Landings that show a console mock-up under the hero. */
 const COST_LANDINGS = ["cloud-cost-optimization", "aws-devops", "cloud-migration"];
@@ -105,10 +114,14 @@ export default async function LandingPage({ params }: { params: Params }) {
         title={landing.h1}
         subtitle={landing.lead}
         aside={
-          <div className="hidden rounded-[1.75rem] bg-card p-5 lg:block">
-            <PlatformDiagram
-              highlight={LANDING_DIAGRAM[slug]}
-              label={landing.stack.join(", ")}
+          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-black lg:block">
+            <Image
+              src={LANDING_PHOTO[LANDING_DIAGRAM[slug] ?? "all"]}
+              alt=""
+              fill
+              priority
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
             />
           </div>
         }

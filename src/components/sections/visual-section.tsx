@@ -21,7 +21,7 @@ export function VisualSection({
     <section className={cn("section", alt && "surface-alt")}>
       <div className="container-page flex flex-col items-center gap-12">
         <SectionHeading title={title} subtitle={subtitle} />
-        <Reveal className="w-full max-w-5xl">
+        <Reveal className="w-full max-w-[88rem]">
           {children}
           <p className="mx-auto mt-4 max-w-2xl text-center text-xs text-muted-foreground">
             {note}

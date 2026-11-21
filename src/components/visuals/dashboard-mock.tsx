@@ -1,4 +1,6 @@
-import { AreaChart, StatusDot } from "./charts";
+import { AreaChart, ChartAxes, StatusDot } from "./charts";
+
+const HOURS = ["00:00", "06:00", "12:00", "18:00", "24:00"];
 import { ConsoleFrame, ConsolePanel } from "./console-frame";
 
 /*
@@ -68,10 +70,14 @@ export function DashboardMock({ className }: { className?: string }) {
           title="Requests per second"
           hint="All services, 5 min average"
         >
-          <AreaChart series={REQUESTS} max={110} />
+          <ChartAxes yTicks={["1.1k", "550", "0"]} xLabels={HOURS}>
+            <AreaChart series={REQUESTS} max={110} />
+          </ChartAxes>
         </ConsolePanel>
         <ConsolePanel title="p95 latency, ms" hint="Alarm threshold 250 ms">
-          <AreaChart series={LATENCY} max={280} threshold={250} />
+          <ChartAxes yTicks={["280", "140", "0"]} xLabels={HOURS}>
+            <AreaChart series={LATENCY} max={280} threshold={250} />
+          </ChartAxes>
         </ConsolePanel>
       </div>
 

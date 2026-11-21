@@ -1,27 +1,42 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CONTACTS, path, type Locale } from "@/content/site";
 import type { Dictionary } from "@/content/locales";
 import { Button } from "@/components/ui/button";
-import { DashboardMock } from "@/components/visuals/dashboard-mock";
 
 /**
- * Centred headline, two actions, and the "product shot" under them — a
- * project dashboard. The heading renders statically, with no entrance
- * animation, so it is the Largest Contentful Paint the moment HTML arrives.
+ * Full-bleed photo hero: the picture fills the screen edge to edge and the
+ * headline sits on it. The heading renders statically, so it is the Largest
+ * Contentful Paint as soon as the HTML arrives; the photo is preloaded.
  */
 export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const { hero } = dict.home;
 
   return (
-    <section className="overflow-hidden pt-14 pb-16 sm:pt-20 md:pb-24">
-      <div className="container-page flex flex-col items-center gap-6 text-center">
-        <p className="text-[0.95rem] font-semibold text-primary">{hero.badge}</p>
+    <section className="relative isolate flex min-h-[88svh] items-center overflow-hidden bg-black text-white">
+      <Image
+        src="/img/cables.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="-z-20 object-cover"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-black/55 to-black/85"
+      />
 
-        <h1 className="max-w-4xl text-[2.6rem] leading-[1.04] font-semibold sm:text-6xl lg:text-[5rem]">
+      <div className="container-page flex flex-col items-center gap-6 py-24 text-center">
+        <p className="text-[0.95rem] font-semibold text-white/80">
+          {hero.badge}
+        </p>
+
+        <h1 className="max-w-5xl text-[2.6rem] leading-[1.03] font-semibold sm:text-6xl lg:text-[5.5rem]">
           {hero.title}
         </h1>
 
-        <p className="max-w-2xl text-lg leading-snug text-muted-foreground sm:text-[1.35rem]">
+        <p className="max-w-2xl text-lg leading-snug text-white/85 sm:text-[1.4rem]">
           {hero.subtitle}
         </p>
 
@@ -31,7 +46,12 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               {dict.actions.discussProject}
             </Link>
           </Button>
-          <Button asChild variant="secondary" size="lg">
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/70 text-white hover:border-white hover:bg-white hover:text-black"
+          >
             <a
               href={CONTACTS.telegramUrl}
               target="_blank"
@@ -42,14 +62,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </Button>
         </div>
 
-        <p className="text-sm text-muted-foreground">{hero.note}</p>
-
-        <div className="mt-8 w-full max-w-5xl">
-          <DashboardMock />
-          <p className="mt-4 text-xs text-muted-foreground">
-            {dict.visuals.sampleNote}
-          </p>
-        </div>
+        <p className="text-sm text-white/65">{hero.note}</p>
       </div>
     </section>
   );

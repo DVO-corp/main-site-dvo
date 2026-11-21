@@ -34,11 +34,11 @@ export default function OpengraphImage() {
               width: 64,
               height: 64,
               borderRadius: 8,
-              border: "3px solid #4ADE80",
+              border: "3px solid #2997FF",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#4ADE80",
+              color: "#2997FF",
               fontSize: 34,
               fontWeight: 700,
             }}

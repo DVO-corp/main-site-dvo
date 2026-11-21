@@ -291,3 +291,22 @@ sends it. If a lead endpoint appears later, post to it from `handleSubmit` in
 Analytics: `ANALYTICS` in `src/content/site.ts` reserves
 `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`; nothing is loaded while it is empty. Adding a
 tracker means updating the Privacy Policy and the footer note first.
+
+---
+
+## Photos
+
+The photographs in `public/img/` come from Unsplash and are used under the
+[Unsplash License](https://unsplash.com/license) (free for commercial use, no
+attribution required). Only free photos are used — nothing from Unsplash+.
+
+| File           | Unsplash photo id                    |
+| -------------- | ------------------------------------ |
+| `cables.webp`  | `photo-1558494949-ef010cbdcc31`      |
+| `rack.webp`    | `photo-1762163516269-3c143e04175c`   |
+| `aisle.webp`   | `photo-1584169417032-d34e8d805e8b`   |
+| `screens.webp` | `photo-1551288049-bebda4e38f71`      |
+| `code.webp`    | `photo-1489875347897-49f64b51c1f8`   |
+
+Layout note: `.container-page` runs almost edge to edge on purpose (no narrow
+centred column); text-led blocks use `.measure` for a readable width.
