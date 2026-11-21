@@ -85,7 +85,7 @@ export default async function InfrastructurePage({
                 as="li"
                 key={item.title}
                 delay={Math.min(index, 5) * 0.04}
-                className="card-hover flex h-full flex-col gap-3 rounded-xl border border-border bg-card/60 p-5"
+                className="card-hover flex h-full flex-col gap-3 rounded-xl border border-border bg-card p-5"
               >
                 <span className="inline-flex size-10 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
                   <Icon name={item.icon} className="size-[1.1rem]" />

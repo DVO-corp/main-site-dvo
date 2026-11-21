@@ -62,7 +62,7 @@ export function InfraModels({ dict }: { dict: Dictionary }) {
               </React.Fragment>
             ))}
           </ol>
-          <div className="grid gap-8 rounded-2xl border border-border bg-card/60 p-6 sm:p-8 lg:grid-cols-[1fr_1fr]">
+          <div className="grid gap-8 rounded-2xl border border-border bg-card p-6 sm:p-8 lg:grid-cols-[1fr_1fr]">
             <div className="flex flex-col gap-4">
               <span className="inline-flex size-12 items-center justify-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
                 <Icon name={model.icon} className="size-5" />

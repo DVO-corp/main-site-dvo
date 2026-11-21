@@ -38,7 +38,7 @@ export function ArchitectureDiagram({ dict }: { dict: Dictionary }) {
                   "flex w-full items-center gap-4 rounded-xl border px-4 py-3.5 text-left transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   selected
                     ? "border-primary/50 bg-primary/[0.07]"
-                    : "border-border bg-card/50 hover:border-border-strong hover:bg-card",
+                    : "border-border bg-card hover:border-border-strong hover:bg-card",
                 )}
               >
                 <span
@@ -65,7 +65,7 @@ export function ArchitectureDiagram({ dict }: { dict: Dictionary }) {
 
       <div
         id="architecture-detail"
-        className="relative flex min-h-72 flex-col gap-5 overflow-hidden rounded-2xl border border-border bg-card/60 p-6 sm:p-8"
+        className="relative flex min-h-72 flex-col gap-5 overflow-hidden rounded-2xl border border-border bg-card p-6 sm:p-8"
       >
         <div
           aria-hidden

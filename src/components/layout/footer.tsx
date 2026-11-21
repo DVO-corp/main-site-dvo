@@ -17,7 +17,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-8 border-t border-border bg-elevated/40">
+    <footer className="relative surface-alt">
       <div className="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
           <Link href={path(locale, "home")} aria-label={dict.nav.home}>

@@ -14,7 +14,7 @@ export function AccordionItem({
   return (
     <AccordionPrimitive.Item
       className={cn(
-        "overflow-hidden rounded-lg border border-border bg-card/50 transition-colors data-[state=open]:border-primary/35",
+        "overflow-hidden rounded-lg border border-border bg-card transition-colors data-[state=open]:border-primary/35",
         className,
       )}
       {...props}

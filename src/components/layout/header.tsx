@@ -52,8 +52,8 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         // Once the page scrolls, content passes under the bar — it has to be
         // near-opaque or the text behind it shows through the navigation.
         scrolled
-          ? "border-border bg-background/95 shadow-sm backdrop-blur-xl backdrop-saturate-150"
-          : "border-transparent bg-background/40 backdrop-blur-sm",
+          ? "border-border/60 bg-background/80 backdrop-blur-xl backdrop-saturate-150"
+          : "border-transparent bg-background/80 backdrop-blur-xl backdrop-saturate-150",
       )}
     >
       <a
@@ -63,7 +63,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         {dict.nav.skipToContent}
       </a>
 
-      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
+      <div className="container-page flex h-14 items-center justify-between gap-4">
         <Link
           href={path(locale, "home")}
           className="rounded-lg transition-opacity hover:opacity-85"
@@ -82,7 +82,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               href={path(locale, route)}
               aria-current={isActive(route) ? "page" : undefined}
               className={cn(
-                "relative rounded-md px-3.5 py-2 text-sm font-medium transition-colors",
+                "relative rounded-md px-3 py-2 text-[0.8rem] transition-colors",
                 isActive(route)
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",
@@ -136,7 +136,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           // Opaque rather than glass: at narrow widths the page behind would
           // otherwise show through the menu and hurt legibility. The entrance
           // is a plain CSS animation, so it never depends on a JS frame loop.
-          className="animate-menu-in absolute inset-x-0 top-full max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-border bg-background shadow-2xl lg:hidden"
+          className="animate-menu-in absolute inset-x-0 top-full max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-b border-border bg-background shadow-2xl lg:hidden"
         >
           <nav
             aria-label={dict.nav.mainNav}

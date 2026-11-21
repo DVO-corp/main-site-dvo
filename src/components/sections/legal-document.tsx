@@ -34,7 +34,7 @@ export function LegalDocument({
           {dict.legal.updated}: {updated}
         </p>
 
-        <Reveal className="flex flex-col gap-3 rounded-2xl border border-border bg-card/60 p-6">
+        <Reveal className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6">
           <h2 className="text-sm font-semibold">{dict.legal.contents}</h2>
           <ul className="flex flex-col gap-1.5 text-sm">
             {doc.sections.map((section) => (

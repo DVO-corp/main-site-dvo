@@ -799,6 +799,27 @@ export const en = {
     },
   },
 
+  visuals: {
+    sampleNote:
+      "Illustration with sample data. Every project gets dashboards built around its own services.",
+    dashTitle:
+      "The whole system on one screen",
+    dashSubtitle:
+      "Service health, traffic, deploys and alerts — the dashboards we set up for every project.",
+    costTitle:
+      "The bill follows the load",
+    costSubtitle:
+      "A cost review ends with a report like this: what you paid before, what you pay now, and where the difference came from.",
+    costNote:
+      "Example of the report format with illustrative figures. The real saving depends on the account and is shown to you before anything is changed.",
+    before:
+      "Before",
+    after:
+      "After",
+    perMonth:
+      "per month",
+  },
+
   footer: {
     tagline:
       "DevOps team: production infrastructure, operations and custom APIs. Ukraine, working across Europe.",

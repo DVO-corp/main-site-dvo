@@ -16,16 +16,16 @@ export function TechStack({ dict }: { dict: Dictionary }) {
             <Reveal
               key={group.id}
               delay={index * 0.05}
-              className="flex flex-col gap-3 rounded-xl border border-border bg-card/50 p-5"
+              className="flex flex-col gap-4 rounded-[1.5rem] bg-card p-6"
             >
-              <h3 className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">
+              <h3 className="text-base font-semibold">
                 {tech.groups[group.id]}
               </h3>
               <ul className="flex flex-wrap gap-1.5">
                 {group.items.map((item) => (
                   <li
                     key={item}
-                    className="rounded-md border border-border/70 bg-background/40 px-2.5 py-1 font-mono text-xs text-foreground/80"
+                    className="rounded-full bg-background px-3 py-1 text-xs text-muted-foreground"
                   >
                     {item}
                   </li>

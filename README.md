@@ -175,15 +175,25 @@ Routes, sitemap, hreflang and the language switcher pick it up automatically.
 
 ## Design system
 
-Tokens are CSS custom properties in `src/app/globals.css`, exposed to Tailwind
-through `@theme inline`. Dark is the default theme; light is a full
-alternative. The active theme is a `dark` class on `<html>`, applied by an
-inline script before first paint (no flash), stored in `localStorage` under
-`dvo-theme`, and read by React through `useSyncExternalStore`.
+Two references, two layers:
 
-Accents: blue (`--primary`), cyan (`--accent`), violet (`--violet`) over a deep
-graphite background, with soft glows, a faint technical grid and glass
-surfaces.
+- **The page follows the Apple site.** Large centred headings with tight
+  tracking, a lot of air, alternating white / light-grey bands
+  (`.surface-alt`), borderless tiles with big radii, pill buttons, one accent
+  blue. Dark theme is the same idea on black.
+- **Product visuals follow the AWS console.** Dashboards and reports are drawn
+  inside the `.console` scope (`components/visuals/`): dark top bar, bordered
+  panels, bold blue KPIs, status indicators, line and bar charts.
+
+Tokens are CSS custom properties in `src/app/globals.css`, exposed to Tailwind
+through `@theme inline`. The active theme is a `dark` class on `<html>`,
+applied by an inline script before first paint, stored in `localStorage` under
+`dvo-theme`.
+
+**Charts use sample data.** `DashboardMock` and `CostCompare` are
+illustrations of what a client gets, and each carries a caption saying so
+(`visuals.sampleNote`, `visuals.costNote`). Do not present their numbers as a
+client result; replace them with a real, approved case when there is one.
 
 ### Performance and accessibility notes
 

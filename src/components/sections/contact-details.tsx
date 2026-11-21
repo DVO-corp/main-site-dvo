@@ -71,7 +71,7 @@ export function ContactDetails({ dict }: { dict: Dictionary }) {
   const t = dict.contact.details;
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card/60 p-6">
+    <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6">
       <div className="flex flex-col gap-1.5">
         <h2 className="text-lg font-semibold">{t.title}</h2>
         <p className="text-sm leading-relaxed text-muted-foreground">

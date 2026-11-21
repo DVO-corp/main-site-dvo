@@ -7,7 +7,7 @@ export function SectionHeading({
   eyebrow,
   title,
   subtitle,
-  align = "left",
+  align = "center",
   as: Tag = "h2",
   className,
 }: {
@@ -31,8 +31,8 @@ export function SectionHeading({
         className={cn(
           "text-balance",
           Tag === "h1"
-            ? "text-3xl leading-[1.1] sm:text-5xl lg:text-6xl"
-            : "text-2xl leading-tight sm:text-3xl lg:text-[2.5rem]",
+            ? "text-4xl leading-[1.05] sm:text-6xl lg:text-7xl"
+            : "text-[2rem] leading-[1.08] sm:text-5xl lg:text-[3.5rem]",
         )}
       >
         {title}
@@ -40,7 +40,7 @@ export function SectionHeading({
       {subtitle && (
         <p
           className={cn(
-            "max-w-2xl text-[1.02rem] leading-relaxed text-muted-foreground",
+            "max-w-2xl text-lg leading-snug text-muted-foreground sm:text-xl",
             align === "center" && "mx-auto",
           )}
         >

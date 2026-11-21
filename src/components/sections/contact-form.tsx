@@ -172,7 +172,7 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="flex flex-col gap-6 rounded-2xl border border-border bg-card/60 p-6 sm:p-8"
+      className="flex flex-col gap-6 rounded-2xl border border-border bg-card p-6 sm:p-8"
     >
       <div className="flex flex-col gap-1.5">
         <h2 className="text-xl font-semibold">{t.title}</h2>

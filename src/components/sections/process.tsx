@@ -21,17 +21,17 @@ export function Process({
         <Reveal
           as="ol"
           className={cn(
-            "grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2",
+            "grid gap-4 sm:grid-cols-2",
             columns === 4 ? "lg:grid-cols-4" : "lg:grid-cols-5",
           )}
         >
           {steps.map((step, index) => (
-            <li key={step.title} className="flex flex-col gap-3 bg-background p-5">
-              <span className="font-mono text-sm text-primary">
-                {String(index + 1).padStart(2, "0")}
+            <li key={step.title} className="flex flex-col gap-3 rounded-[1.5rem] bg-card p-6">
+              <span className="text-3xl font-semibold text-primary">
+                {index + 1}
               </span>
-              <h3 className="text-base font-semibold">{step.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <h3 className="text-lg leading-snug font-semibold">{step.title}</h3>
+              <p className="text-sm leading-snug text-muted-foreground">
                 {step.text}
               </p>
             </li>

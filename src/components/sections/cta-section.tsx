@@ -19,14 +19,10 @@ export function CtaSection({
   return (
     <section className="section">
       <div className="container-page">
-        <Reveal className="relative overflow-hidden rounded-2xl border border-border bg-card/60 px-6 py-12 sm:px-12 sm:py-16">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 -z-10 grid-surface opacity-60"
-          />
+        <Reveal className="relative overflow-hidden rounded-[2rem] bg-card px-6 py-14 sm:px-12 sm:py-20">
           <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
-            <h2 className="text-2xl sm:text-[2rem]">{title}</h2>
-            <p className="text-muted-foreground">{text}</p>
+            <h2 className="text-3xl leading-[1.08] sm:text-5xl">{title}</h2>
+            <p className="text-lg leading-snug text-muted-foreground">{text}</p>
 
             <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center">
               <Button asChild size="lg">

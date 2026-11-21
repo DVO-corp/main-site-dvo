@@ -134,7 +134,7 @@ export default async function ProductsPage({
         </div>
       </section>
 
-      <div id="api" className="scroll-mt-24 border-y border-border bg-elevated/50">
+      <div id="api" className="scroll-mt-24 surface-alt">
         <Process
           title={products.api.title}
           subtitle={products.api.text}
@@ -157,6 +157,7 @@ export default async function ProductsPage({
       <section id="hosting" className="section scroll-mt-24">
         <div className="container-page grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
           <SectionHeading
+            align="left"
             title={products.hosting.title}
             subtitle={products.hosting.text}
           />

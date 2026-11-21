@@ -55,7 +55,7 @@ export default async function AboutPage({
 
       <section className="pt-14 pb-4">
         <div className="container-page">
-          <Reveal className="grid gap-8 rounded-2xl border border-border bg-card/60 p-6 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-12">
+          <Reveal className="grid gap-8 rounded-2xl border border-border bg-card p-6 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-12">
             <LogoMark className="size-16 shrink-0" />
             <div className="flex flex-col gap-4">
               <h2 className="text-2xl">{about.intro.title}</h2>
@@ -80,7 +80,7 @@ export default async function AboutPage({
                 as="li"
                 key={item.title}
                 delay={index * 0.05}
-                className="flex h-full gap-4 rounded-xl border border-border bg-card/50 p-6"
+                className="flex h-full gap-4 rounded-xl border border-border bg-card p-6"
               >
                 <span className="font-mono text-sm text-primary">
                   {String(index + 1).padStart(2, "0")}

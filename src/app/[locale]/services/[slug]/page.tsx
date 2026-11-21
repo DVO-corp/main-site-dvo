@@ -27,8 +27,21 @@ import {
 } from "@/components/sections/platform-diagram";
 import { Faq } from "@/components/sections/faq";
 import { CtaSection } from "@/components/sections/cta-section";
+import { VisualSection } from "@/components/sections/visual-section";
+import { CostCompare } from "@/components/visuals/cost-compare";
+import { DashboardMock } from "@/components/visuals/dashboard-mock";
 
 type Params = Promise<{ locale: string; slug: string }>;
+
+/** Landings that show a console mock-up under the hero. */
+const COST_LANDINGS = ["cloud-cost-optimization", "aws-devops", "cloud-migration"];
+const DASHBOARD_LANDINGS = [
+  "monitoring",
+  "infrastructure-support",
+  "high-load",
+  "devops-outsourcing",
+  "kubernetes",
+];
 
 export const dynamicParams = false;
 
@@ -92,7 +105,7 @@ export default async function LandingPage({ params }: { params: Params }) {
         title={landing.h1}
         subtitle={landing.lead}
         aside={
-          <div className="hidden rounded-lg border border-border bg-card/60 p-3 sm:p-4 lg:block">
+          <div className="hidden rounded-[1.75rem] bg-card p-5 lg:block">
             <PlatformDiagram
               highlight={LANDING_DIAGRAM[slug]}
               label={landing.stack.join(", ")}
@@ -126,9 +139,9 @@ export default async function LandingPage({ params }: { params: Params }) {
             <h2 className="text-2xl leading-tight sm:text-3xl">
               {dict.labels.included}
             </h2>
-            <ul className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
+            <ul className="grid gap-4 sm:grid-cols-2">
               {landing.included.map((item) => (
-                <li key={item.title} className="flex gap-3 bg-card p-5">
+                <li key={item.title} className="flex gap-3 rounded-[1.5rem] bg-card p-6">
                   <Check
                     className="mt-0.5 size-4 shrink-0 text-primary"
                     aria-hidden
@@ -146,7 +159,28 @@ export default async function LandingPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      <div className="border-y border-border bg-elevated/50">
+      {COST_LANDINGS.includes(slug) && (
+        <VisualSection
+          alt
+          title={dict.visuals.costTitle}
+          subtitle={dict.visuals.costSubtitle}
+          note={dict.visuals.costNote}
+        >
+          <CostCompare labels={dict.visuals} />
+        </VisualSection>
+      )}
+      {DASHBOARD_LANDINGS.includes(slug) && (
+        <VisualSection
+          alt
+          title={dict.visuals.dashTitle}
+          subtitle={dict.visuals.dashSubtitle}
+          note={dict.visuals.sampleNote}
+        >
+          <DashboardMock />
+        </VisualSection>
+      )}
+
+      <div>
         <Process
           title={dict.labels.howItGoes}
           subtitle=""
@@ -158,7 +192,7 @@ export default async function LandingPage({ params }: { params: Params }) {
       <section className="section">
         <div className="container-page grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-14">
           <div className="flex flex-col gap-6">
-            <SectionHeading title={dict.labels.faq} />
+            <SectionHeading title={dict.labels.faq} align="left" />
             <Faq items={landing.faq} />
           </div>
 
@@ -169,7 +203,7 @@ export default async function LandingPage({ params }: { params: Params }) {
                 {landing.stack.map((item) => (
                   <li
                     key={item}
-                    className="rounded-sm border border-border bg-card px-2.5 py-1 font-mono text-xs"
+                    className="rounded-full bg-card px-3 py-1 text-xs text-muted-foreground"
                   >
                     {item}
                   </li>

@@ -33,12 +33,12 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-border pt-10 pb-12 md:pt-14 md:pb-16">
+    <section className="relative overflow-hidden surface-alt pt-8 pb-14 md:pt-10 md:pb-20">
       <GridBackground />
 
       <div className="container-page flex flex-col gap-6">
         <nav aria-label="Breadcrumb">
-          <ol className="flex flex-wrap items-center gap-1.5 font-mono text-xs text-muted-foreground">
+          <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
             <li>
               <Link
                 href={path(locale, "home")}
@@ -88,10 +88,10 @@ export function PageHero({
               {badge}
             </Badge>
           )}
-          <h1 className="text-[2rem] leading-[1.1] font-semibold sm:text-5xl">
+          <h1 className="text-[2.25rem] leading-[1.06] font-semibold sm:text-5xl lg:text-[3.5rem]">
             {title}
           </h1>
-          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="text-lg leading-snug text-muted-foreground sm:text-xl">
             {subtitle}
           </p>
         </div>

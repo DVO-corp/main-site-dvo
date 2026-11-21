@@ -14,6 +14,8 @@ import { Process } from "@/components/sections/process";
 import { TechStack } from "@/components/sections/tech-stack";
 import { Faq } from "@/components/sections/faq";
 import { CtaSection } from "@/components/sections/cta-section";
+import { VisualSection } from "@/components/sections/visual-section";
+import { CostCompare } from "@/components/visuals/cost-compare";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -44,6 +46,14 @@ export default async function HomePage({
 
       <Hero locale={typedLocale} dict={dict} />
       <ServicesGrid locale={typedLocale} dict={dict} />
+
+      <VisualSection
+        title={dict.visuals.costTitle}
+        subtitle={dict.visuals.costSubtitle}
+        note={dict.visuals.costNote}
+      >
+        <CostCompare labels={dict.visuals} />
+      </VisualSection>
 
       <section className="section pt-0">
         <div className="container-page flex flex-col gap-10">
