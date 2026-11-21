@@ -12,8 +12,8 @@ export const COMPANY = {
   name: "DVO Corp",
   legalName: "DVO Corp",
   shortName: "DVO",
-  /** DevOps, Virtualization & Optimization */
-  expansion: "DevOps, Virtualization & Optimization",
+  /** What the three letters stand for; shown under the logo. */
+  expansion: "Deploy · Verify · Operate",
   foundingLocation: "Ukraine",
   domain: "dvocorp.com",
 } as const;

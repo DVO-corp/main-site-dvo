@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import type { Dictionary } from "@/content/locales";
 import { Icon } from "@/lib/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,6 +11,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
  * home page and the infrastructure page, so it takes its heading from the
  * caller instead of hardcoding one.
  */
+/** Icons for the three-step picture of each model: who → how → where. */
+const FLOW_ICONS: Record<string, string[]> = {
+  own: ["Users", "GitBranch", "Cloud"],
+  managed: ["GitBranch", "Workflow", "Server"],
+  api: ["AppWindow", "KeyRound", "Braces"],
+};
+
 export function InfraModels({ dict }: { dict: Dictionary }) {
   const models = dict.home.models.items;
   const [value, setValue] = React.useState(models[0]?.id ?? "own");
@@ -27,7 +34,34 @@ export function InfraModels({ dict }: { dict: Dictionary }) {
       </TabsList>
 
       {models.map((model) => (
-        <TabsContent key={model.id} value={model.id}>
+        <TabsContent key={model.id} value={model.id} className="flex flex-col gap-4">
+          <ol className="grid items-stretch gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr]">
+            {model.flow.map((step, index) => (
+              <React.Fragment key={step}>
+                {index > 0 && (
+                  <li
+                    aria-hidden
+                    className="flex items-center justify-center text-primary"
+                  >
+                    <ArrowRight className="size-5 rotate-90 sm:rotate-0" />
+                  </li>
+                )}
+                <li
+                  className={
+                    index === 2
+                      ? "flex items-center gap-3 rounded-lg border border-primary bg-primary/10 px-4 py-3"
+                      : "flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3"
+                  }
+                >
+                  <Icon
+                    name={FLOW_ICONS[model.id]?.[index] ?? "Boxes"}
+                    className="size-6 shrink-0 text-primary"
+                  />
+                  <span className="text-sm font-medium">{step}</span>
+                </li>
+              </React.Fragment>
+            ))}
+          </ol>
           <div className="grid gap-8 rounded-2xl border border-border bg-card/60 p-6 sm:p-8 lg:grid-cols-[1fr_1fr]">
             <div className="flex flex-col gap-4">
               <span className="inline-flex size-12 items-center justify-center rounded-xl border border-primary/25 bg-primary/10 text-primary">

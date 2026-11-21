@@ -5,7 +5,7 @@ import type { Dictionary } from "@/content/locales";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { GridBackground } from "@/components/common/grid-background";
-import { KvPanel } from "@/components/common/kv-panel";
+import { PlatformDiagram } from "./platform-diagram";
 
 /**
  * Above-the-fold content renders statically — no entrance animation — so the
@@ -61,7 +61,11 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </p>
         </div>
 
-        <KvPanel title={hero.panelTitle} rows={hero.panel} />
+        <div className="rounded-lg border border-border bg-card/60 p-3 sm:p-4">
+          <PlatformDiagram
+            label={hero.panel.map((row) => row.v).join("; ")}
+          />
+        </div>
       </div>
     </section>
   );

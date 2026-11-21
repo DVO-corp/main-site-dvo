@@ -17,6 +17,7 @@ export function PageHero({
   title,
   subtitle,
   leaf,
+  aside,
   children,
 }: {
   locale: Locale;
@@ -27,6 +28,8 @@ export function PageHero({
   subtitle: string;
   /** Extra breadcrumb after the section, for pages nested inside it. */
   leaf?: string;
+  /** Illustration shown beside the heading on wide screens. */
+  aside?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
@@ -72,6 +75,13 @@ export function PageHero({
           </ol>
         </nav>
 
+        <div
+          className={
+            aside
+              ? "grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]"
+              : undefined
+          }
+        >
         <div className="flex max-w-3xl flex-col gap-5">
           {badge && (
             <Badge variant="primary" className="w-fit">
@@ -84,6 +94,8 @@ export function PageHero({
           <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
             {subtitle}
           </p>
+        </div>
+        {aside}
         </div>
 
         {children}

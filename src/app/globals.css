@@ -262,6 +262,31 @@
     text-wrap: balance;
   }
 
+  /* Diagram accents: a soft pulse for status dots, a drift for flow arrows. */
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -16;
+    }
+  }
+
+  .animate-dash-flow {
+    animation: dash-flow 1.2s linear infinite;
+  }
+
   /* Radix supplies the measured height; these drive the FAQ accordion. */
   @keyframes accordion-down {
     from {

@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Activity,
+  AppWindow,
   ArrowRightLeft,
   Blocks,
   Bot,
@@ -18,6 +19,7 @@ import {
   Gauge,
   GitBranch,
   HardDrive,
+  KeyRound,
   Layers,
   LifeBuoy,
   Lock,
@@ -50,6 +52,7 @@ import {
  */
 const registry: Record<string, LucideIcon> = {
   Activity,
+  AppWindow,
   ArrowRightLeft,
   Blocks,
   Bot,
@@ -68,6 +71,7 @@ const registry: Record<string, LucideIcon> = {
   Gauge,
   GitBranch,
   HardDrive,
+  KeyRound,
   Layers,
   LifeBuoy,
   Lock,

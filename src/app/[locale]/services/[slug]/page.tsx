@@ -21,6 +21,10 @@ import { PageHero } from "@/components/common/page-hero";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Reveal } from "@/components/common/reveal";
 import { Process } from "@/components/sections/process";
+import {
+  LANDING_DIAGRAM,
+  PlatformDiagram,
+} from "@/components/sections/platform-diagram";
 import { Faq } from "@/components/sections/faq";
 import { CtaSection } from "@/components/sections/cta-section";
 
@@ -87,6 +91,14 @@ export default async function LandingPage({ params }: { params: Params }) {
         leaf={landing.name}
         title={landing.h1}
         subtitle={landing.lead}
+        aside={
+          <div className="hidden rounded-lg border border-border bg-card/60 p-3 sm:p-4 lg:block">
+            <PlatformDiagram
+              highlight={LANDING_DIAGRAM[slug]}
+              label={landing.stack.join(", ")}
+            />
+          </div>
+        }
       />
 
       <section className="section">

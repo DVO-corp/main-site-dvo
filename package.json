@@ -2,7 +2,7 @@
   "name": "dvocorp-site",
   "version": "1.0.0",
   "private": true,
-  "description": "DVO Corp — DevOps, Virtualization & Optimization. Static corporate site (Next.js App Router, static export, GitHub Pages).",
+  "description": "DVO Corp — Deploy · Verify · Operate. Static corporate site (Next.js App Router, static export, GitHub Pages).",
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/postbuild.mjs",

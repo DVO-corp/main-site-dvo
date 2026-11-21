@@ -50,7 +50,7 @@ export default function OpengraphImage() {
               DVO Corp
             </span>
             <span style={{ color: "#8A93A8", fontSize: 18, letterSpacing: 2 }}>
-              DEVOPS · INFRASTRUCTURE · OPERATIONS
+              DEPLOY · VERIFY · OPERATE
             </span>
           </div>
         </div>

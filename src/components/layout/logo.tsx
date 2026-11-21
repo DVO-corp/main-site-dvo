@@ -53,8 +53,8 @@ export function Logo({
           <span className="text-[1.15rem] font-semibold tracking-tight">
             DVO<span className="text-primary"> Corp</span>
           </span>
-          <span className="mt-0.5 text-[0.62rem] font-medium tracking-[0.14em] text-muted-foreground uppercase">
-            DevOps · Infra · Ops
+          <span className="mt-0.5 text-[0.62rem] font-medium tracking-[0.1em] text-muted-foreground uppercase">
+            {COMPANY.expansion}
           </span>
         </span>
       )}

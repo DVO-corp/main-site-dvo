@@ -61,7 +61,7 @@ export const en = {
 
   home: {
     hero: {
-      badge: "DevOps · Infrastructure · Operations",
+      badge: "Deploy · Verify · Operate",
       title: "DevOps team for products that have to stay up",
       subtitle:
         "We design, launch and run production infrastructure: Kubernetes, Terraform, CI/CD, monitoring, security and cost control. In your AWS account, any other cloud, or on our servers.",
@@ -92,6 +92,7 @@ export const en = {
         {
           id: "own",
           tab: "Your infrastructure",
+          flow: ["Our engineers", "Code in your repository", "Your cloud account"],
           icon: "Server",
           title: "We build and run it in your accounts",
           text: "AWS, Hetzner, any other cloud or your own hardware. Everything is described as code in your repository; accounts, access and data stay yours.",
@@ -107,6 +108,7 @@ export const en = {
         {
           id: "managed",
           tab: "Our infrastructure",
+          flow: ["Your repository", "Our delivery pipeline", "Our clusters"],
           icon: "ServerCog",
           title: "We host and operate your application",
           text: "No servers of your own and no wish to get them. We run your application on our clusters and are responsible for deploys, uptime, monitoring and backups.",
@@ -122,6 +124,7 @@ export const en = {
         {
           id: "api",
           tab: "Function as an API",
+          flow: ["Your application", "API key + HTTP call", "MetaPlatho"],
           icon: "Braces",
           title: "We add your function to our API platform",
           text: "You need one capability, not a whole system: a calculation, a conversion, a data-processing step. We build it, run it on the MetaPlatho platform and you call it over HTTP, paying for usage.",
@@ -665,7 +668,7 @@ export const en = {
       badge: "About",
       title: "A small team of DevOps engineers",
       subtitle:
-        "DVO stands for DevOps, Virtualization & Optimization. We are based in Ukraine and work remotely with companies in Ukraine and across Europe.",
+        "DVO stands for Deploy, Verify, Operate — the three things we do for a product. We are based in Ukraine and work remotely with companies in Ukraine and across Europe.",
     },
     intro: {
       title: "Who you work with",

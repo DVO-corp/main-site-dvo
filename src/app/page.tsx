@@ -51,7 +51,7 @@ export default function RootRedirectPage() {
         <main className="flex min-h-dvh flex-col items-center justify-center gap-6 px-6 text-center">
           <LogoMark className="size-12" />
           <p className="text-sm text-muted-foreground">
-            DVO Corp — DevOps, Virtualization &amp; Optimization
+            DVO Corp — Deploy · Verify · Operate
           </p>
           <nav className="flex flex-wrap items-center justify-center gap-3">
             {LOCALES.map((locale) => (

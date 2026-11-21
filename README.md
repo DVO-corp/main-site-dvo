@@ -1,6 +1,6 @@
 # DVO Corp — dvocorp.com
 
-Corporate site for **DVO Corp** (DevOps, Virtualization & Optimization):
+Corporate site for **DVO Corp** (Deploy · Verify · Operate):
 a DevOps team that builds and runs production infrastructure (AWS, Kubernetes,
 Terraform, CI/CD, monitoring), hosts applications and ships custom APIs.
 
