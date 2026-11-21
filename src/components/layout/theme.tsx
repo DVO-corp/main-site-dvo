@@ -82,7 +82,7 @@ export function ThemeToggle({
       aria-label={label}
       title={label}
       className={cn(
-        "inline-flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground",
+        "inline-flex size-10 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground",
         className,
       )}
     >

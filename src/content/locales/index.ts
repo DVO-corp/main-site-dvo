@@ -1,12 +1,13 @@
 import type { Locale } from "../site";
 import { DEFAULT_LOCALE, isLocale } from "../site";
-import { uk, type Dictionary } from "./uk";
-import { en } from "./en";
+import { en, type Dictionary } from "./en";
+import { uk } from "./uk";
 import { ru } from "./ru";
 
 const dictionaries = {
-  uk: uk as unknown as Dictionary,
-  en,
+  uk,
+  // `en` is declared `as const` (it defines the shape); widen it here.
+  en: en as unknown as Dictionary,
   ru,
 } satisfies Record<Locale, Dictionary>;
 

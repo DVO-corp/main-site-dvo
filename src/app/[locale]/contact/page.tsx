@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { CONTACTS, LOCALES, path, type Locale } from "@/content/site";
+import { CONTACTS, LOCALES, type Locale } from "@/content/site";
 import { getDictionary } from "@/content/locales";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, graph } from "@/lib/jsonld";
-import { Icon } from "@/lib/icons";
 import { JsonLd } from "@/components/common/json-ld";
 import { PageHero } from "@/components/common/page-hero";
 import { Reveal } from "@/components/common/reveal";
@@ -35,20 +32,6 @@ export default async function ContactPage({
   const dict = getDictionary(locale);
   const { contact } = dict;
 
-  /** Each channel card resolves to a real destination. */
-  const hrefFor = (action: string) => {
-    switch (action) {
-      case "writeTelegram":
-        return { href: CONTACTS.telegramUrl, external: true };
-      case "writeEmail":
-        return { href: `mailto:${CONTACTS.email}`, external: false };
-      case "discussInfrastructure":
-        return { href: path(typedLocale, "infrastructure"), external: false };
-      default:
-        return { href: path(typedLocale, "ai"), external: false };
-    }
-  };
-
   return (
     <>
       <JsonLd
@@ -69,7 +52,7 @@ export default async function ContactPage({
         subtitle={contact.hero.subtitle}
       />
 
-      <section className="pb-4">
+      <section className="pt-14 pb-4">
         <div className="container-page grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-10">
           <Reveal>
             <ContactForm dict={dict} />
@@ -78,62 +61,6 @@ export default async function ContactPage({
           <div className="flex flex-col gap-6">
             <Reveal>
               <ContactDetails dict={dict} />
-            </Reveal>
-
-            <Reveal delay={0.06} className="flex flex-col gap-4">
-              <h2 className="text-lg font-semibold">
-                {contact.channels.title}
-              </h2>
-
-              <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                {contact.channels.items.map((item) => {
-                  const { href, external } = hrefFor(item.action);
-                  const label =
-                    dict.actions[item.action as keyof typeof dict.actions];
-
-                  const inner = (
-                    <>
-                      <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
-                        <Icon name={item.icon} className="size-[1.05rem]" />
-                      </span>
-                      <span className="flex flex-col gap-0.5">
-                        <span className="text-sm font-semibold">
-                          {item.title}
-                        </span>
-                        <span className="text-xs leading-relaxed text-muted-foreground">
-                          {item.text}
-                        </span>
-                        <span className="mt-1 inline-flex items-center gap-1.5 text-xs font-medium text-primary">
-                          {label}
-                          <ArrowRight className="size-3" aria-hidden />
-                        </span>
-                      </span>
-                    </>
-                  );
-
-                  const className =
-                    "card-hover flex h-full items-start gap-3.5 rounded-xl border border-border bg-card/60 p-4 outline-none focus-visible:ring-2 focus-visible:ring-ring";
-
-                  return (
-                    <li key={item.title}>
-                      {external ? (
-                        <a
-                          href={href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={className}
-                        >
-                          {inner}
-                        </a>
-                      ) : (
-                        <Link href={href} className={className}>
-                          {inner}
-                        </Link>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
             </Reveal>
 
             <Reveal

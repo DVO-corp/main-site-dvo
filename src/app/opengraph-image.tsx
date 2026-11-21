@@ -23,7 +23,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           background:
-            "linear-gradient(135deg, #10121A 0%, #161A28 55%, #1B1730 100%)",
+            "#151618",
           padding: 72,
           fontFamily: "sans-serif",
         }}
@@ -33,12 +33,12 @@ export default function OpengraphImage() {
             style={{
               width: 64,
               height: 64,
-              borderRadius: 18,
-              border: "3px solid #5B7CFA",
+              borderRadius: 8,
+              border: "3px solid #4ADE80",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#38C6D9",
+              color: "#4ADE80",
               fontSize: 34,
               fontWeight: 700,
             }}
@@ -50,7 +50,7 @@ export default function OpengraphImage() {
               DVO Corp
             </span>
             <span style={{ color: "#8A93A8", fontSize: 18, letterSpacing: 2 }}>
-              DEVOPS · VIRTUALIZATION · OPTIMIZATION
+              DEVOPS · INFRASTRUCTURE · OPERATIONS
             </span>
           </div>
         </div>
@@ -65,15 +65,15 @@ export default function OpengraphImage() {
               maxWidth: 940,
             }}
           >
-            Infrastructure and AI capacity without the excess spend
+            DevOps team for products that have to stay up
           </span>
           <span style={{ color: "#9AA3B8", fontSize: 26, maxWidth: 900 }}>
-            DevOps, Kubernetes, GPU pools and custom automation for small teams
+            Production infrastructure, operations and custom APIs. In your cloud or on our servers.
           </span>
         </div>
 
         <div style={{ display: "flex", gap: 14 }}>
-          {["Kubernetes", "GPU pools", "CI/CD", "Monitoring", "Media API"].map(
+          {["AWS", "Kubernetes", "Terraform", "CI/CD", "Monitoring"].map(
             (chip) => (
               <span
                 key={chip}
@@ -81,7 +81,7 @@ export default function OpengraphImage() {
                   color: "#C3CAD9",
                   fontSize: 20,
                   border: "1px solid #2E3446",
-                  borderRadius: 999,
+                  borderRadius: 6,
                   padding: "8px 20px",
                 }}
               >

@@ -16,6 +16,7 @@ export function PageHero({
   badge,
   title,
   subtitle,
+  leaf,
   children,
 }: {
   locale: Locale;
@@ -24,15 +25,17 @@ export function PageHero({
   badge?: string;
   title: string;
   subtitle: string;
+  /** Extra breadcrumb after the section, for pages nested inside it. */
+  leaf?: string;
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden pt-10 pb-14 md:pt-14 md:pb-20">
+    <section className="relative overflow-hidden border-b border-border pt-10 pb-12 md:pt-14 md:pb-16">
       <GridBackground />
 
       <div className="container-page flex flex-col gap-6">
         <nav aria-label="Breadcrumb">
-          <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <ol className="flex flex-wrap items-center gap-1.5 font-mono text-xs text-muted-foreground">
             <li>
               <Link
                 href={path(locale, "home")}
@@ -44,9 +47,28 @@ export function PageHero({
             <li aria-hidden className="flex items-center">
               <ChevronRight className="size-3.5" />
             </li>
-            <li aria-current="page" className="text-foreground">
-              {dict.nav[route as keyof typeof dict.nav]}
-            </li>
+            {leaf ? (
+              <>
+                <li>
+                  <Link
+                    href={path(locale, route)}
+                    className="transition-colors hover:text-foreground"
+                  >
+                    {dict.nav[route as keyof typeof dict.nav]}
+                  </Link>
+                </li>
+                <li aria-hidden className="flex items-center">
+                  <ChevronRight className="size-3.5" />
+                </li>
+                <li aria-current="page" className="text-foreground">
+                  {leaf}
+                </li>
+              </>
+            ) : (
+              <li aria-current="page" className="text-foreground">
+                {dict.nav[route as keyof typeof dict.nav]}
+              </li>
+            )}
           </ol>
         </nav>
 

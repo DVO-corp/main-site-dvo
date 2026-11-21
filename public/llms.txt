@@ -1,0 +1,46 @@
+# DVO Corp (dvocorp.com)
+
+> DVO Corp is a small DevOps team from Ukraine. We design, launch and operate
+> production infrastructure for software products: AWS and EKS, Kubernetes,
+> Terraform / infrastructure as code, CI/CD, monitoring and alerting, security,
+> cloud cost optimisation, migrations and ongoing support. We work in the
+> client's cloud accounts or host applications on our own infrastructure, and
+> we ship single functions as pay-per-use API endpoints on our MetaPlatho
+> platform. Clients: startups and companies in Ukraine and across Europe.
+> Languages: Ukrainian, English.
+
+## Contact
+
+- Telegram: https://t.me/dvocorp
+- Email: support@dvocorp.com, info@dvocorp.com
+- Request form: https://dvocorp.com/en/contact/
+
+## Services (English)
+
+- [DevOps outsourcing](https://dvocorp.com/en/services/devops-outsourcing/): an infrastructure team without hiring one
+- [AWS infrastructure](https://dvocorp.com/en/services/aws-devops/): accounts, VPC, EKS, RDS, delivery and cost review, all in Terraform
+- [Kubernetes](https://dvocorp.com/en/services/kubernetes/): EKS and self-managed clusters, Helm, autoscaling, upgrades
+- [Terraform and IaC](https://dvocorp.com/en/services/terraform-iac/): modules, importing existing resources, plan-on-PR
+- [CI/CD](https://dvocorp.com/en/services/ci-cd/): GitHub Actions, GitLab CI, GitOps, rollbacks
+- [Monitoring and alerts](https://dvocorp.com/en/services/monitoring/): Prometheus, VictoriaMetrics, Grafana, Loki
+- [Cloud cost optimisation](https://dvocorp.com/en/services/cloud-cost-optimization/): bill audit, right-sizing, autoscaling
+- [Infrastructure security](https://dvocorp.com/en/services/infrastructure-security/): access, secrets, network, backups
+- [Cloud migration](https://dvocorp.com/en/services/cloud-migration/): between clouds or into a cluster, minimal downtime
+- [Support and operations](https://dvocorp.com/en/services/infrastructure-support/): taking a running system under supervision
+- [High load](https://dvocorp.com/en/services/high-load/): load testing, bottlenecks, scaling
+- [Managed hosting](https://dvocorp.com/en/services/managed-hosting/): your application on our clusters
+- [Custom API development](https://dvocorp.com/en/services/api-development/): your function as a pay-per-use endpoint
+- [AI infrastructure](https://dvocorp.com/en/services/ai-infrastructure/): agents, model serving, GPU workers
+- [DevOps for startups](https://dvocorp.com/en/services/devops-for-startups/): a minimal production setup that grows with the product
+
+## Послуги (українською)
+
+- [Усі послуги](https://dvocorp.com/uk/services/)
+- [DevOps аутсорсинг](https://dvocorp.com/uk/services/devops-outsourcing/)
+- [Інфраструктура на AWS](https://dvocorp.com/uk/services/aws-devops/)
+- [Kubernetes](https://dvocorp.com/uk/services/kubernetes/)
+- [Підтримка інфраструктури](https://dvocorp.com/uk/services/infrastructure-support/)
+
+## Product
+
+- [MetaPlatho](https://metaplatho.com): our own media-processing platform with a public REST API; it runs on the infrastructure we build and operate.

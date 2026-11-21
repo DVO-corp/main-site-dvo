@@ -3,7 +3,6 @@ import { LOCALES, type Locale } from "@/content/site";
 import { getDictionary } from "@/content/locales";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, graph } from "@/lib/jsonld";
-import { Icon } from "@/lib/icons";
 import { JsonLd } from "@/components/common/json-ld";
 import { PageHero } from "@/components/common/page-hero";
 import { Reveal } from "@/components/common/reveal";
@@ -54,7 +53,7 @@ export default async function AboutPage({
         subtitle={about.hero.subtitle}
       />
 
-      <section className="pb-4">
+      <section className="pt-14 pb-4">
         <div className="container-page">
           <Reveal className="grid gap-8 rounded-2xl border border-border bg-card/60 p-6 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-12">
             <LogoMark className="size-16 shrink-0" />
@@ -72,31 +71,6 @@ export default async function AboutPage({
       </section>
 
       <section className="section">
-        <div className="container-page flex flex-col gap-10">
-          <SectionHeading title={about.focus.title} />
-
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {about.focus.items.map((item, index) => (
-              <Reveal
-                as="li"
-                key={item.title}
-                delay={index * 0.05}
-                className="card-hover flex h-full flex-col gap-3 rounded-xl border border-border bg-card/60 p-6"
-              >
-                <span className="inline-flex size-11 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
-                  <Icon name={item.icon} className="size-5" />
-                </span>
-                <h3 className="font-semibold">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {item.text}
-                </p>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section pt-0">
         <div className="container-page flex flex-col gap-10">
           <SectionHeading title={about.principles.title} />
 

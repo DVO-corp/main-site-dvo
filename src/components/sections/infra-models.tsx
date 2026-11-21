@@ -7,12 +7,12 @@ import { Icon } from "@/lib/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /**
- * The "Your server / Managed DVO / Shared DVO" switcher. Rendered on both the
+ * The "your infrastructure / our infrastructure / function as an API" switcher. Rendered on both the
  * home page and the infrastructure page, so it takes its heading from the
  * caller instead of hardcoding one.
  */
 export function InfraModels({ dict }: { dict: Dictionary }) {
-  const models = dict.home.shared.models;
+  const models = dict.home.models.items;
   const [value, setValue] = React.useState(models[0]?.id ?? "own");
 
   return (

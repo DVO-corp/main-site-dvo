@@ -50,7 +50,7 @@ export default function NotFound() {
             className="container-page flex flex-1 flex-col items-center justify-center gap-6 py-16 text-center"
           >
             <p
-              className="text-gradient text-7xl font-semibold sm:text-8xl"
+              className="text-primary text-7xl font-semibold sm:text-8xl"
               aria-hidden
             >
               404
@@ -76,7 +76,7 @@ export default function NotFound() {
                   <Link
                     key={route}
                     href={path(DEFAULT_LOCALE, route)}
-                    className="rounded-full border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+                    className="rounded-md border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
                   >
                     {dict.nav[route as keyof typeof dict.nav]}
                   </Link>

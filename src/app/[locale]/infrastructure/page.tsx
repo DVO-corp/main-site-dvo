@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LOCALES, type Locale } from "@/content/site";
+import { LOCALES, absoluteUrl, path, type Locale } from "@/content/site";
 import { getDictionary } from "@/content/locales";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, graph, serviceSchema } from "@/lib/jsonld";
@@ -44,10 +44,10 @@ export default async function InfrastructurePage({
             { name: dict.breadcrumbs.home, route: "home" },
             { name: dict.nav.infrastructure, route: "infrastructure" },
           ]),
-          serviceSchema(typedLocale, {
+          serviceSchema({
             name: infra.hero.title,
             description: dict.seo.infrastructure.description,
-            route: "infrastructure",
+            url: absoluteUrl(path(typedLocale, "infrastructure")),
           }),
         ])}
       />
@@ -61,7 +61,7 @@ export default async function InfrastructurePage({
         subtitle={infra.hero.subtitle}
       />
 
-      <section className="pb-4">
+      <section className="pt-14 pb-4">
         <div className="container-page flex flex-col gap-8">
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl sm:text-3xl">{infra.diagram.title}</h2>

@@ -50,7 +50,7 @@ function ContactRow({
         onClick={copy}
         aria-label={`${copyLabel}: ${value}`}
         className={cn(
-          "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs transition-colors",
+          "inline-flex shrink-0 items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs transition-colors",
           copied
             ? "border-success/40 text-success"
             : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground",

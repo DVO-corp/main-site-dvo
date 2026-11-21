@@ -6,11 +6,13 @@ import {
   LOCALE_TAGS,
   SITE_URL,
   absoluteUrl,
+  landingPath,
   path,
   type Locale,
   type RouteKey,
 } from "@/content/site";
 import { getDictionary } from "@/content/locales";
+import { LANDING_LOCALES, type Landing } from "@/content/landings";
 
 type SeoKey = keyof ReturnType<typeof getDictionary>["seo"];
 
@@ -33,34 +35,30 @@ const OG_LOCALES: Record<Locale, string> = {
   ru: "ru_RU",
 };
 
-/**
- * Builds the full metadata block for a localized page: canonical URL,
- * hreflang alternates (including x-default), Open Graph and Twitter cards.
- */
-export function buildMetadata(
-  locale: Locale,
-  route: RouteKey,
-  seoKey: SeoKey = route as SeoKey,
-): Metadata {
-  const dict = getDictionary(locale);
-  const seo = dict.seo[seoKey];
-  const pathname = path(locale, route);
-  const url = absoluteUrl(pathname);
+interface PageSeo {
+  title: string;
+  description: string;
+  keywords: string[];
+}
 
+/** Shared shape: canonical, hreflang alternates, Open Graph and Twitter. */
+function compose(
+  locale: Locale,
+  seo: PageSeo,
+  url: string,
+  alternates: { locale: Locale; url: string }[],
+): Metadata {
   const languages: Record<string, string> = {};
-  for (const alt of LOCALES) {
-    languages[LOCALE_TAGS[alt]] = absoluteUrl(path(alt, route));
-  }
-  languages["x-default"] = absoluteUrl(path(DEFAULT_LOCALE, route));
+  for (const alt of alternates) languages[LOCALE_TAGS[alt.locale]] = alt.url;
+  const fallback =
+    alternates.find((alt) => alt.locale === DEFAULT_LOCALE) ?? alternates[0];
+  if (fallback) languages["x-default"] = fallback.url;
 
   return {
     title: seo.title,
     description: seo.description,
     keywords: seo.keywords,
-    alternates: {
-      canonical: url,
-      languages,
-    },
+    alternates: { canonical: url, languages },
     openGraph: {
       type: "website",
       siteName: COMPANY.name,
@@ -68,9 +66,9 @@ export function buildMetadata(
       description: seo.description,
       url,
       locale: OG_LOCALES[locale],
-      alternateLocale: LOCALES.filter((l) => l !== locale).map(
-        (l) => OG_LOCALES[l],
-      ),
+      alternateLocale: alternates
+        .filter((alt) => alt.locale !== locale)
+        .map((alt) => OG_LOCALES[alt.locale]),
       images: [OG_IMAGE],
     },
     twitter: {
@@ -80,4 +78,36 @@ export function buildMetadata(
       images: [OG_IMAGE.url],
     },
   };
+}
+
+/** Metadata for a localized top-level page. */
+export function buildMetadata(
+  locale: Locale,
+  route: RouteKey,
+  seoKey: SeoKey = route as SeoKey,
+): Metadata {
+  const dict = getDictionary(locale);
+  return compose(
+    locale,
+    dict.seo[seoKey],
+    absoluteUrl(path(locale, route)),
+    LOCALES.map((alt) => ({ locale: alt, url: absoluteUrl(path(alt, route)) })),
+  );
+}
+
+/** Metadata for a search landing; alternates cover only its own locales. */
+export function buildLandingMetadata(
+  locale: Locale,
+  slug: string,
+  landing: Landing,
+): Metadata {
+  return compose(
+    locale,
+    landing.seo,
+    absoluteUrl(landingPath(locale, slug)),
+    LANDING_LOCALES.map((alt) => ({
+      locale: alt,
+      url: absoluteUrl(landingPath(alt, slug)),
+    })),
+  );
 }

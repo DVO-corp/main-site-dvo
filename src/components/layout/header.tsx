@@ -58,7 +58,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
     >
       <a
         href="#main"
-        className="sr-only rounded-full bg-primary px-4 py-2 text-primary-foreground focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50"
+        className="sr-only rounded-md bg-primary px-4 py-2 text-primary-foreground focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50"
       >
         {dict.nav.skipToContent}
       </a>
@@ -82,7 +82,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               href={path(locale, route)}
               aria-current={isActive(route) ? "page" : undefined}
               className={cn(
-                "relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+                "relative rounded-md px-3.5 py-2 text-sm font-medium transition-colors",
                 isActive(route)
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",
@@ -92,7 +92,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               {isActive(route) && (
                 <span
                   aria-hidden
-                  className="absolute inset-x-3.5 -bottom-0.5 h-px bg-gradient-to-r from-primary to-accent"
+                  className="absolute inset-x-3.5 -bottom-0.5 h-px bg-primary"
                 />
               )}
             </Link>
@@ -119,7 +119,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             aria-label={open ? dict.nav.closeMenu : dict.nav.openMenu}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="inline-flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground lg:hidden"
+            className="inline-flex size-10 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground lg:hidden"
           >
             {open ? (
               <X className="size-5" strokeWidth={1.7} aria-hidden />

@@ -17,10 +17,39 @@ type Json = Record<string, unknown>;
 const ORG_ID = `${SITE_URL}/#organization`;
 const SITE_ID = `${SITE_URL}/#website`;
 
+/** Markets we actually sell to; mirrored in the copy and the promotion plan. */
+const AREA_SERVED = [
+  "Ukraine",
+  "Poland",
+  "Moldova",
+  "Lithuania",
+  "Latvia",
+  "Estonia",
+  "Czechia",
+  "Romania",
+  "Germany",
+  "European Union",
+];
+
+const KNOWS_ABOUT = [
+  "DevOps",
+  "Amazon Web Services",
+  "Amazon EKS",
+  "Kubernetes",
+  "Terraform",
+  "Infrastructure as code",
+  "CI/CD",
+  "GitOps",
+  "Monitoring and alerting",
+  "Cloud cost optimization",
+  "Cloud migration",
+  "Site reliability engineering",
+];
+
 export function organizationSchema(locale: Locale): Json {
   const dict = getDictionary(locale);
   return {
-    "@type": "Organization",
+    "@type": ["Organization", "ProfessionalService"],
     "@id": ORG_ID,
     name: COMPANY.name,
     legalName: COMPANY.legalName,
@@ -37,7 +66,9 @@ export function organizationSchema(locale: Locale): Json {
     },
     sameAs: SOCIAL.map((s) => s.href),
     knowsLanguage: Object.values(LOCALE_TAGS),
-    areaServed: "Worldwide",
+    areaServed: AREA_SERVED,
+    knowsAbout: KNOWS_ABOUT,
+    address: { "@type": "PostalAddress", addressCountry: "UA" },
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -98,18 +129,32 @@ export function faqSchema(items: { q: string; a: string }[]): Json {
   };
 }
 
-export function serviceSchema(
-  locale: Locale,
-  service: { name: string; description: string; route: RouteKey },
-): Json {
+/** Breadcrumbs for pages that are not top-level routes (search landings). */
+export function trailSchema(trail: { name: string; url: string }[]): Json {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+export function serviceSchema(service: {
+  name: string;
+  description: string;
+  url: string;
+}): Json {
   return {
     "@type": "Service",
     name: service.name,
     description: service.description,
     serviceType: service.name,
     provider: { "@id": ORG_ID },
-    areaServed: "Worldwide",
-    url: absoluteUrl(path(locale, service.route)),
+    areaServed: AREA_SERVED,
+    url: service.url,
   };
 }
 
@@ -123,7 +168,7 @@ export function softwareApplicationSchema(
     description: app.description,
     applicationCategory: "MultimediaApplication",
     operatingSystem: "Web",
-    url: PRODUCTS.mediaProcessing.url,
+    url: PRODUCTS.metaplatho.url,
     inLanguage: LOCALE_TAGS[locale],
     publisher: { "@id": ORG_ID },
   };

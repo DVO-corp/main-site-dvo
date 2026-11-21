@@ -1,13 +1,21 @@
-import type { Dictionary } from "./uk";
+import { legal } from "./legal/en";
 
-/** English dictionary. Must match the shape of `uk`. */
-export const en: Dictionary = {
+/**
+ * English dictionary and the SOURCE OF TRUTH for the content shape.
+ *
+ * `Dictionary` is derived from this object, so adding a key here makes
+ * TypeScript require the same key in `uk.ts` and `ru.ts`.
+ *
+ * Copy rules: say what we do in plain words, no filler, no invented numbers,
+ * no client names. Anything stated as a fact must be true of our own
+ * production today.
+ */
+export const en = {
   nav: {
     home: "Home",
     services: "Services",
-    ai: "AI Infrastructure",
     infrastructure: "Infrastructure",
-    products: "Products",
+    products: "Platform & API",
     about: "About",
     contact: "Contact",
     privacy: "Privacy Policy",
@@ -25,509 +33,217 @@ export const en: Dictionary = {
 
   actions: {
     discussProject: "Discuss a project",
-    viewServices: "View services",
-    mediaProcessing: "Media Processing",
-    openMediaProcessing: "Open Media Processing",
-    orderIntegration: "Order an integration",
-    discussWorkflow: "Discuss your own workflow",
-    getEstimate: "Get an estimate",
-    requestEstimate: "Request a custom estimate",
-    discussInfrastructure: "Discuss infrastructure",
-    contactUs: "Get in touch",
-    learnMore: "Learn more",
-    showMore: "Details",
-    showLess: "Collapse",
+    viewServices: "All services",
+    openProduct: "Open MetaPlatho",
+    learnMore: "Details",
     writeTelegram: "Message on Telegram",
     writeEmail: "Send an email",
     backHome: "Back to home",
-    allServices: "All services",
-    send: "Send request",
-    sending: "Sending…",
-    sendAnother: "Send another request",
-    calculate: "Suggest a setup",
-    reset: "Reset",
+    prepare: "Prepare the request",
+    sendTelegram: "Send via Telegram",
+    sendEmail: "Send by email",
+    editRequest: "Edit the request",
     copy: "Copy",
     copied: "Copied",
     openInNewTab: "opens in a new tab",
   },
 
   labels: {
-    problem: "What it solves",
     included: "What's included",
     bestFor: "Best for",
-    outcome: "Possible outcome",
-    example: "Example",
-    note: "Important",
-    recommended: "Suggested model",
-    loadProfile: "Load profile",
+    whenNeeded: "When you need this",
+    howItGoes: "How the work goes",
+    stack: "Tools we use",
+    faq: "Questions",
+    related: "Related services",
     required: "required",
-    optional: "optional",
-    inDevelopment: "In development",
-    available: "Available",
-    planned: "Planned",
   },
 
   home: {
     hero: {
-      badge: "DevOps · Virtualization · Optimization",
-      title: "Infrastructure and AI capacity without the excess spend",
+      badge: "DevOps · Infrastructure · Operations",
+      title: "DevOps team for products that have to stay up",
       subtitle:
-        "We set up servers, Kubernetes, AI models and custom services for small teams. Architecture is matched to your real workload, so you don't pay for capacity that sits idle.",
-      note: "We work on your own infrastructure or provide a managed environment — whichever makes more sense for your project.",
-    },
-
-    diagram: {
-      title: "How a request flows",
-      subtitle:
-        "A simplified path from your application's request to compute, storage and monitoring. Hover or tap a node for details.",
-      hint: "Select a node on the diagram",
-      nodes: [
-        {
-          id: "request",
-          label: "Client request",
-          desc: "An HTTP request, webhook or job coming from your application or integration.",
-        },
-        {
-          id: "gateway",
-          label: "DVO Gateway",
-          desc: "Entry point: TLS, routing, rate limits and API key authentication.",
-        },
-        {
-          id: "queue",
-          label: "Job queue",
-          desc: "Long operations don't block the response — the job is queued and picked up by a worker.",
-        },
-        {
-          id: "k8s",
-          label: "Kubernetes",
-          desc: "Service orchestration: rollouts, restarts, resource limits and scaling.",
-        },
-        {
-          id: "cpu",
-          label: "CPU workers",
-          desc: "Conversion, parsing, data processing, API integrations — everything that doesn't need a GPU.",
-        },
-        {
-          id: "gpu",
-          label: "GPU workers",
-          desc: "Image and video generation, transcription, model inference. Can run in a shared pool.",
-        },
-        {
-          id: "storage",
-          label: "Storage",
-          desc: "Object storage for incoming and finished files, backups and object lifecycle rules.",
-        },
-        {
-          id: "api",
-          label: "API / Result",
-          desc: "The result returns to your service via API, a webhook or a file link.",
-        },
-        {
-          id: "monitoring",
-          label: "Monitoring",
-          desc: "Metrics, logs and alerts: utilisation, errors and resource cost stay visible.",
-        },
+        "We design, launch and run production infrastructure: Kubernetes, Terraform, CI/CD, monitoring, security and cost control. In your AWS account, any other cloud, or on our servers.",
+      note: "Any stack — Python, Node.js, Go, PHP, Java. From a single service to a high-load platform.",
+      panelTitle: "what you get",
+      panel: [
+        { k: "infra", v: "Terraform · Kubernetes · Helm" },
+        { k: "delivery", v: "CI/CD · GitOps · rollbacks" },
+        { k: "observe", v: "metrics · logs · alerts · dashboards" },
+        { k: "secure", v: "access · secrets · network · backups" },
+        { k: "clouds", v: "AWS · Hetzner · Cloudflare · any" },
+        { k: "cost", v: "audit · right-sizing · autoscaling" },
+        { k: "handover", v: "code and docs stay with you" },
       ],
     },
 
-    advantages: {
-      title: "Why teams work with DVO",
-      subtitle:
-        "We cover the technical side so you can focus on the product and your clients.",
-      items: [
-        {
-          icon: "Users",
-          title: "No separate DevOps team",
-          text: "You get infrastructure engineering when you need it, without hiring a full-time specialist.",
-        },
-        {
-          icon: "TrendingDown",
-          title: "Architecture for the real workload",
-          text: "We look at the load profile first and pick resources second. No oversized servers bought \"just in case\".",
-        },
-        {
-          icon: "Cpu",
-          title: "Shared GPU capacity",
-          text: "If a dedicated GPU server would idle most of the time, a share of a common compute pool can replace it.",
-        },
-        {
-          icon: "Rocket",
-          title: "From idea to a working setup",
-          text: "Design, launch, documentation and handover — in sequential stages with a visible result at each one.",
-        },
-        {
-          icon: "ShieldCheck",
-          title: "Transparency and control",
-          text: "Infrastructure is described as code, access and monitoring are configured, and the documentation stays with you.",
-        },
-        {
-          icon: "Workflow",
-          title: "Automation and APIs",
-          text: "File handling, data processing and routine operations move into services that integrate with your tools.",
-        },
-      ],
-    },
-
-    directions: {
+    services: {
       title: "What we do",
       subtitle:
-        "Start with one area and expand the scope as the project grows.",
+        "Take one task or the whole infrastructure. Every item below is work we do with our own hands, on our own production as well.",
+    },
+
+    models: {
+      title: "Three ways to work with us",
+      subtitle:
+        "The model is chosen at the start and can change as the product grows.",
       items: [
         {
-          icon: "ServerCog",
-          title: "End-to-end DevOps",
-          text: "Infrastructure design, containerisation, CI/CD, monitoring, backups and security.",
-          route: "services",
-          points: ["Kubernetes and K3s", "CI/CD and GitOps", "Monitoring and backups"],
-        },
-        {
-          icon: "Boxes",
-          title: "Managed infrastructure",
-          text: "Three engagement models: on your servers, fully managed, or inside the shared DVO infrastructure.",
-          route: "infrastructure",
-          points: ["Your infrastructure", "Full support", "Shared resources"],
-        },
-        {
-          icon: "Sparkles",
-          title: "AI and GPU",
-          text: "Running models on GPUs, ComfyUI, job queues, API access and automatic scaling.",
-          route: "ai",
-          points: ["ComfyUI workflows", "GPU pools", "Model APIs"],
-        },
-        {
-          icon: "Bot",
-          title: "Custom automation",
-          text: "Internal services, Telegram bots, integrations, bulk file processing and fast MVPs.",
-          route: "services",
-          points: ["API integrations", "Data processing", "MVP in weeks"],
-        },
-        {
-          icon: "Clapperboard",
-          title: "Media Processing",
-          text: "A ready platform for image, video and audio processing — with a UI and an API.",
-          route: "products",
-          points: ["Conversion", "Subtitles", "Bulk processing"],
-        },
-        {
-          icon: "Coins",
-          title: "Cost optimisation",
-          text: "An audit of current bills, resource rebalancing, and the right plans and instance types.",
-          route: "services",
-          points: ["Spend audit", "Right-sizing", "Migration"],
-        },
-      ],
-    },
-
-    media: {
-      badge: "DVO product",
-      title: "DVO Media Processing",
-      tagline: "One platform for image, video and audio processing",
-      text: "Instead of a pile of separate utilities and scripts — a single service where files are processed manually through the interface or automatically through an API. Built for agencies, content teams and products that handle a lot of media.",
-      features: [
-        { icon: "FileArchive", label: "File compression" },
-        { icon: "Scaling", label: "Resolution changes" },
-        { icon: "Shuffle", label: "Format conversion" },
-        { icon: "Crop", label: "Cropping" },
-        { icon: "Eraser", label: "Background removal" },
-        { icon: "Type", label: "Text and logos" },
-        { icon: "Captions", label: "Subtitles" },
-        { icon: "Clapperboard", label: "Video for TikTok, Reels, Shorts" },
-        { icon: "HardDrive", label: "Large files" },
-        { icon: "Layers", label: "Bulk processing" },
-        { icon: "Braces", label: "API for automation" },
-        { icon: "Puzzle", label: "Custom features" },
-      ],
-    },
-
-    shared: {
-      title: "Shared infrastructure: how it works",
-      subtitle:
-        "A dedicated server isn't always necessary. Quite often the workloads of several teams fit comfortably into a single compute pool.",
-      models: [
-        {
           id: "own",
-          tab: "Your server",
+          tab: "Your infrastructure",
           icon: "Server",
-          title: "On the client's infrastructure",
-          text: "We configure your servers and services, describe the setup as code, prepare the documentation and hand the finished solution to your team.",
+          title: "We build and run it in your accounts",
+          text: "AWS, Hetzner, any other cloud or your own hardware. Everything is described as code in your repository; accounts, access and data stay yours.",
           points: [
-            "All resources and credentials stay with you",
-            "Infrastructure as code plus documentation",
-            "Knowledge transfer to your team",
-            "Optional ongoing support on request",
+            "Terraform and Helm in your repository",
+            "CI/CD, monitoring, alerts and backups configured",
+            "Documentation and handover to your team",
+            "Ongoing support under a separate agreement",
           ],
           bestFor:
-            "Teams that already have their own cloud accounts or hardware and want to keep full control.",
+            "Companies that already have cloud accounts or servers and need engineers to build or fix what runs on them.",
         },
         {
           id: "managed",
-          tab: "Managed DVO",
+          tab: "Our infrastructure",
           icon: "ServerCog",
-          title: "Fully managed",
-          text: "We launch the infrastructure and keep running it: updates, monitoring, incident response, backups and further development.",
+          title: "We host and operate your application",
+          text: "No servers of your own and no wish to get them. We run your application on our clusters and are responsible for deploys, uptime, monitoring and backups.",
           points: [
-            "Launch plus ongoing operations",
-            "Monitoring, updates, backups",
-            "Incident response",
-            "Regular review of resource cost",
+            "Your code runs on our Kubernetes clusters",
+            "Deploys from your repository, zero-downtime",
+            "Monitoring, alerts and incident response on us",
+            "Move out to your own cloud at any time — the setup is portable",
           ],
           bestFor:
-            "Product teams without an infrastructure engineer who need a predictable technical partner.",
+            "Products without a DevOps engineer that need to be online and predictable, not to own servers.",
         },
         {
-          id: "shared",
-          tab: "Shared DVO",
-          icon: "Split",
-          title: "Shared DVO infrastructure",
-          text: "Several clients use common compute resources. Each one pays for their share rather than for a whole server that sits idle most of the day.",
+          id: "api",
+          tab: "Function as an API",
+          icon: "Braces",
+          title: "We add your function to our API platform",
+          text: "You need one capability, not a whole system: a calculation, a conversion, a data-processing step. We build it, run it on the MetaPlatho platform and you call it over HTTP, paying for usage.",
           points: [
-            "Pay for the share of resources you actually need",
-            "Workload isolation and separate access keys",
-            "Job queues with priorities",
-            "Move to dedicated resources as the load grows",
+            "An HTTP endpoint with API keys",
+            "Usage metering and pay-as-you-go billing already in place",
+            "Queues, retries and webhooks for long jobs",
+            "Nothing to host or maintain on your side",
           ],
           bestFor:
-            "Projects with uneven load: content generation, periodic media processing, model experiments.",
+            "Teams that need a working function this month and do not want to build and operate a backend for it.",
         },
       ],
-      example: {
-        title: "A simple example",
-        text: "Instead of renting a dedicated GPU server at roughly $400–500 per month, several clients can use a shared compute pool and pay only for the share of resources they need.",
-        note: "We don't promise a fixed saving. The final cost always depends on the volume of jobs, the type of processing and your latency requirements — which is why it is calculated individually.",
-      },
-      pool: {
-        title: "How a shared GPU pool is split",
-        subtitle:
-          "An illustration of the principle: one GPU can serve several projects as long as none of them saturates it continuously.",
-        dedicatedLabel: "Dedicated server for one project",
-        sharedLabel: "Shared pool across several projects",
-        idleLabel: "Idle",
-        clientLabel: "Project",
-        legendUsed: "In use",
-        legendIdle: "Paid for, but idle",
-      },
+    },
+
+    proof: {
+      badge: "Our own production",
+      title: "We run what we sell",
+      text: "MetaPlatho is our own product: a media-processing platform with a public API, user accounts, payments and usage billing. It runs on infrastructure we built and operate ourselves — the same tools and the same practices we bring to client projects.",
+      points: [
+        "Kubernetes clusters described in Terraform, deployed through CI and GitOps",
+        "Worker pools that scale with the queue and down to zero when idle",
+        "Metrics, logs, dashboards and alerts on every service",
+        "Load tests against production, with the bottlenecks found and fixed",
+        "Secrets encrypted in Git, private networking, automated backups",
+      ],
+      facts: [
+        { k: "product", v: "metaplatho.com" },
+        { k: "platform", v: "Kubernetes + KEDA" },
+        { k: "iac", v: "Terraform + Helm" },
+        { k: "delivery", v: "GitHub Actions + GitOps" },
+        { k: "observe", v: "VictoriaMetrics + Grafana + Loki" },
+        { k: "billing", v: "API keys, metering, payments" },
+      ],
     },
 
     process: {
-      title: "How we work together",
-      subtitle: "Clear stages with an agreed result at every step.",
+      title: "How a project goes",
+      subtitle: "Short stages, each one ends with something you can check.",
       steps: [
         {
-          title: "Intro and scope",
-          text: "We discuss what exists today, the goals and the constraints. If infrastructure is already running, we review the bills and the configuration.",
+          title: "Call and access",
+          text: "You describe the task. If something already runs, we look at the configuration and the bills.",
         },
         {
-          title: "Architecture and estimate",
-          text: "We propose a solution, explain exactly what drives the cost, and point out the cheaper alternatives.",
+          title: "Plan and estimate",
+          text: "You get the target architecture, the list of work, the timeline and the price — before any work starts.",
+        },
+        {
+          title: "Build",
+          text: "Infrastructure as code, pipelines, monitoring, backups. Changes go through your repository, so you see every one.",
         },
         {
           title: "Launch",
-          text: "We set up the environment, CI/CD, monitoring and backups — and migrate the project if a move is needed.",
+          text: "Load check, cut-over in an agreed window, a rollback path ready.",
         },
         {
           title: "Handover or support",
-          text: "We hand over documentation and access, or take the infrastructure into ongoing operations.",
-        },
-        {
-          title: "Growth",
-          text: "We scale resources as the load grows, add new services and review the cost on a regular basis.",
-        },
-      ],
-    },
-
-    comparison: {
-      title: "On your own vs. with DVO",
-      subtitle:
-        "A comparison of both approaches for a team without an in-house infrastructure engineer.",
-      colSelf: "On your own",
-      colDvo: "With DVO",
-      rows: [
-        {
-          label: "Getting infrastructure up",
-          self: "A developer is pulled off the product and learns DevOps alongside their real work",
-          dvo: "An engineer designs and launches the infrastructure while the team stays on the product",
-        },
-        {
-          label: "Choosing resources",
-          self: "It's easy to take a server with headroom and pay for capacity nobody uses",
-          dvo: "The configuration matches the load profile and is revisited as things change",
-        },
-        {
-          label: "GPUs for AI workloads",
-          self: "A rented GPU is billed around the clock, even when there are no jobs",
-          dvo: "Start in a shared pool and move to a dedicated GPU once that becomes the better deal",
-        },
-        {
-          label: "CI/CD and releases",
-          self: "Manual deploys, environments that drift apart, painful rollbacks",
-          dvo: "Automated pipelines, identical environments, predictable rollback",
-        },
-        {
-          label: "Monitoring",
-          self: "Users are usually the ones reporting the outage",
-          dvo: "Metrics, logs and alerts are in place before launch",
-        },
-        {
-          label: "Backups",
-          self: "Taken irregularly, restore never tested",
-          dvo: "A schedule, off-server storage and verified restores",
-        },
-        {
-          label: "System knowledge",
-          self: "Lives in one person's head",
-          dvo: "Configuration as code and documentation stay with you",
-        },
-      ],
-    },
-
-    tasks: {
-      title: "What people come to us with",
-      subtitle: "Pick the situation closest to yours and see where to start.",
-      items: [
-        {
-          icon: "Rocket",
-          title: "We need an MVP live quickly",
-          text: "The idea and the code exist, but there's no environment, no domains and no deploy process.",
-          solution:
-            "We roll out a minimal working environment: a server or K3s cluster, domain, SSL, CI/CD and basic monitoring. The infrastructure then grows with the product.",
-          route: "services",
-        },
-        {
-          icon: "TrendingDown",
-          title: "The cloud bill keeps growing",
-          text: "Spend goes up every month and it's hard to tell what exactly you're paying for.",
-          solution:
-            "We audit what's actually being used, where instance types, plans or storage classes can change, and propose a plan with the expected effect.",
-          route: "services",
-        },
-        {
-          icon: "Sparkles",
-          title: "We need a GPU for content generation",
-          text: "Jobs arrive in waves, but a dedicated GPU is billed around the clock.",
-          solution:
-            "We set up ComfyUI or a custom pipeline on a GPU, add a job queue and an API. For uneven load we connect a shared pool.",
-          route: "ai",
-        },
-        {
-          icon: "Clapperboard",
-          title: "We process a lot of video and images",
-          text: "Manual conversion and trimming eat hours of the team's time.",
-          solution:
-            "We connect DVO Media Processing or build a custom processing pipeline with an API, queues and bulk operations on files.",
-          route: "products",
-        },
-        {
-          icon: "Users",
-          title: "There's no DevOps engineer on the team",
-          text: "The servers were configured a while ago and nobody dares to touch them.",
-          solution:
-            "We document the current state, clean up the configuration and add monitoring and backups. Then either handover or ongoing support.",
-          route: "infrastructure",
-        },
-        {
-          icon: "ArrowRightLeft",
-          title: "We need to move the project",
-          text: "A migration between providers, or from standalone servers into a cluster.",
-          solution:
-            "We plan the migration with minimal downtime: move the data, prepare the environment, test, then switch the traffic over.",
-          route: "infrastructure",
-        },
-      ],
-    },
-
-    counters: {
-      title: "The approach in short",
-      items: [
-        {
-          id: "directions",
-          value: 9,
-          suffix: "",
-          label: "service areas",
-          note: "from DevOps to media processing",
-        },
-        {
-          id: "tech",
-          value: 40,
-          suffix: "+",
-          label: "technologies in the stack",
-          note: "proven tools, no exotics",
-        },
-        {
-          id: "models",
-          value: 3,
-          suffix: "",
-          label: "engagement models",
-          note: "your server, managed, or shared resources",
-        },
-        {
-          id: "languages",
-          value: 3,
-          suffix: "",
-          label: "working languages",
-          note: "Ukrainian, English, Russian",
+          text: "Documentation and access go to your team, or we stay on as your operations engineers.",
         },
       ],
     },
 
     tech: {
-      title: "Technologies",
+      title: "Stack",
       subtitle:
-        "We work with tools that are actively maintained and straightforward to operate.",
+        "Mainstream, actively maintained tools. Your next engineer will already know them.",
       groups: {
         orchestration: "Orchestration and containers",
         cicd: "CI/CD and delivery",
         cloud: "Cloud and compute",
         iac: "Infrastructure as code",
-        network: "Networking, ingress and security",
+        network: "Networking and security",
         observability: "Monitoring and logs",
         data: "Databases and storage",
-        ai: "AI and media processing",
-        platform: "Systems and development",
+        runtime: "Languages and runtimes",
+        workloads: "Queues, GPU and AI workloads",
       },
     },
 
     faq: {
-      title: "Frequently asked questions",
-      subtitle: "If your question isn't here, write to us and we'll answer specifically.",
+      title: "Questions we get first",
+      subtitle: "Not here? Write to us and get a direct answer.",
       items: [
         {
-          q: "What size of projects do you work with?",
-          a: "Mostly small teams: agencies, early-stage startups, SaaS projects and content teams. A typical request ranges from a single server running a few services to a small cluster with GPU workloads.",
+          q: "How big are the projects you take?",
+          a: "From one server with a few services to multi-node Kubernetes clusters with autoscaling and high request rates. Size matters less than the task being clear: we say up front if something is outside what we can do well.",
         },
         {
-          q: "We want to keep the infrastructure ourselves. Is that possible?",
-          a: "Yes — that's one of the three engagement models. All resources, accounts and credentials remain yours; we configure the system, describe it as code and hand it over together with the documentation.",
+          q: "You are a small team. What happens if someone is unavailable?",
+          a: "Everything we build is code and documentation in your repository, not knowledge in one head. Any of us — or any other engineer — can pick the system up from the repository.",
         },
         {
-          q: "How is shared infrastructure different from a dedicated server?",
-          a: "With a dedicated server you pay for the full capacity regardless of usage. In a shared pool several projects use the same compute resources and you pay for your share. Workloads are isolated and every project has its own access keys and quotas.",
+          q: "Do you work in our existing AWS or Hetzner account?",
+          a: "Yes. We work with the access you grant, put the existing setup into Terraform where it is not there yet, and change it through pull requests you can review.",
         },
         {
-          q: "How much cheaper will shared infrastructure be?",
-          a: "There's no honest way to name a figure upfront — it depends on the number of jobs, the type of processing and your latency requirements. We calculate the cost individually and show what it consists of.",
+          q: "We have no servers at all. Can you host us?",
+          a: "Yes. We run your application on our own clusters and take care of deploys, monitoring and backups. If you later want your own cloud, the same configuration moves there.",
         },
         {
-          q: "Can we move from the shared pool to dedicated resources?",
-          a: "Yes, and it's a common path: start on shared resources while validating the idea, then move to a dedicated GPU or a separate cluster once the load becomes steady.",
+          q: "What does it cost?",
+          a: "A one-off project is priced by the agreed list of work; support is a monthly fee that depends on the size of the system and the response time you need. You get the number before we start, and it does not change without a change of scope.",
         },
         {
-          q: "What happens if we stop working together?",
-          a: "You keep the documentation, the configuration as code and all access. The infrastructure isn't technically tied to us — another team or your own engineer can pick it up.",
+          q: "Can you take over a system someone else built?",
+          a: "Yes, that is a common request. We start with an audit: what runs where, what is missing (backups, monitoring, access control) and what it costs. Then we fix things in order of risk.",
         },
         {
-          q: "Do you work with existing AWS or DigitalOcean accounts?",
-          a: "Yes. We can clean up an existing environment, optimise its configuration and cost, or plan a migration if a different option turns out to make more sense.",
+          q: "Do you also write code?",
+          a: "Yes: backend services, APIs, automation and internal tools in Python and Node.js, plus whatever glue the infrastructure needs. If you need one function rather than a product, we can ship it as an endpoint on our API platform.",
         },
         {
-          q: "How quickly can we start?",
-          a: "The first conversation follows your message on Telegram or by email. After that we need a description of the task and, where it exists, access to the current infrastructure to prepare a proposal.",
+          q: "What stays with us if we stop working together?",
+          a: "Everything: the repositories with Terraform, Helm charts and pipelines, the documentation and all access. Nothing is tied to us technically.",
         },
       ],
     },
 
     cta: {
-      title: "Tell us about your project",
-      text: "Describe the task and we'll propose an infrastructure option and show what the cost is made of.",
+      title: "Describe the task — get a plan and a price",
+      text: "Write what you have and what you need. We answer within one business day with questions or a concrete proposal.",
     },
   },
 
@@ -535,478 +251,264 @@ export const en: Dictionary = {
     hero: {
       title: "Services",
       subtitle:
-        "Nine areas that cover the technical side of a product: from the first server to automation and cost optimisation.",
+        "Infrastructure work from the first server to a high-load platform. Take one item or all of them.",
     },
     categories: [
       {
-        id: "devops",
+        id: "turnkey",
         icon: "ServerCog",
-        name: "End-to-end DevOps",
-        tagline: "Infrastructure, process and releases",
-        problem:
-          "The code is ready, but there's no environment, no automated deploys and no visibility into what happens on the servers.",
+        name: "Turnkey infrastructure",
+        text: "From an empty cloud account to production: environments, deploys, monitoring, backups, documentation.",
         included: [
-          "Infrastructure design for the actual task",
-          "Server setup and baseline security",
-          "Docker and service containerisation",
-          "CI/CD with GitLab CI or GitHub Actions",
-          "Argo CD and a GitOps approach",
-          "Domains, SSL, CDN, Cloudflare",
-          "Backups with verified restores",
-          "System documentation",
+          "Architecture for your load and budget",
+          "Dev, staging and production environments",
+          "Everything described in Terraform",
+          "CI/CD, monitoring, alerts, backups",
+          "Documentation and handover",
         ],
-        bestFor: [
-          "Startups approaching their first release",
-          "Agencies delivering projects to clients",
-          "Teams without an infrastructure engineer",
-        ],
-        outcome:
-          "Predictable releases, identical environments and a system that can be maintained without its original author.",
+        slug: "devops-outsourcing",
       },
       {
-        id: "managed",
-        icon: "Boxes",
-        name: "Managed infrastructure",
-        tagline: "Three engagement models",
-        problem:
-          "The servers run, but nobody is watching updates, backups or how much the resources cost.",
+        id: "aws",
+        icon: "Cloud",
+        name: "AWS infrastructure",
+        text: "Accounts, networks, EKS, databases and delivery on AWS — built as code and sized to what you actually use.",
         included: [
-          "Working on the client's infrastructure",
-          "Full operations handled by DVO",
-          "Shared infrastructure billed by resource share",
-          "Regular updates and patching",
-          "Access management",
-          "Configuration reviews against the current load",
+          "Account and VPC layout, IAM",
+          "EKS, EC2, RDS, S3, CloudFront",
+          "Terraform for every resource",
+          "Monitoring, backups, alerts",
+          "Cost review of the AWS bill",
         ],
-        bestFor: [
-          "Product teams with no in-house DevOps",
-          "Projects with uneven load",
-          "Teams that want predictable monthly spend",
+        slug: "aws-devops",
+      },
+      {
+        id: "iac",
+        icon: "Blocks",
+        name: "Terraform and IaC",
+        text: "Infrastructure as code: reproducible environments, reviewable changes, ready-made modules and templates.",
+        included: [
+          "Terraform / Terragrunt modules",
+          "Importing existing resources into code",
+          "State, environments and access layout",
+          "Plan-on-PR and apply pipelines",
+          "Templates your team can reuse",
         ],
-        outcome:
-          "Infrastructure under supervision: updates, backups and incident response no longer depend on a developer's spare time.",
+        slug: "terraform-iac",
       },
       {
         id: "kubernetes",
         icon: "Container",
-        name: "Kubernetes and K3s",
-        tagline: "Orchestration without needless complexity",
-        problem:
-          "The number of services keeps growing and managing containers by hand stops scaling.",
+        name: "Kubernetes",
+        text: "Production clusters on AWS EKS or self-managed Kubernetes, sized for the load you actually have.",
         included: [
-          "Kubernetes or K3s cluster setup",
+          "Cluster setup and upgrades",
           "Helm charts for your services",
-          "Ingress, TLS certificates, routing",
-          "Resource limits and pod autoscaling",
-          "Namespace isolation for environments",
-          "Zero-downtime rollout strategies",
+          "Ingress, TLS, network policies",
+          "Autoscaling: HPA, KEDA, node pools",
+          "Zero-downtime rollouts",
         ],
-        bestFor: [
-          "Projects with several services",
-          "Teams that need separate environments",
-          "Anyone planning for load growth",
-        ],
-        outcome:
-          "A cluster of the right size: K3s for smaller projects, full Kubernetes when it's justified.",
+        slug: "kubernetes",
       },
       {
-        id: "ai",
-        icon: "Sparkles",
-        name: "AI and GPU",
-        tagline: "Models, queues and compute",
-        problem:
-          "You need GPU capacity for generation or inference, but a dedicated card idles most of the time.",
+        id: "cicd",
+        icon: "GitBranch",
+        name: "CI/CD and delivery",
+        text: "From a commit to production without manual steps: builds, tests, deploys and rollbacks.",
         included: [
-          "Running models on GPUs",
-          "ComfyUI and ready-made workflows",
-          "text-to-image, image-to-video, text-to-video",
-          "speech-to-text, subtitles, speech synthesis",
-          "Job queues and priorities",
-          "API access to models",
-          "Automatic GPU scaling",
-          "Shared GPU pools across projects",
+          "GitHub Actions and GitLab CI pipelines",
+          "Image builds, caching, registries",
+          "GitOps with Argo CD or Flux",
+          "Preview and staging environments",
+          "One-command rollback",
         ],
-        bestFor: [
-          "AI creators and content studios",
-          "Products with generative features",
-          "Teams experimenting with models",
-        ],
-        outcome:
-          "A working AI pipeline with API access and billing tied to compute you actually consume.",
+        slug: "ci-cd",
       },
       {
-        id: "automation",
-        icon: "Workflow",
-        name: "Process automation",
-        tagline: "Less manual work",
-        problem:
-          "The team spends hours on repetitive operations with files, data and reports.",
+        id: "monitoring",
+        icon: "Activity",
+        name: "Monitoring and alerts",
+        text: "Metrics, logs, dashboards and alerts, so you learn about a problem before your users do.",
         included: [
-          "Data processing automation",
-          "Parsing and information gathering",
-          "Bulk file processing",
-          "Image, video and audio conversion",
-          "Telegram bots for internal processes",
-          "Service-to-service API integrations",
-          "Scheduled jobs and webhooks",
+          "Prometheus / VictoriaMetrics, Grafana, Loki",
+          "Dashboards per service and per business flow",
+          "Alerts to Telegram, Slack or email",
+          "Uptime and synthetic checks",
+          "On-call runbooks",
         ],
-        bestFor: [
-          "Marketing and content teams",
-          "Agencies with repeatable processes",
-          "Operations teams in small businesses",
-        ],
-        outcome:
-          "Routine work runs on a schedule or on an event, and the team gets back to meaningful work.",
+        slug: "monitoring",
       },
       {
-        id: "custom",
-        icon: "Blocks",
-        name: "Custom development",
-        tagline: "Small services built around your process",
-        problem:
-          "Off-the-shelf tools don't cover your process, and building a large product makes no sense.",
+        id: "security",
+        icon: "ShieldCheck",
+        name: "Security",
+        text: "Access, secrets, network and backups brought to a state you can show an auditor or a client.",
         included: [
-          "Internal services and control panels",
-          "API integrations with existing systems",
-          "Large file processing",
-          "Fast MVPs for validating an idea",
-          "Bespoke tools for business processes",
-          "Technical documentation for the solution",
+          "Infrastructure security audit",
+          "IAM, RBAC and least-privilege access",
+          "Secrets out of the repo: SOPS, Vault, cloud KMS",
+          "Private networking, WAF, rate limits",
+          "Backups with tested restores",
         ],
-        bestFor: [
-          "Companies with a non-standard process",
-          "Products that need a prototype",
-          "Teams integrating several systems",
-        ],
-        outcome:
-          "A working applied service that solves a specific task without unnecessary features.",
-      },
-      {
-        id: "media",
-        icon: "Clapperboard",
-        name: "Media Processing",
-        tagline: "Images, video and audio",
-        problem:
-          "Media handling is scattered across manual tools and scripts with no single process.",
-        included: [
-          "Compression and resolution changes",
-          "Format conversion and cropping",
-          "Background removal, text and logo overlays",
-          "Subtitles and social-ready video",
-          "Large file handling and bulk operations",
-          "API for automated processing",
-          "Custom features for your workflow",
-        ],
-        bestFor: [
-          "Content studios and video production",
-          "Marketing agencies",
-          "Products with user-generated content",
-        ],
-        outcome:
-          "A single media pipeline: manual through the interface or automatic through the API.",
+        slug: "infrastructure-security",
       },
       {
         id: "cost",
         icon: "Coins",
         name: "Cost optimisation",
-        tagline: "Pay for what you use",
-        problem:
-          "Cloud bills keep climbing and the link between spend and real load isn't clear.",
+        text: "We find what you pay for and do not use, and bring the bill in line with the real load.",
         included: [
-          "Audit of current infrastructure and bills",
-          "Analysis of actual resource consumption",
-          "Instance type and plan selection",
-          "Moving cold data to cheaper storage",
-          "Switching to shared resources where sensible",
-          "Autoscaling rules",
-          "Regular configuration reviews",
+          "Audit of bills and actual consumption",
+          "Right-sizing instances and storage",
+          "Autoscaling and scale-to-zero",
+          "Reserved, spot and cheaper-provider options",
+          "A report with numbers before and after",
         ],
-        bestFor: [
-          "Projects on AWS, DigitalOcean, RunPod",
-          "Teams with GPU workloads",
-          "Anyone planning to scale",
+        slug: "cloud-cost-optimization",
+      },
+      {
+        id: "highload",
+        icon: "Gauge",
+        name: "High load and performance",
+        text: "Systems that keep answering when traffic grows tenfold: load tests, bottlenecks, scaling.",
+        included: [
+          "Load testing against real scenarios",
+          "Finding and removing bottlenecks",
+          "Horizontal scaling and queues",
+          "Caching and CDN",
+          "Capacity plan for growth",
         ],
-        outcome:
-          "A clear cost structure and a change plan that explains what actually moves the needle.",
+        slug: "high-load",
+      },
+      {
+        id: "migration",
+        icon: "ArrowRightLeft",
+        name: "Migration",
+        text: "Between clouds, from bare servers into a cluster, or off an expensive provider — with minimal downtime.",
+        included: [
+          "Inventory of services and data",
+          "Target architecture and cost comparison",
+          "Parallel environment and data sync",
+          "Cut-over in an agreed window",
+          "Rollback path until you sign off",
+        ],
+        slug: "cloud-migration",
       },
       {
         id: "support",
-        icon: "Activity",
-        name: "Support and monitoring",
-        tagline: "Problems surface before your users do",
-        problem:
-          "You learn about an outage from a client's message and then hunt for the cause across servers by hand.",
+        icon: "LifeBuoy",
+        name: "Support and operations",
+        text: "We take a running system under supervision: updates, incidents, backups and steady improvement.",
         included: [
-          "Grafana, Prometheus, Loki",
-          "Dashboards for your services",
-          "Alerts to Telegram or email",
-          "Log collection and retention",
-          "Service availability checks",
-          "Scheduled updates and patching",
-          "Technical support after launch",
+          "Audit and clean-up of the current setup",
+          "Monitoring and incident response",
+          "Updates and security patches",
+          "Backups and restore drills",
+          "Monthly report: what was done, what is next",
         ],
-        bestFor: [
-          "Projects already in production",
-          "Services with external customers",
-          "Teams spread across time zones",
-        ],
-        outcome:
-          "System state, load and errors are visible — and alerts arrive before a user writes in.",
-      },
-    ],
-    cta: {
-      title: "Didn't find what you were looking for?",
-      text: "Describe the task in your own words and we'll tell you whether we can help and what it would look like in practice.",
-    },
-  },
-
-  ai: {
-    hero: {
-      badge: "AI Infrastructure",
-      title: "AI infrastructure and GPU capacity",
-      subtitle:
-        "Model deployment, job queues, API access and shared GPU pools. We match the configuration to your processing type and usage frequency — not to the top of the price list.",
-    },
-    sections: [
-      {
-        icon: "Sparkles",
-        title: "Running models",
-        text: "We deploy image and video generation, transcription and speech synthesis models. ComfyUI with ready-made workflows, or a custom pipeline shaped around your process.",
-        points: [
-          "text-to-image and image-to-video",
-          "text-to-video and video sequence processing",
-          "speech-to-text, subtitles, speech synthesis",
-          "Local deployment or cloud GPUs",
-        ],
+        slug: "infrastructure-support",
       },
       {
-        icon: "Microchip",
-        title: "GPU infrastructure",
-        text: "We pick the GPU type for the job: for most generative scenarios, extra headroom doesn't translate into a proportional speed-up.",
-        points: [
-          "GPU choice based on model and job volume",
-          "VRAM usage optimisation",
-          "Batch job processing",
-          "GPU utilisation monitoring",
+        id: "hosting",
+        icon: "Server",
+        name: "Hosting on our infrastructure",
+        text: "No servers of your own? We run your application on our clusters and answer for its uptime.",
+        included: [
+          "Deploys from your repository",
+          "Domains, TLS, CDN",
+          "Databases, queues, object storage",
+          "Monitoring and backups included",
+          "Portable setup — leave whenever you want",
         ],
+        slug: "managed-hosting",
       },
       {
-        icon: "Split",
-        title: "Shared GPU resources",
-        text: "Several projects run in one compute pool with isolated workloads and their own quotas. That removes the need to pay for a card around the clock for a few hours of work.",
-        points: [
-          "Pay for your share of the resources",
-          "Isolated workloads and separate keys",
-          "Queue quotas and priorities",
-          "Move to a dedicated GPU when needed",
-        ],
-      },
-      {
+        id: "api",
         icon: "Braces",
-        title: "API access",
-        text: "Models become an ordinary HTTP service: your application submits a job and receives the result through a webhook or a file link.",
-        points: [
-          "REST API with access keys",
-          "Webhooks on job completion",
-          "Per-client rate limits",
-          "Integration examples",
+        name: "Development and custom APIs",
+        text: "Backend services, integrations and single functions shipped as an API you pay for by usage.",
+        included: [
+          "Python and Node.js services",
+          "Your function as an endpoint on MetaPlatho",
+          "API keys, usage metering, billing",
+          "Queues, webhooks, retries",
+          "Integrations and internal tools",
         ],
+        slug: "api-development",
       },
       {
-        icon: "Timer",
-        title: "Processing queues",
-        text: "Long jobs don't block the interface. The queue spreads the load, keeps statuses and lets you track progress.",
-        points: [
-          "Job priorities",
-          "Retries on failure",
-          "Statuses and execution history",
-          "Protection against worker overload",
+        id: "ai",
+        icon: "Bot",
+        name: "AI agents and GPU workloads",
+        text: "We deploy and operate what your AI features run on: agents, model serving, GPU workers and queues.",
+        included: [
+          "Self-hosted and API-based LLM setups",
+          "Agent runtimes with tools and access limits",
+          "GPU workers that scale with the queue",
+          "Cost and usage monitoring",
+          "Private deployment inside your perimeter",
         ],
-      },
-      {
-        icon: "Scaling",
-        title: "Automatic scaling",
-        text: "Worker count follows the queue: capacity is added at peaks and released when things go quiet.",
-        points: [
-          "Scaling by queue depth",
-          "Maximum spend limits",
-          "Fast worker start-up",
-          "Graceful job completion",
-        ],
-      },
-      {
-        icon: "Lock",
-        title: "Private deployment",
-        text: "If the data can't leave your perimeter, we deploy the models inside your infrastructure and hand control to your team.",
-        points: [
-          "Deployment in your environment",
-          "Isolated network and access",
-          "Documentation and knowledge transfer",
-          "Support under a separate agreement",
-        ],
+        slug: "ai-infrastructure",
       },
     ],
-    compare: {
-      title: "Dedicated GPU or shared pool",
-      subtitle:
-        "Both work — the question is simply how even your workload is.",
-      dedicated: {
-        title: "Dedicated GPU",
-        points: [
-          "The full card is available to one project",
-          "Predictable latency under constant load",
-          "Billed around the clock regardless of usage",
-          "Makes sense with a steady stream of jobs",
-        ],
-      },
-      shared: {
-        title: "Shared pool",
-        points: [
-          "Resources are distributed across several projects",
-          "You pay for the share you actually need",
-          "A queue with quotas and priorities",
-          "Makes sense with uneven load",
-        ],
-      },
-      note: "There is no guaranteed saving: if jobs run continuously, a dedicated card can be the better deal. That's why we look at the load profile first.",
-    },
-    calculator: {
-      title: "Find the right infrastructure model",
-      subtitle:
-        "A concept calculator with no payment involved. It doesn't show an exact price — it suggests which option to consider first.",
-      fields: {
-        volume: "Jobs per month",
-        type: "Processing type",
-        gpu: "GPU required",
-        gpuHint: "Image and video generation, inference of large models",
-        frequency: "Usage frequency",
-        mode: "Infrastructure",
-      },
-      types: [
-        { id: "image", label: "Image generation" },
-        { id: "video", label: "Video generation or processing" },
-        { id: "speech", label: "Transcription and speech" },
-        { id: "llm", label: "Language model inference" },
-        { id: "convert", label: "Media conversion" },
-        { id: "data", label: "Data processing and parsing" },
-      ],
-      frequencies: [
-        { id: "sporadic", label: "Uneven, in waves" },
-        { id: "daily", label: "Daily, during working hours" },
-        { id: "continuous", label: "A constant stream of jobs" },
-      ],
-      modes: [
-        { id: "shared", label: "Shared" },
-        { id: "dedicated", label: "Dedicated" },
-        { id: "unsure", label: "Not decided yet" },
-      ],
-      profiles: {
-        light: "Light",
-        medium: "Moderate",
-        heavy: "Heavy",
-      },
-      results: {
-        cpuOnly: {
-          title: "CPU workers are enough",
-          text: "The workloads you described don't need a GPU. It makes more sense to start with a small server or a K3s cluster with a job queue and horizontal scaling.",
-          points: [
-            "CPU workers with a job queue",
-            "Object storage for files",
-            "Scaling by queue depth",
-          ],
-        },
-        sharedPool: {
-          title: "Shared GPU pool",
-          text: "The load is uneven, so a dedicated card would idle most of the time. A shared pool gives you GPU access while you pay for your share of the resources.",
-          points: [
-            "GPU access without renting a whole card",
-            "A queue with quotas for your project",
-            "Room to move to dedicated resources later",
-          ],
-        },
-        hybrid: {
-          title: "Hybrid setup",
-          text: "Keep the baseline load on steady capacity and send peaks into the shared pool. That way you don't pay for a peak-sized configuration around the clock.",
-          points: [
-            "Steady capacity for the baseline load",
-            "Shared pool for peak periods",
-            "Autoscaling by queue depth",
-          ],
-        },
-        dedicated: {
-          title: "Dedicated GPU resources",
-          text: "The volume and regularity of your jobs mean a dedicated configuration will be more predictable in latency. Cost optimisation then happens at the model and batching level.",
-          points: [
-            "A dedicated GPU or several cards",
-            "Batch processing and model optimisation",
-            "Utilisation and cost monitoring",
-          ],
-        },
-      },
-      disclaimer:
-        "The result is a reference point, not a commercial offer. Exact cost depends on the models, file sizes, latency requirements and the chosen provider — so it is calculated individually.",
-      resultTitle: "What to consider",
-      emptyState: "Fill in the parameters above to see a suggestion.",
-    },
     cta: {
-      title: "Need GPU capacity for a specific workload?",
-      text: "Tell us which models you use and what volume you expect, and we'll prepare a configuration option and an estimate.",
+      title: "Not on the list?",
+      text: "Describe the task in your own words. If it is about servers, deploys or keeping a system alive, we have most likely done it.",
     },
   },
 
   infrastructure: {
     hero: {
       badge: "Infrastructure",
-      title: "Infrastructure that's straightforward to operate",
+      title: "What a production setup consists of",
       subtitle:
-        "Servers, clusters, code delivery, monitoring and backups. We build systems sized to the task and describe them so that support doesn't depend on a single person.",
+        "The layers we build and operate, from the edge to the servers. Nothing here is exotic — it is the standard that keeps a product online.",
     },
     diagram: {
-      title: "A typical project architecture",
-      subtitle:
-        "The layers a small product's infrastructure usually consists of. Select a layer to see what's in it.",
+      title: "Reference architecture",
+      subtitle: "Select a layer to see what it contains.",
       layers: [
         {
           id: "edge",
           title: "Edge",
-          text: "Domains, TLS, CDN and protection against basic attacks. Cloudflare and Traefik in front of your services.",
-          items: ["DNS", "TLS", "CDN", "WAF", "Traefik", "Rate limiting"],
+          text: "Domains, TLS, CDN, WAF and rate limits in front of your services.",
+          items: ["DNS", "TLS", "CDN", "WAF", "Traefik / NGINX", "Rate limiting"],
         },
         {
           id: "platform",
           title: "Platform",
-          text: "Kubernetes or K3s with an ingress controller, secrets and isolated environments. In the cloud that usually means AWS EKS.",
-          items: ["Kubernetes", "AWS EKS", "K3s", "Ingress", "Helm", "Secrets"],
+          text: "AWS EKS or self-managed Kubernetes with ingress, secrets, namespaces per environment and node pools per workload type.",
+          items: ["AWS EKS", "Kubernetes", "Helm", "Ingress", "Secrets", "Node pools"],
         },
         {
           id: "workloads",
           title: "Workloads",
-          text: "Your services, workers and scheduled jobs with resource limits and autoscaling.",
-          items: ["API", "Python", "CPU workers", "GPU workers", "Cron", "Queues"],
+          text: "Your services, background workers and scheduled jobs with resource limits and autoscaling.",
+          items: ["API", "Workers", "Cron", "Queues", "HPA", "KEDA"],
         },
         {
           id: "data",
           title: "Data",
-          text: "Databases, cache, object storage and backups with verified restores.",
-          items: ["PostgreSQL", "Redis", "S3 / MinIO", "AWS EBS", "Backups"],
+          text: "Databases, cache, object storage and backups with restores that are actually tested.",
+          items: ["PostgreSQL", "MySQL", "Redis", "S3 / R2 / MinIO", "Backups"],
         },
         {
           id: "delivery",
           title: "Delivery",
-          text: "Image builds, tests, automated deploys and GitOps state synchronisation, with the infrastructure described as code.",
-          items: ["GitHub Actions", "GitLab CI", "Registry", "Argo CD", "Terraform"],
+          text: "Builds, tests, deploys and GitOps sync. Infrastructure changes go through the same review as code.",
+          items: ["GitHub Actions", "GitLab CI", "Registry", "Argo CD / Flux", "Terraform"],
         },
         {
           id: "observability",
           title: "Observability",
-          text: "Metrics, logs, dashboards and alerts — so you see the system state before an incident.",
-          items: ["Prometheus", "VictoriaMetrics", "Grafana", "Loki", "Alerts"],
+          text: "Metrics, logs, dashboards and alerts for every layer above.",
+          items: ["VictoriaMetrics", "Prometheus", "Grafana", "Loki", "Alertmanager"],
         },
         {
           id: "foundation",
-          title: "Servers and platform services",
-          text: "Virtual machines, the operating system and the provider's managed services — what everything else stands on.",
-          items: ["Linux", "Ubuntu", "AWS EC2", "Hetzner Cloud", "Amazon SES", "Bash"],
+          title: "Servers and network",
+          text: "Virtual machines or bare metal, private networks, firewalls and the provider's managed services.",
+          items: ["AWS EC2", "AWS VPC", "Hetzner", "Linux", "Firewall", "NAT"],
         },
       ],
     },
@@ -1015,255 +517,201 @@ export const en: Dictionary = {
       items: [
         {
           icon: "Server",
-          title: "Servers",
-          text: "Baseline configuration, access, updates, firewall and environment separation.",
+          title: "Servers and network",
+          text: "Hardened hosts, private networks, firewalls, VPN access, separate environments.",
         },
         {
           icon: "Container",
-          title: "Kubernetes and K3s",
-          text: "A cluster of the right size: K3s for smaller projects, full Kubernetes where it's needed.",
+          title: "Clusters",
+          text: "AWS EKS or self-managed Kubernetes with upgrades, node pools and autoscaling.",
         },
         {
           icon: "GitBranch",
-          title: "CI/CD",
-          text: "Build and deploy pipelines in GitLab CI or GitHub Actions with pre-release checks.",
+          title: "Pipelines",
+          text: "Build, test and deploy on every commit, with a rollback that takes one command.",
         },
         {
           icon: "Waypoints",
           title: "GitOps",
-          text: "Argo CD keeps the cluster in sync with the repository: changes are visible in history and rollback is predictable.",
+          text: "The cluster state lives in Git: every change has an author, a review and a history.",
         },
         {
           icon: "Activity",
           title: "Monitoring",
-          text: "Prometheus, Grafana and Loki with dashboards and alerts tailored to your services.",
+          text: "Dashboards and alerts built around your services, not a default template.",
         },
         {
           icon: "DatabaseBackup",
           title: "Backups",
-          text: "A schedule, off-server storage, encryption and regular restore verification.",
+          text: "Scheduled, encrypted, stored off the server, with restores checked on a schedule.",
         },
         {
           icon: "ShieldCheck",
           title: "Security",
-          text: "Access management, secrets kept out of the repo, dependency updates, network isolation.",
+          text: "Least-privilege access, encrypted secrets, network isolation, patching.",
         },
         {
           icon: "Scaling",
           title: "Scaling",
-          text: "Horizontal scaling of services and workers by metrics or queue depth.",
-        },
-        {
-          icon: "ArrowRightLeft",
-          title: "Migration",
-          text: "Moving between providers or into a cluster, with a plan and minimal downtime.",
+          text: "Services and workers scale by metrics or queue depth, nodes follow.",
         },
         {
           icon: "Coins",
-          title: "Cost optimisation",
-          text: "Usage analysis and selection of instances, storage and plans that match real consumption.",
+          title: "Cost control",
+          text: "Resources match consumption; idle capacity scales down instead of being billed.",
         },
       ],
     },
     models: {
-      title: "Whose infrastructure we work on",
-      subtitle:
-        "The model is chosen at the start and can change as the project evolves.",
+      title: "Whose infrastructure it runs on",
+      subtitle: "Yours, ours, or just an endpoint on our API platform.",
     },
     migration: {
-      title: "Project migration",
+      title: "Migration without a weekend of downtime",
       subtitle:
-        "The usual sequence when you need to change provider or consolidate services into a cluster.",
+        "The usual sequence when you change provider or move services into a cluster.",
       steps: [
         {
           title: "Inventory",
-          text: "We record which services, data and dependencies exist today — and which of them are actually needed.",
+          text: "What runs, what it depends on, and what can be dropped.",
         },
         {
-          title: "Target architecture",
-          text: "We describe how the system will look after the move and what changes in cost.",
+          title: "Target design",
+          text: "How the system looks after the move and what changes in the bill.",
         },
         {
-          title: "Parallel environment",
-          text: "We build the new environment alongside the current one and move data without stopping work.",
+          title: "Parallel build",
+          text: "The new environment goes up next to the old one; data is synced while you keep working.",
         },
         {
           title: "Verification",
-          text: "We test the services, the load and restoring from backups.",
+          text: "Services, load and a restore from backup are tested on the new side.",
         },
         {
           title: "Cut-over",
-          text: "Traffic switches during an agreed window, with a fast way back if needed.",
+          text: "Traffic switches in an agreed window, with a way back until you sign off.",
         },
       ],
     },
     cta: {
-      title: "We'll show what this looks like in your case",
-      text: "Tell us about your current infrastructure and we'll propose a target architecture and a transition plan.",
+      title: "Show us what you run today",
+      text: "We will tell you what is missing, what is at risk and what it would take to fix.",
     },
   },
 
   products: {
     hero: {
-      badge: "Products",
-      title: "DVO products",
+      badge: "Platform & API",
+      title: "No servers? Use ours",
       subtitle:
-        "Ready-made tools that grew out of client work. Each one can be used as a standalone service or integrated through an API.",
+        "MetaPlatho is our production API platform. We can host your application next to it, or add the function you need as an endpoint you pay for by usage.",
     },
     mp: {
-      status: "available",
-      name: "DVO Media Processing",
-      tagline: "One platform for image, video and audio processing",
-      text: "Process files manually through the interface or automatically through an API. A single service instead of a collection of separate utilities, scripts and manual steps.",
-      groups: [
-        {
-          title: "Images",
-          items: [
-            "Compression with no visible quality loss",
-            "Resolution changes and cropping",
-            "Format conversion",
-            "Background removal",
-            "Text and logo overlays",
-          ],
-        },
-        {
-          title: "Video",
-          items: [
-            "Compression and resolution changes",
-            "Conversion and trimming",
-            "Subtitles",
-            "Preparation for TikTok, Reels and Shorts",
-            "Large file handling",
-          ],
-        },
-        {
-          title: "Audio and automation",
-          items: [
-            "Audio format conversion",
-            "Extracting the audio track from video",
-            "Bulk file processing",
-            "API for automated processing",
-            "Custom features per client",
-          ],
-        },
-      ],
-    },
-    upcoming: {
-      title: "In development",
-      subtitle:
-        "Directions we're working on. If you need one of them right now, write to us and we'll discuss early access.",
-      items: [
-        {
-          icon: "Braces",
-          title: "DVO Compute API",
-          text: "A single API layer over compute jobs: queues, statuses, webhooks and access keys for GPU and CPU workers.",
-          status: "inDevelopment",
-        },
-        {
-          icon: "Bot",
-          title: "DVO Automation Kit",
-          text: "A set of ready blocks for common automation: scheduled jobs, parsing, integrations and Telegram notifications.",
-          status: "inDevelopment",
-        },
-        {
-          icon: "Gauge",
-          title: "DVO Cost Insight",
-          text: "A dashboard summarising infrastructure spend with hints on where resources are used inefficiently.",
-          status: "planned",
-        },
-      ],
-    },
-    custom: {
-      title: "Your own tool or workflow",
-      text: "If the tool you need doesn't exist, we'll build it around your process. That can be a standalone service, a Media Processing extension or a workflow for generative jobs.",
+      name: "MetaPlatho",
+      tagline: "Our product, running on our infrastructure",
+      text: "A media-processing service with a web studio and a REST API: compression, conversion, resizing, subtitles and transcription for images, video and audio. Users sign up, top up a balance and pay for what they process.",
       points: [
-        "A description of the task and the expected result",
-        "A prototype to validate the approach",
-        "Deployment on your infrastructure or ours",
-        "API and documentation for integration",
+        "REST API with a single API-key header",
+        "Async jobs with polling and webhooks",
+        "Usage metering, quotas and rate limits per account",
+        "Card payments and balance top-ups",
+        "Autoscaled worker pools behind a queue",
+      ],
+    },
+    api: {
+      title: "Your function as an API",
+      text: "Not every task needs its own backend. Tell us what the function must do — we build it, deploy it on the platform and give you an endpoint.",
+      steps: [
+        {
+          title: "You describe the function",
+          text: "Input, output, expected volume. A price calculator, a document converter, a data check, a report builder — anything that fits a request and a response.",
+        },
+        {
+          title: "We build and test it",
+          text: "The endpoint is added to the platform. You get a key and try it against your real data.",
+        },
+        {
+          title: "You call it and pay for usage",
+          text: "Metering, limits and billing are already there. No servers, deploys or on-call on your side.",
+        },
+      ],
+      points: [
+        "A working endpoint in days, not a quarter",
+        "Per-request pricing agreed up front",
+        "Scales with your traffic",
+        "The code can move to your own infrastructure later",
+      ],
+      exampleTitle: "What a call looks like",
+    },
+    hosting: {
+      title: "Hosting for your application",
+      text: "If you have code but no infrastructure, we run it on the same clusters that serve MetaPlatho — with the same deploy pipeline, monitoring and backups.",
+      points: [
+        "Containers built and deployed from your repository",
+        "A database, cache, queue and object storage as needed",
+        "Domain, TLS and CDN configured",
+        "Dashboards and alerts you can see",
+        "A fixed monthly price for the agreed resources",
       ],
     },
     cta: {
-      title: "Need an integration or a custom workflow?",
-      text: "Tell us which files you process and at what volume, and we'll propose a way to connect.",
+      title: "Need a function or a place to run your code?",
+      text: "Describe what it should do and the volume you expect. We answer with a price and a date.",
     },
   },
 
   about: {
     hero: {
       badge: "About",
-      title: "DVO Corp",
+      title: "A small team of DevOps engineers",
       subtitle:
-        "A compact technical team working on infrastructure, automation and AI integrations for small companies.",
+        "DVO stands for DevOps, Virtualization & Optimization. We are based in Ukraine and work remotely with companies in Ukraine and across Europe.",
     },
     intro: {
-      title: "What DVO stands for",
-      text: "DVO means DevOps, Virtualization & Optimization. Three parts of the same job: a solid code delivery process, sensibly organised compute resources, and constant attention to what all of it costs.",
+      title: "Who you work with",
+      text: "The people you talk to are the people who do the work. There are no account managers and no juniors behind a senior name: an engineer takes your task, designs the solution, builds it and answers for the result.",
       second:
-        "We don't sell clients the most expensive servers we can. We select, combine and optimise infrastructure so that you pay only for the resources you genuinely need. A small team gets enterprise-grade infrastructure without enterprise-grade spend.",
-    },
-    focus: {
-      title: "What we specialise in",
-      items: [
-        {
-          icon: "ServerCog",
-          title: "Practical infrastructure",
-          text: "Solutions sized to the task, without complexity where it brings no benefit.",
-        },
-        {
-          icon: "Workflow",
-          title: "Automation",
-          text: "We move repetitive processes into services with APIs, queues and clear states.",
-        },
-        {
-          icon: "Sparkles",
-          title: "AI integrations",
-          text: "Running models on GPUs and wiring generative features into existing products.",
-        },
-        {
-          icon: "Coins",
-          title: "Cost optimisation",
-          text: "We regularly check that resources still match the real workload.",
-        },
-        {
-          icon: "Rocket",
-          title: "Fast applied solutions",
-          text: "Modern development tooling lets us bring applied services to a working state faster.",
-        },
-      ],
+        "We run our own production — the MetaPlatho platform with paying users — so we know what an outage at night, a growing bill and a failed deploy cost. That is the experience clients pay for.",
     },
     principles: {
       title: "How we work",
       items: [
         {
-          title: "The task first, the technology second",
+          title: "Everything is code",
+          text: "Infrastructure, pipelines and dashboards live in your repository. Nothing is configured by hand and forgotten.",
+        },
+        {
+          title: "The task first, the tool second",
           text: "Not everyone needs Kubernetes. Sometimes the right answer is one well-configured server with backups and monitoring.",
         },
         {
-          title: "Transparent costs",
-          text: "We explain exactly what you're paying for and where cheaper alternatives exist. We don't promise a fixed saving upfront.",
+          title: "A price before the work",
+          text: "You know the scope, the timeline and the cost up front. If the scope changes, we agree on it before doing it.",
         },
         {
-          title: "The system outlives the contractor",
-          text: "The configuration is described as code and the documentation stays with you. Another team can pick the infrastructure up.",
+          title: "No lock-in",
+          text: "Mainstream tools, full access and documentation. Another engineer can take the system over at any point.",
         },
         {
-          title: "Honest timelines and limits",
-          text: "We say so directly if a task is outside our competence or if expectations don't match the budget.",
+          title: "Straight answers",
+          text: "If a task is outside what we do well, or the budget does not fit the expectation, we say so on the first call.",
+        },
+        {
+          title: "We take the unglamorous work",
+          text: "Legacy servers, undocumented setups, a migration nobody wants to touch. Someone has to do it properly.",
         },
       ],
     },
     cta: {
-      title: "Let's discuss your task",
-      text: "Write on Telegram or by email — you'll get a specific answer, not a generic pitch.",
+      title: "Tell us what you are building",
+      text: "Telegram or email — you get an answer from an engineer, not a sales script.",
     },
   },
 
   contact: {
     details: {
-      title: "Contacts as plain text",
-      subtitle:
-        "Email, phone and Telegram in plain text — easy to select, or copy with one click.",
+      title: "Direct contacts",
+      subtitle: "Plain text — select it or copy with one click.",
       emailLabel: "Email",
       telegramLabel: "Telegram",
       phoneLabel: "Phone",
@@ -1271,46 +719,14 @@ export const en: Dictionary = {
     },
     hero: {
       badge: "Contact",
-      title: "Tell us about your project",
+      title: "Describe the task",
       subtitle:
-        "Describe the task and we'll propose an infrastructure option and explain what the cost is made of.",
-    },
-    channels: {
-      title: "Direct channels",
-      items: [
-        {
-          icon: "Send",
-          title: "Telegram",
-          text: "The fastest way to reach us for a short discussion.",
-          action: "writeTelegram",
-        },
-        {
-          icon: "Mail",
-          title: "Email",
-          text: "Convenient for a detailed brief and documents.",
-          action: "writeEmail",
-        },
-        {
-          icon: "ServerCog",
-          title: "Discuss infrastructure",
-          text: "An audit of the current environment and a target architecture.",
-          action: "discussInfrastructure",
-        },
-        {
-          icon: "Coins",
-          title: "Custom estimate",
-          text: "A cost estimate for your job volume and processing type.",
-          action: "requestEstimate",
-        },
-      ],
+        "What you have now, what you need, and by when. We answer within one business day.",
     },
     form: {
-      title: "Request form",
-      subtitle: "Fill in what you know now. Details can be clarified later.",
-      notice: {
-        title: "The form is not working yet",
-        text: "Submissions through the site are not connected. Please write to us directly by email or on Telegram — that way the request definitely reaches us and you get a faster reply.",
-      },
+      title: "Request",
+      subtitle:
+        "Fill in what you know. The form builds a message that you send through Telegram or email in one click.",
       fields: {
         name: "Name",
         namePlaceholder: "What should we call you",
@@ -1322,345 +738,182 @@ export const en: Dictionary = {
         taskTypePlaceholder: "Choose an area",
         description: "Task description",
         descriptionPlaceholder:
-          "What exists now, what you need, timelines and constraints",
-        load: "Approximate load",
+          "What runs now, what you need, timeline and constraints",
+        load: "Scale",
         loadPlaceholder: "Choose an option",
-        budget: "Budget range",
-        budgetPlaceholder: "Choose a range",
+        budget: "Format",
+        budgetPlaceholder: "Choose a format",
       },
       taskTypes: [
-        { id: "devops", label: "DevOps and server setup" },
-        { id: "kubernetes", label: "Kubernetes or K3s" },
-        { id: "ai", label: "AI models and GPUs" },
-        { id: "media", label: "Media processing" },
-        { id: "automation", label: "Automation and integrations" },
-        { id: "custom", label: "Custom development" },
+        { id: "turnkey", label: "Infrastructure from scratch" },
+        { id: "aws", label: "AWS infrastructure" },
+        { id: "kubernetes", label: "Kubernetes / EKS" },
+        { id: "iac", label: "Terraform / IaC" },
+        { id: "cicd", label: "CI/CD" },
+        { id: "monitoring", label: "Monitoring and alerts" },
+        { id: "security", label: "Security" },
         { id: "cost", label: "Cost optimisation" },
-        { id: "support", label: "Support for an existing system" },
+        { id: "migration", label: "Migration" },
+        { id: "support", label: "Support for a running system" },
+        { id: "hosting", label: "Hosting on our infrastructure" },
+        { id: "api", label: "Development / custom API" },
+        { id: "ai", label: "AI agents / GPU workloads" },
         { id: "other", label: "Something else" },
       ],
       loads: [
-        { id: "small", label: "Small: one or two services" },
-        { id: "medium", label: "Medium: several services or workers" },
-        { id: "large", label: "High: continuous processing or GPU workloads" },
-        { id: "unknown", label: "Hard to estimate for now" },
+        { id: "small", label: "One or two services" },
+        { id: "medium", label: "Several services, one team" },
+        { id: "large", label: "High load or many environments" },
+        { id: "unknown", label: "Hard to say yet" },
       ],
       budgets: [
-        { id: "starter", label: "Up to $500 per month" },
-        { id: "growth", label: "$500 – $1,500 per month" },
-        { id: "scale", label: "Over $1,500 per month" },
         { id: "project", label: "One-off project" },
-        { id: "discuss", label: "We'd like to discuss it" },
+        { id: "support", label: "Monthly support" },
+        { id: "hourly", label: "Hourly, as needed" },
+        { id: "discuss", label: "Let's discuss" },
       ],
       validation: {
-        nameRequired: "Let us know what to call you",
-        contactRequired: "We need a Telegram handle or email to reply",
-        contactInvalid: "That looks off — please check the contact",
-        descriptionRequired: "Briefly describe the task",
+        nameRequired: "Tell us what to call you",
+        contactRequired: "We need a Telegram handle or an email to reply",
+        contactInvalid: "That does not look right — please check the contact",
+        descriptionRequired: "Describe the task in a few words",
         descriptionShort: "Please add a little more detail",
       },
-      success: {
-        title: "The form is running in demo mode",
-        text: "Submissions through the site aren't connected yet, so your data hasn't been sent anywhere. To make sure the request reaches us, write on Telegram or by email — you can simply copy the form contents.",
-        copy: "Copy the request text",
-        copied: "Copied",
+      ready: {
+        title: "The request is ready",
+        text: "Choose how to send it. Telegram opens a chat with the text already filled in; email opens your mail client with the same text.",
       },
       privacy:
-        "Data from the form is not shared with third parties and is used only to reply to your request.",
+        "The form sends nothing by itself: the text goes to us only when you press send in Telegram or in your mail client.",
     },
     response: {
       title: "What happens next",
       steps: [
-        "We clarify the details of the task and the current state of your infrastructure",
-        "We propose a solution and explain what makes up the cost",
-        "We agree on the scope and timeline of the first stage",
+        "We read the request and come back with questions or a time for a call",
+        "You get a plan: what we would do, in what order and what it costs",
+        "We agree on the first stage and start",
       ],
     },
   },
 
   footer: {
     tagline:
-      "Infrastructure, AI capacity and custom technical solutions for small teams.",
+      "DevOps team: production infrastructure, operations and custom APIs. Ukraine, working across Europe.",
     navTitle: "Navigation",
-    servicesTitle: "Areas",
+    servicesTitle: "Services",
     contactTitle: "Contact",
-    productsTitle: "Products",
+    productsTitle: "Product",
     legalTitle: "Legal",
     rights: "All rights reserved.",
-    note: "The site runs as a static build with no advertising trackers.",
+    note: "Static site, no cookies, no ad trackers.",
   },
 
   notFound: {
     title: "Page not found",
     text: "The address may contain a typo, or the page has moved. Use the navigation below.",
-    suggestions: "Popular sections",
+    suggestions: "Sections",
   },
 
   breadcrumbs: {
     home: "Home",
   },
 
-  legal: {
-    updated: "Last updated",
-    contents: "Contents",
-    privacy: {
-      hero: {
-        badge: "Privacy",
-        title: "Privacy Policy",
-        subtitle:
-          "What this site collects (very little), what happens when you send us a request, and how to control it.",
-      },
-      sections: [
-        {
-          id: "summary",
-          heading: "The short version",
-          paras: [],
-          bullets: [
-            "This site is a static build. It has no database of its own and builds no profile of you.",
-            "We use no advertising trackers and set no cookies.",
-            "You only hand us personal data when you write to us — through the form, by email or on Telegram.",
-            "Our media processing service at mp.dvocorp.com runs under its own policy; this page does not cover it.",
-          ],
-        },
-        {
-          id: "controller",
-          heading: "1. Who is responsible",
-          paras: [
-            "dvocorp.com belongs to DVO Corp (Ukraine). For any question about personal data, write to support@dvocorp.com — we answer within 30 days, usually much sooner.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "collect",
-          heading: "2. What we collect",
-          paras: [
-            "Simply reading the site leaves us no personal data at all: pages are served as ready-made files, and there is nothing to send us.",
-            "If you send a request through the contact form, we receive what you typed into it: your name, company (optional), a contact for our reply, the type of task, the rough load, a budget range and your description. These fields exist only so we can prepare a useful answer.",
-            "If you email us or write on Telegram, we see what any recipient of a message sees: your address or handle and your text.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "hosting",
-          heading: "3. Hosting and technical logs",
-          paras: [
-            "The site is hosted on GitHub Pages. Like any web server it technically records requests — including IP address and browser type — in GitHub's own logs. We have no access to them and collect nothing from them; they exist for the operation and security of the platform itself.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "cookies",
-          heading: "4. Cookies and browser storage",
-          paras: [
-            "The site sets no cookies, which is why there is no consent banner here.",
-            "The only thing kept in your browser is your light/dark theme choice in localStorage. It exists so the page does not flash on load, never leaves your device and is not an identifier.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "use",
-          heading: "5. Why we use it",
-          paras: [
-            "Solely to answer your request and, if we agree to work together, to do the work. The legal basis is your own request and the steps taken before entering a contract, plus our legitimate interest in ordinary business correspondence.",
-            "We do not use this data for mailings you did not ask for, we do not pass it to advertising networks, and we do not sell it to anyone.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "retention",
-          heading: "6. How long we keep it",
-          paras: [
-            "Correspondence about a request that did not turn into a project is kept for up to 12 months and then deleted. Records for projects that did happen are kept for as long as accounting and tax law requires.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "rights",
-          heading: "7. Your rights",
-          paras: [
-            "You can ask for a copy of your data, for it to be corrected or deleted, object to the processing, or complain to your data protection authority. Writing to support@dvocorp.com is enough.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "product",
-          heading: "8. Media Processing is a separate service",
-          paras: [
-            "Our media processing product runs at mp.dvocorp.com. It is a separate application that accepts user files, and it has its own privacy policy covering encryption, how long files are stored and advertising counters. This page does not describe it; the link to that policy is in the service's own footer.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "changes",
-          heading: "9. Changes",
-          paras: [
-            "We update this page along with the site. The date at the top always reflects the current version.",
-          ],
-          bullets: [],
-        },
-      ],
-    },
-    terms: {
-      hero: {
-        badge: "Terms",
-        title: "Terms of Use",
-        subtitle:
-          "The rules for using dvocorp.com and the status of what is published on it.",
-      },
-      sections: [
-        {
-          id: "about",
-          heading: "1. About this site",
-          paras: [
-            "dvocorp.com is the informational site of DVO Corp (Ukraine). It describes our services and lets you contact us. Questions about these terms go to support@dvocorp.com.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "offer",
-          heading: "2. The information here is not a binding offer",
-          paras: [
-            "Service descriptions, example configurations and any figures on the site are indicative. They are not a public offer and create no obligation until we have agreed scope and price in writing.",
-            "The calculator gives a rough estimate from the parameters you enter. Real cost depends on the actual task.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "requests",
-          heading: "3. Requests sent through the site",
-          paras: [
-            "By submitting the form you confirm that the contacts you give are yours or that you are entitled to provide them. Do not send confidential third-party data, passwords or any access credentials through the form.",
-            "Receiving a request does not mean we have taken on the work. We may decline to work together without giving a reason.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "ip",
-          heading: "4. Rights in the content",
-          paras: [
-            "The text, design, graphics and code of this site belong to DVO Corp. Technology and product names are mentioned as trademarks of their owners and imply no partnership or endorsement.",
-            "You may quote material from the site freely with attribution. Copying whole pages, or reusing our design for your own site, needs our written permission.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "availability",
-          heading: "5. Availability and external links",
-          paras: [
-            "The site is provided “as is”. We do not guarantee uninterrupted availability and may change or remove material at any time.",
-            "The site links to external resources, including our own service at mp.dvocorp.com, which has its own terms. We are not responsible for the content of third-party sites.",
-          ],
-          bullets: [],
-        },
-        {
-          id: "law",
-          heading: "6. Governing law",
-          paras: [
-            "These terms are governed by the law of Ukraine. We try to resolve any disagreement by email first: support@dvocorp.com.",
-          ],
-          bullets: [],
-        },
-      ],
-    },
-  },
+  legal,
 
   seo: {
     home: {
-      title: "DVO Corp — DevOps, AI infrastructure and GPUs for small teams",
+      title: "DVO Corp — DevOps team: AWS, Kubernetes, Terraform, CI/CD",
       description:
-        "End-to-end DevOps, Kubernetes, AI models on GPUs and shared infrastructure. Server setup and infrastructure cost optimisation for agencies, startups and small businesses.",
+        "DevOps outsourcing from Ukraine: AWS and EKS infrastructure, Terraform, Kubernetes, CI/CD, monitoring, security, cost optimisation and ongoing operations. In your cloud or on our servers.",
       keywords: [
-        "DevOps for small business",
-        "managed Kubernetes services",
-        "affordable AI infrastructure",
-        "shared GPU infrastructure",
-        "infrastructure cost optimization",
-        "managed infrastructure for startups",
+        "DevOps outsourcing",
+        "DevOps as a service",
+        "AWS DevOps consulting",
+        "DevOps company Ukraine",
+        "Kubernetes consulting",
+        "Terraform infrastructure as code",
+        "infrastructure support",
       ],
     },
     services: {
-      title: "Services — DevOps, Kubernetes, AI and automation | DVO Corp",
+      title: "DevOps services: Terraform, Kubernetes, CI/CD, monitoring | DVO Corp",
       description:
-        "Nine areas: end-to-end DevOps, managed infrastructure, Kubernetes and K3s, AI and GPU, automation, custom development, media processing, cost optimisation and monitoring.",
+        "Turnkey infrastructure, IaC, Kubernetes, CI/CD, monitoring and alerts, security, cost optimisation, high load, migration, support, hosting and custom APIs.",
       keywords: [
-        "DevOps for small business",
-        "custom automation services",
-        "managed infrastructure for startups",
-        "server setup services",
-      ],
-    },
-    ai: {
-      title: "AI infrastructure and shared GPU capacity | DVO Corp",
-      description:
-        "Running AI models on GPUs, ComfyUI, job queues, API access and shared GPU pools. Configuration matched to your processing type and usage frequency.",
-      keywords: [
-        "affordable AI infrastructure",
-        "shared GPU infrastructure",
-        "GPU API for agencies",
-        "run AI models on GPU",
-        "ComfyUI hosting",
+        "DevOps services",
+        "hire DevOps engineer",
+        "CI/CD setup",
+        "Kubernetes setup",
+        "cloud cost optimization",
       ],
     },
     infrastructure: {
-      title: "Infrastructure: servers, Kubernetes, CI/CD, monitoring | DVO Corp",
+      title: "Production infrastructure: architecture, clusters, delivery | DVO Corp",
       description:
-        "Server setup, Kubernetes and K3s, CI/CD and GitOps, monitoring, backups, security, scaling, migration and infrastructure cost optimisation.",
+        "What a production setup consists of and how we build it: edge, Kubernetes, workloads, data, CI/CD, observability. Migration without downtime.",
       keywords: [
-        "managed Kubernetes services",
-        "infrastructure cost optimization",
-        "CI/CD setup",
-        "infrastructure migration",
+        "production infrastructure",
+        "Kubernetes architecture",
+        "cloud migration",
+        "GitOps",
       ],
     },
     products: {
-      title: "Products: DVO Media Processing and automation tools",
+      title: "MetaPlatho platform: managed hosting and custom API endpoints | DVO Corp",
       description:
-        "DVO Media Processing — a platform for image, video and audio processing with an API. Conversion, subtitles, bulk processing and custom per-client features.",
+        "No servers of your own? We host your application on our clusters or ship the function you need as a pay-per-use API endpoint on the MetaPlatho platform.",
       keywords: [
-        "media processing API",
-        "video processing API",
-        "bulk image processing",
-        "image conversion API",
+        "managed hosting",
+        "custom API development",
+        "API as a service",
+        "pay per use API",
       ],
     },
     about: {
-      title: "About DVO Corp — an infrastructure and automation team",
+      title: "About DVO Corp — DevOps engineers from Ukraine",
       description:
-        "DVO Corp is a compact technical team: practical infrastructure, automation, AI integrations and cost optimisation for small companies.",
-      keywords: [
-        "DVO Corp",
-        "DevOps team",
-        "DevOps for small business",
-      ],
+        "A small team of DevOps engineers running their own production. Everything as code, a price before the work, no lock-in.",
+      keywords: ["DVO Corp", "DevOps team Ukraine", "DevOps freelancers"],
     },
     contact: {
-      title: "Contact — discuss infrastructure or an AI workload | DVO Corp",
+      title: "Contact DVO Corp — describe the task, get a plan and a price",
       description:
-        "Write on Telegram or by email to discuss server setup, Kubernetes, GPU capacity or automation. A custom estimate for your job volume.",
-      keywords: [
-        "hire DevOps engineer",
-        "infrastructure consultation",
-        "custom GPU estimate",
-      ],
+        "Write on Telegram or by email about infrastructure, Kubernetes, CI/CD, monitoring or support. We answer within one business day.",
+      keywords: ["hire DevOps engineer", "DevOps consultation", "infrastructure audit"],
     },
     privacy: {
       title: "Privacy Policy | DVO Corp",
       description:
-        "What dvocorp.com collects, what happens to a request sent through the contact form, how long we keep correspondence and how to exercise your rights.",
+        "What dvocorp.com collects, what happens to a request you send us, how long we keep correspondence and how to exercise your rights.",
       keywords: ["privacy policy", "personal data protection", "GDPR"],
     },
     terms: {
       title: "Terms of Use | DVO Corp",
       description:
-        "The rules for using dvocorp.com: the status of published information and estimates, requests through the form, rights in the content and governing law.",
-      keywords: ["terms of use", "website terms", "public offer"],
+        "The rules for using dvocorp.com: the status of published information, requests, rights in the content and governing law.",
+      keywords: ["terms of use", "website terms"],
     },
     notFound: {
       title: "Page not found | DVO Corp",
-      description: "This page doesn't exist. Use the site navigation.",
+      description: "This page does not exist. Use the site navigation.",
       keywords: [],
     },
   },
-};
+} as const satisfies Record<string, unknown>;
+
+/** Recursively widens literal types so translations are plain strings. */
+export type Widen<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends boolean
+      ? boolean
+      : T extends readonly (infer U)[]
+        ? Widen<U>[]
+        : T extends object
+          ? { -readonly [K in keyof T]: Widen<T[K]> }
+          : T;
+
+export type Dictionary = Widen<typeof en>;
 
 export default en;

@@ -9,6 +9,7 @@ import {
   type Locale,
 } from "@/content/site";
 import type { Dictionary } from "@/content/locales";
+import { serviceHref } from "@/components/sections/services-grid";
 import { Logo } from "./logo";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -32,7 +33,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 href={item.href}
                 target="_blank"
                 rel="me noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+                className="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
               >
                 {item.label}
                 <ArrowUpRight className="size-3" aria-hidden />
@@ -70,10 +71,10 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             {dict.footer.servicesTitle}
           </h2>
           <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
-            {dict.services.categories.slice(0, 6).map((service) => (
+            {dict.services.categories.slice(0, 8).map((service) => (
               <li key={service.id}>
                 <Link
-                  href={`${path(locale, "services")}#${service.id}`}
+                  href={serviceHref(locale, service)}
                   className="transition-colors hover:text-foreground"
                 >
                   {service.name}
@@ -88,12 +89,12 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
             <li>
               <a
-                href={PRODUCTS.mediaProcessing.url}
+                href={PRODUCTS.metaplatho.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
               >
-                {PRODUCTS.mediaProcessing.name}
+                {PRODUCTS.metaplatho.name}
                 <ArrowUpRight className="size-3" aria-hidden />
                 <span className="sr-only">{dict.actions.openInNewTab}</span>
               </a>
@@ -103,7 +104,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 href={path(locale, "products")}
                 className="transition-colors hover:text-foreground"
               >
-                {dict.products.upcoming.title}
+                {dict.nav.products}
               </Link>
             </li>
           </ul>

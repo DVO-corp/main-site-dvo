@@ -24,12 +24,6 @@ export function CtaSection({
             aria-hidden
             className="pointer-events-none absolute inset-0 -z-10 grid-surface opacity-60"
           />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-64 w-[36rem] -translate-x-1/2 rounded-full blur-[100px]"
-            style={{ background: "var(--glow-a)" }}
-          />
-
           <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
             <h2 className="text-2xl sm:text-[2rem]">{title}</h2>
             <p className="text-muted-foreground">{text}</p>

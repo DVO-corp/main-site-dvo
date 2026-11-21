@@ -22,7 +22,7 @@ export function ArchitectureDiagram({ dict }: { dict: Dictionary }) {
         {/* Vertical rail linking the layers. */}
         <span
           aria-hidden
-          className="absolute top-6 bottom-6 left-[1.35rem] w-px bg-gradient-to-b from-primary/50 via-accent/40 to-violet/30"
+          className="absolute top-6 bottom-6 left-[1.35rem] w-px bg-border"
         />
 
         {layers.map((layer, index) => {
@@ -43,7 +43,7 @@ export function ArchitectureDiagram({ dict }: { dict: Dictionary }) {
               >
                 <span
                   className={cn(
-                    "relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-full border font-mono text-xs font-semibold transition-colors",
+                    "relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-semibold transition-colors",
                     selected
                       ? "border-primary/50 bg-background text-primary"
                       : "border-border bg-background text-muted-foreground",
@@ -80,7 +80,7 @@ export function ArchitectureDiagram({ dict }: { dict: Dictionary }) {
             transition={{ duration: 0.24, ease: "easeOut" }}
             className="flex flex-col gap-5"
           >
-            <span className="inline-flex size-12 items-center justify-center rounded-xl border border-violet/25 bg-violet/10 text-violet">
+            <span className="inline-flex size-12 items-center justify-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
               <Layers className="size-5" strokeWidth={1.6} aria-hidden />
             </span>
             <h3 className="text-xl font-semibold">{active.title}</h3>

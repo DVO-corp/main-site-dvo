@@ -2,15 +2,8 @@
 
 import * as React from "react";
 import { motion, useReducedMotion } from "motion/react";
-import {
-  CircleCheck,
-  Copy,
-  Info,
-  Mail,
-  Send,
-  TriangleAlert,
-} from "lucide-react";
-import { CONTACTS, FORM } from "@/content/site";
+import { CircleCheck, Copy, Info, Mail, Pencil, Send } from "lucide-react";
+import { COMPANY, CONTACTS } from "@/content/site";
 import type { Dictionary } from "@/content/locales";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/field";
@@ -36,7 +29,7 @@ const EMPTY: FormValues = {
 };
 
 type Errors = Partial<Record<keyof FormValues, string>>;
-type Status = "idle" | "submitting" | "done";
+type Status = "idle" | "done";
 
 /** Accepts an email address or a Telegram handle. */
 function isValidContact(value: string): boolean {
@@ -93,7 +86,12 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
     ].join("\n");
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  /**
+   * The site is a static export with no backend, so the form does not post
+   * anywhere. It validates, then hands the composed text to the visitor's own
+   * Telegram or mail client — one click, and the request really arrives.
+   */
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const found = validate();
     setErrors(found);
@@ -102,23 +100,6 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
       document.getElementById(`contact-${firstKey}`)?.focus();
       return;
     }
-
-    setStatus("submitting");
-
-    // When a backend appears, set NEXT_PUBLIC_CONTACT_ENDPOINT and this branch
-    // starts posting real leads — no other change is needed here.
-    if (!FORM.demoMode) {
-      try {
-        await fetch(FORM.endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
-      } catch {
-        /* fall through to the same confirmation screen */
-      }
-    }
-
     setStatus("done");
   }
 
@@ -133,6 +114,12 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
   }
 
   if (status === "done") {
+    const message = composeMessage();
+    const telegramHref = `${CONTACTS.telegramUrl}?text=${encodeURIComponent(message)}`;
+    const mailHref = `mailto:${CONTACTS.email}?subject=${encodeURIComponent(
+      `${COMPANY.name}: ${values.company || values.name}`,
+    )}&body=${encodeURIComponent(message)}`;
+
     return (
       <motion.div
         initial={reduced ? false : { opacity: 0, y: 10 }}
@@ -140,45 +127,41 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
         transition={{ duration: 0.3 }}
         role="status"
         aria-live="polite"
-        className="flex flex-col gap-5 rounded-2xl border border-accent/30 bg-accent/[0.06] p-6 sm:p-8"
+        className="flex flex-col gap-5 rounded-2xl border border-primary/30 bg-primary/[0.05] p-6 sm:p-8"
       >
-        <span className="inline-flex size-12 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+        <span className="inline-flex size-12 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary">
           <CircleCheck className="size-6" strokeWidth={1.6} aria-hidden />
         </span>
 
-        <h3 className="text-xl font-semibold">{t.success.title}</h3>
+        <h3 className="text-xl font-semibold">{t.ready.title}</h3>
         <p className="leading-relaxed text-muted-foreground">
-          {t.success.text}
+          {t.ready.text}
         </p>
 
         <pre className="max-h-60 overflow-auto rounded-lg border border-border bg-background/60 p-4 font-mono text-xs leading-relaxed whitespace-pre-wrap text-muted-foreground">
-          {composeMessage()}
+          {message}
         </pre>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <Button type="button" onClick={copyMessage} variant="secondary">
-            <Copy aria-hidden />
-            {copied ? t.success.copied : t.success.copy}
-          </Button>
           <Button asChild>
-            <a
-              href={CONTACTS.telegramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={telegramHref} target="_blank" rel="noopener noreferrer">
               <Send aria-hidden />
-              {dict.actions.writeTelegram}
+              {dict.actions.sendTelegram}
             </a>
           </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            onClick={() => {
-              setValues(EMPTY);
-              setStatus("idle");
-            }}
-          >
-            {dict.actions.sendAnother}
+          <Button asChild variant="secondary">
+            <a href={mailHref}>
+              <Mail aria-hidden />
+              {dict.actions.sendEmail}
+            </a>
+          </Button>
+          <Button type="button" onClick={copyMessage} variant="ghost">
+            <Copy aria-hidden />
+            {copied ? dict.actions.copied : dict.actions.copy}
+          </Button>
+          <Button type="button" variant="ghost" onClick={() => setStatus("idle")}>
+            <Pencil aria-hidden />
+            {dict.actions.editRequest}
           </Button>
         </div>
       </motion.div>
@@ -195,47 +178,6 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
         <h2 className="text-xl font-semibold">{t.title}</h2>
         <p className="text-sm text-muted-foreground">{t.subtitle}</p>
       </div>
-
-      {/*
-        Up-front notice rather than a surprise after submitting: while there is
-        no endpoint, the form cannot deliver anything, so point people at the
-        channels that do work before they spend time filling it in.
-      */}
-      {FORM.demoMode && (
-        <div className="flex flex-col gap-3 rounded-lg border border-warning/40 bg-warning/[0.07] p-4">
-          <div className="flex items-start gap-3">
-            <TriangleAlert
-              className="mt-0.5 size-4 shrink-0 text-warning"
-              aria-hidden
-            />
-            <div className="flex flex-col gap-1">
-              <p className="text-sm font-semibold">{t.notice.title}</p>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {t.notice.text}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-2 pl-7">
-            <a
-              href={`mailto:${CONTACTS.email}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1.5 font-mono text-xs transition-colors hover:border-primary/50"
-            >
-              <Mail className="size-3.5" aria-hidden />
-              {CONTACTS.email}
-            </a>
-            <a
-              href={CONTACTS.telegramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1.5 font-mono text-xs transition-colors hover:border-primary/50"
-            >
-              <Send className="size-3.5" aria-hidden />@
-              {CONTACTS.telegramUsername}
-            </a>
-          </div>
-        </div>
-      )}
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
@@ -347,16 +289,14 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
         />
       </Field>
 
-      {FORM.demoMode && (
-        <p className="flex items-start gap-3 rounded-lg border border-border/70 bg-background/40 p-4 text-xs leading-relaxed text-muted-foreground">
-          <Info className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden />
-          {t.privacy}
-        </p>
-      )}
+      <p className="flex items-start gap-3 rounded-lg border border-border/70 bg-background/40 p-4 text-xs leading-relaxed text-muted-foreground">
+        <Info className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+        {t.privacy}
+      </p>
 
-      <Button type="submit" size="lg" disabled={status === "submitting"}>
+      <Button type="submit" size="lg">
         <Send aria-hidden />
-        {status === "submitting" ? dict.actions.sending : dict.actions.send}
+        {dict.actions.prepare}
       </Button>
     </form>
   );

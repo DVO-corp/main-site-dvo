@@ -18,7 +18,7 @@ const target = path(DEFAULT_LOCALE);
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "DVO Corp",
-  description: "DevOps, Virtualization & Optimization.",
+  description: "DevOps team: production infrastructure, operations and custom APIs.",
   alternates: {
     canonical: `${SITE_URL}${target}`,
   },
@@ -59,7 +59,7 @@ export default function RootRedirectPage() {
                 key={locale}
                 href={path(locale)}
                 hrefLang={LOCALE_TAGS[locale]}
-                className="rounded-full border border-border px-4 py-2 text-sm transition-colors hover:border-primary/60"
+                className="rounded-md border border-border px-4 py-2 text-sm transition-colors hover:border-primary/60"
               >
                 {LOCALE_NAMES[locale]}
               </Link>

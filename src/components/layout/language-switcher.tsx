@@ -10,13 +10,22 @@ import {
   LOCALE_TAGS,
   type Locale,
 } from "@/content/site";
+import { LANDING_LOCALES } from "@/content/landings/types";
 import { cn } from "@/lib/utils";
 
-/** Replaces the locale segment while keeping the rest of the path intact. */
+/**
+ * Replaces the locale segment while keeping the rest of the path intact.
+ * Search landings (`/<locale>/services/<slug>/`) are not published in every
+ * locale; where the target has none, the link goes to its services page.
+ */
 function swapLocale(pathname: string, next: Locale): string {
   const segments = pathname.split("/").filter(Boolean);
   if (segments.length === 0) return `/${next}/`;
   segments[0] = next;
+  const isLanding = segments.length === 3 && segments[1] === "services";
+  if (isLanding && !(LANDING_LOCALES as readonly string[]).includes(next)) {
+    segments.length = 2;
+  }
   return `/${segments.join("/")}/`;
 }
 
@@ -57,7 +66,7 @@ export function LanguageSwitcher({
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={label}
-        className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border px-3 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+        className="inline-flex h-10 items-center gap-1.5 rounded-md border border-border px-3 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
       >
         <Languages className="size-4" strokeWidth={1.7} aria-hidden />
         {LOCALE_SHORT[locale]}

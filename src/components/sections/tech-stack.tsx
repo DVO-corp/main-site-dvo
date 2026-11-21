@@ -2,7 +2,6 @@ import { TECH_STACK } from "@/content/site";
 import type { Dictionary } from "@/content/locales";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Reveal } from "@/components/common/reveal";
-import { Counters } from "./counters";
 
 export function TechStack({ dict }: { dict: Dictionary }) {
   const { tech } = dict.home;
@@ -11,10 +10,6 @@ export function TechStack({ dict }: { dict: Dictionary }) {
     <section className="section">
       <div className="container-page flex flex-col gap-10">
         <SectionHeading title={tech.title} subtitle={tech.subtitle} />
-
-        <Reveal>
-          <Counters dict={dict} />
-        </Reveal>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {TECH_STACK.map((group, index) => (

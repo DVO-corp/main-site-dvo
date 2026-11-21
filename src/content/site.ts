@@ -37,11 +37,12 @@ export const CONTACTS = {
 } as const;
 
 export const PRODUCTS = {
-  mediaProcessing: {
-    id: "media-processing",
-    name: "DVO Media Processing",
-    url: "https://mp.dvocorp.com",
-    host: "mp.dvocorp.com",
+  metaplatho: {
+    id: "metaplatho",
+    name: "MetaPlatho",
+    url: "https://metaplatho.com",
+    host: "metaplatho.com",
+    apiDocsUrl: "https://metaplatho.com/docs/api",
   },
 } as const;
 
@@ -89,7 +90,6 @@ export function isLocale(value: string): value is Locale {
 export const ROUTES = {
   home: "",
   services: "services",
-  ai: "ai-infrastructure",
   infrastructure: "infrastructure",
   products: "products",
   about: "about",
@@ -103,7 +103,6 @@ export type RouteKey = keyof typeof ROUTES;
 /** Order used by the main navigation and the sitemap. */
 export const NAV_ORDER: RouteKey[] = [
   "services",
-  "ai",
   "infrastructure",
   "products",
   "about",
@@ -123,6 +122,11 @@ export function path(locale: Locale, route: RouteKey = "home"): string {
   return slug ? `/${locale}/${slug}/` : `/${locale}/`;
 }
 
+/** Path of a search landing; landings live under the services section. */
+export function landingPath(locale: Locale, slug: string): string {
+  return `/${locale}/${ROUTES.services}/${slug}/`;
+}
+
 export function absoluteUrl(pathname: string): string {
   return `${SITE_URL}${pathname}`;
 }
@@ -139,16 +143,15 @@ export type TechGroupId =
   | "network"
   | "observability"
   | "data"
-  | "ai"
-  | "platform";
+  | "runtime"
+  | "workloads";
 
 /**
  * The technology showcase.
  *
  * Deliberately curated rather than exhaustive: each group lists the tools a
  * prospective client would recognise and buy on, not every package we have
- * ever touched. Adding an item here also moves the counter on the home page,
- * which is derived from TECH_COUNT below.
+ * ever touched.
  */
 export const TECH_STACK: { id: TechGroupId; items: string[] }[] = [
   {
@@ -156,10 +159,11 @@ export const TECH_STACK: { id: TechGroupId; items: string[] }[] = [
     items: [
       "Kubernetes",
       "AWS EKS",
-      "K3s",
+      "Self-managed Kubernetes",
       "Docker",
       "Helm",
       "Argo CD",
+      "Flux",
       "Horizontal Pod Autoscaler",
       "KEDA",
       "Kubernetes RBAC",
@@ -182,25 +186,27 @@ export const TECH_STACK: { id: TechGroupId; items: string[] }[] = [
     id: "cloud",
     items: [
       "Amazon EC2",
+      "Amazon RDS",
+      "Amazon VPC",
       "Amazon S3",
       "Amazon EBS",
       "AWS NLB",
       "AWS CloudFront",
-      "Amazon SES",
       "AWS IAM",
       "Hetzner Cloud",
-      "GPU g4dn",
+      "Cloudflare R2",
+      "DigitalOcean",
     ],
   },
   {
     id: "iac",
     items: [
       "Terraform",
+      "Terragrunt",
       "Terraform modules",
-      "Infrastructure as Code",
       "Ansible",
+      "SOPS",
       "DNS as code",
-      "Cloudflare API",
     ],
   },
   {
@@ -214,7 +220,7 @@ export const TECH_STACK: { id: TechGroupId; items: string[] }[] = [
       "Let's Encrypt",
       "TLS / SSL",
       "Network Policies",
-      "Load balancing",
+      "WireGuard / VPN",
     ],
   },
   {
@@ -238,60 +244,41 @@ export const TECH_STACK: { id: TechGroupId; items: string[] }[] = [
       "ClickHouse",
       "Redis",
       "S3 / MinIO",
-      "Prisma",
-      "Backup & restore",
+            "Backup & restore",
     ],
   },
   {
-    id: "ai",
+    id: "runtime",
     items: [
-      "ComfyUI",
-      "FFmpeg",
-      "GPU workers",
-      "Shared GPU pools",
-      "RunPod",
-      "Vast.ai",
-      "Speech-to-text",
-      "Task queues",
-    ],
-  },
-  {
-    id: "platform",
-    items: [
-      "Linux",
-      "Ubuntu",
-      "Bash",
       "Python",
       "Node.js",
+      "Go",
+      "PHP",
+      "Java",
+      "Bash",
+      "Linux",
       "REST API",
       "Webhooks",
-      "Telegram Bot API",
-      "Git",
+    ],
+  },
+  {
+    id: "workloads",
+    items: [
+      "Redis queues",
+      "RabbitMQ",
+      "Kafka",
+      "FFmpeg",
+      "GPU workers",
+      "LLM serving",
+      "AI agents",
+      "Scale-to-zero",
     ],
   },
 ];
 
-/** Total distinct technologies — used by the animated counters. */
-export const TECH_COUNT = TECH_STACK.reduce(
-  (total, group) => total + group.items.length,
-  0,
-);
-
 /* ------------------------------------------------------------------ */
 /* Forms                                                               */
 /* ------------------------------------------------------------------ */
-
-/**
- * The contact form posts nowhere today. When a backend appears, point this at
- * the endpoint (e.g. `/api/lead` or a serverless function) and flip DEMO_MODE
- * off — the form component already handles both paths.
- */
-export const FORM = {
-  endpoint: process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "",
-  get demoMode() {
-    return !this.endpoint;
-  },
-} as const;
 
 export const ANALYTICS = {
   /** Left empty on purpose; wire a provider in when one is chosen. */

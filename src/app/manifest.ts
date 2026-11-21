@@ -9,11 +9,11 @@ export default function manifest(): MetadataRoute.Manifest {
     name: `${COMPANY.name} — ${COMPANY.expansion}`,
     short_name: COMPANY.name,
     description:
-      "Infrastructure, AI capacity and custom technical solutions for small teams.",
+      "DevOps team: production infrastructure, operations and custom APIs.",
     start_url: path(DEFAULT_LOCALE),
     display: "standalone",
-    background_color: "#14161f",
-    theme_color: "#14161f",
+    background_color: "#151618",
+    theme_color: "#151618",
     icons: [
       {
         src: "/icon.svg",
