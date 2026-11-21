@@ -13,21 +13,21 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const { hero } = dict.home;
 
   return (
-    <section className="relative isolate flex min-h-[88svh] items-center overflow-hidden bg-black text-white">
+    <section className="relative flex min-h-[88svh] items-center overflow-hidden bg-black text-white">
       <Image
         src="/img/cables.webp"
         alt=""
         fill
         priority
         sizes="100vw"
-        className="-z-20 object-cover"
+        className="object-cover"
       />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-black/55 to-black/85"
+        className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/85"
       />
 
-      <div className="container-page flex flex-col items-center gap-6 py-24 text-center">
+      <div className="relative z-10 container-page flex flex-col items-center gap-6 py-24 text-center">
         <p className="text-[0.95rem] font-semibold text-white/80">
           {hero.badge}
         </p>

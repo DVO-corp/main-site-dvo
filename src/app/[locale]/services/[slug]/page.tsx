@@ -10,6 +10,7 @@ import {
   type Locale,
 } from "@/content/site";
 import { getDictionary } from "@/content/locales";
+import { cn } from "@/lib/utils";
 import {
   LANDING_LOCALES,
   LANDING_SLUGS,
@@ -18,11 +19,10 @@ import {
 import { buildLandingMetadata } from "@/lib/seo";
 import { faqSchema, graph, serviceSchema, trailSchema } from "@/lib/jsonld";
 import { JsonLd } from "@/components/common/json-ld";
-import { PageHero } from "@/components/common/page-hero";
+import { PhotoHero } from "@/components/common/photo-hero";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Reveal } from "@/components/common/reveal";
 import { Process } from "@/components/sections/process";
-import { LANDING_DIAGRAM } from "@/components/sections/platform-diagram";
 import { Faq } from "@/components/sections/faq";
 import { CtaSection } from "@/components/sections/cta-section";
 import { VisualSection } from "@/components/sections/visual-section";
@@ -31,15 +31,35 @@ import { DashboardMock } from "@/components/visuals/dashboard-mock";
 
 type Params = Promise<{ locale: string; slug: string }>;
 
-/** The photo beside the heading, by the part of the system the page covers. */
+/**
+ * Tiles sit three to a row on wide screens; a short last row is stretched so
+ * the grid never ends with an empty slot.
+ */
+function whenSpan(index: number, total: number): string {
+  const tail = total % 3;
+  if (tail !== 0 && index >= total - tail) {
+    return tail === 2 ? "lg:col-span-3" : "lg:col-span-6";
+  }
+  return "lg:col-span-2";
+}
+
+/** One photo per landing; also used on "related" tiles pointing at it. */
 const LANDING_PHOTO: Record<string, string> = {
-  all: "/img/cables.webp",
-  iac: "/img/rack.webp",
-  cluster: "/img/aisle.webp",
-  delivery: "/img/code.webp",
-  observe: "/img/screens.webp",
-  secure: "/img/cables.webp",
-  data: "/img/rack.webp",
+  "devops-outsourcing": "/img/cables.webp",
+  "infrastructure-security": "/img/cables.webp",
+  "aws-devops": "/img/rack.webp",
+  "high-load": "/img/rack.webp",
+  kubernetes: "/img/aisle.webp",
+  "managed-hosting": "/img/aisle.webp",
+  "terraform-iac": "/img/engineer.webp",
+  "api-development": "/img/engineer.webp",
+  "ci-cd": "/img/code.webp",
+  "devops-for-startups": "/img/code.webp",
+  monitoring: "/img/screens.webp",
+  "infrastructure-support": "/img/screens.webp",
+  "cloud-cost-optimization": "/img/cabinets.webp",
+  "ai-infrastructure": "/img/cabinets.webp",
+  "cloud-migration": "/img/wires.webp",
 };
 
 /** Landings that show a console mock-up under the hero. */
@@ -106,75 +126,64 @@ export default async function LandingPage({ params }: { params: Params }) {
         ])}
       />
 
-      <PageHero
+      <PhotoHero
         locale={typedLocale}
         dict={dict}
         route="services"
         leaf={landing.name}
+        photo={LANDING_PHOTO[slug] ?? "/img/cables.webp"}
         title={landing.h1}
         subtitle={landing.lead}
-        aside={
-          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-black lg:block">
-            <Image
-              src={LANDING_PHOTO[LANDING_DIAGRAM[slug] ?? "all"]}
-              alt=""
-              fill
-              priority
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-        }
       />
 
       <section className="section">
-        <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
-          <Reveal className="flex flex-col gap-5">
-            <h2 className="text-2xl leading-tight sm:text-3xl">
-              {dict.labels.whenNeeded}
-            </h2>
-            <ul className="flex flex-col">
-              {landing.when.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-3 border-b border-border py-3 text-sm leading-relaxed first:pt-0 last:border-b-0"
-                >
-                  <span aria-hidden className="font-mono text-primary">
-                    →
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+        <div className="container-page flex flex-col gap-12">
+          <SectionHeading title={dict.labels.whenNeeded} />
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+            {landing.when.map((item, index) => (
+              <Reveal
+                as="li"
+                key={item}
+                delay={Math.min(index, 4) * 0.04}
+                className={cn(
+                  "flex flex-col gap-4 rounded-[1.75rem] bg-card p-7 sm:p-8",
+                  whenSpan(index, landing.when.length),
+                )}
+              >
+                <span className="text-3xl font-semibold text-primary">
+                  {index + 1}
+                </span>
+                <p className="text-xl leading-snug font-medium">{item}</p>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-          <div className="flex flex-col gap-5">
-            <h2 className="text-2xl leading-tight sm:text-3xl">
-              {dict.labels.included}
-            </h2>
-            <ul className="grid gap-4 sm:grid-cols-2">
-              {landing.included.map((item) => (
-                <li key={item.title} className="flex gap-3 rounded-[1.5rem] bg-card p-6">
-                  <Check
-                    className="mt-0.5 size-4 shrink-0 text-primary"
-                    aria-hidden
-                  />
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="font-semibold">{item.title}</h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {item.text}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <section className="section surface-alt">
+        <div className="container-page flex flex-col gap-12">
+          <SectionHeading title={dict.labels.included} />
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {landing.included.map((item) => (
+              <li
+                key={item.title}
+                className="flex flex-col gap-3 rounded-[1.75rem] bg-card p-7 sm:p-8"
+              >
+                <Check className="size-7 text-primary" aria-hidden />
+                <h3 className="text-2xl leading-tight font-semibold">
+                  {item.title}
+                </h3>
+                <p className="leading-snug text-muted-foreground">
+                  {item.text}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       {COST_LANDINGS.includes(slug) && (
         <VisualSection
-          alt
           title={dict.visuals.costTitle}
           subtitle={dict.visuals.costSubtitle}
           note={dict.visuals.costNote}
@@ -184,7 +193,6 @@ export default async function LandingPage({ params }: { params: Params }) {
       )}
       {DASHBOARD_LANDINGS.includes(slug) && (
         <VisualSection
-          alt
           title={dict.visuals.dashTitle}
           subtitle={dict.visuals.dashSubtitle}
           note={dict.visuals.sampleNote}
@@ -193,62 +201,71 @@ export default async function LandingPage({ params }: { params: Params }) {
         </VisualSection>
       )}
 
-      <div>
-        <Process
-          title={dict.labels.howItGoes}
-          subtitle=""
-          steps={landing.steps}
-          columns={4}
-        />
-      </div>
+      <Process
+        title={dict.labels.howItGoes}
+        subtitle=""
+        steps={landing.steps}
+        columns={4}
+      />
 
-      <section className="section">
-        <div className="container-page grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-14">
-          <div className="flex flex-col gap-6">
-            <SectionHeading title={dict.labels.faq} align="left" />
+      <section className="section surface-alt">
+        <div className="container-page flex flex-col gap-12">
+          <SectionHeading title={dict.labels.faq} />
+          <div className="measure max-w-4xl">
             <Faq items={landing.faq} />
           </div>
-
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-4">
-              <h2 className="label-mono">{dict.labels.stack}</h2>
-              <ul className="flex flex-wrap gap-1.5">
-                {landing.stack.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-full bg-card px-3 py-1 text-xs text-muted-foreground"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <nav className="flex flex-col gap-4" aria-label={dict.labels.related}>
-              <h2 className="label-mono">{dict.labels.related}</h2>
-              <ul className="flex flex-col">
-                {landing.related.map((related) => {
-                  const target = getLanding(locale, related);
-                  if (!target) return null;
-                  return (
-                    <li key={related} className="border-b border-border last:border-b-0">
-                      <Link
-                        href={landingPath(typedLocale, related)}
-                        className="group flex items-center justify-between gap-3 py-3 text-sm transition-colors hover:text-primary"
-                      >
-                        {target.name}
-                        <ArrowRight
-                          className="size-3.5 text-muted-foreground group-hover:text-primary"
-                          aria-hidden
-                        />
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-          </div>
+          <ul className="flex flex-wrap justify-center gap-2">
+            {landing.stack.map((item) => (
+              <li
+                key={item}
+                className="rounded-full bg-card px-4 py-1.5 text-sm text-muted-foreground"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
+      </section>
+
+      <section className="py-3">
+        <nav aria-label={dict.labels.related} className="container-page">
+          <ul className="grid gap-3 md:grid-cols-3">
+            {landing.related.map((related) => {
+              const target = getLanding(locale, related);
+              if (!target) return null;
+              return (
+                <li key={related}>
+                  <Link
+                    href={landingPath(typedLocale, related)}
+                    className="group relative flex min-h-[18rem] flex-col justify-end overflow-hidden rounded-[1.75rem] bg-black p-7 text-white outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <Image
+                      src={LANDING_PHOTO[related] ?? "/img/cables.webp"}
+                      alt=""
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10"
+                    />
+                    <span className="relative z-10 text-sm text-white/70">
+                      {dict.labels.related}
+                    </span>
+                    <span className="relative z-10 flex items-center justify-between gap-3 text-2xl leading-tight font-semibold">
+                      {target.name}
+                      <ArrowRight
+                        className="size-5 shrink-0 transition-transform group-hover:translate-x-1"
+                        aria-hidden
+                      />
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
       </section>
 
       <CtaSection

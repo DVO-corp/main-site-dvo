@@ -275,20 +275,3 @@ export function PlatformDiagram({
     </svg>
   );
 }
-
-/** Which part of the picture each service landing is about. */
-export const LANDING_DIAGRAM: Record<string, DiagramGroup | undefined> = {
-  "aws-devops": "iac",
-  kubernetes: "cluster",
-  "terraform-iac": "iac",
-  "ci-cd": "delivery",
-  monitoring: "observe",
-  "cloud-cost-optimization": "cluster",
-  "infrastructure-security": "secure",
-  "cloud-migration": "iac",
-  "infrastructure-support": "observe",
-  "high-load": "cluster",
-  "managed-hosting": "cluster",
-  "api-development": "delivery",
-  "ai-infrastructure": "cluster",
-};

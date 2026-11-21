@@ -73,7 +73,7 @@ export function ShowcaseTiles({
             <li
               key={service.id}
               className={cn(
-                "relative isolate flex min-h-[36rem] flex-col items-center overflow-hidden rounded-[1.75rem] text-center",
+                "relative flex min-h-[36rem] flex-col items-center overflow-hidden rounded-[1.75rem] text-center",
                 photo ? "bg-black text-white" : "bg-card",
               )}
             >
@@ -84,16 +84,16 @@ export function ShowcaseTiles({
                     alt=""
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
-                    className={cn("-z-20 object-cover", photo.position)}
+                    className={cn("object-cover", photo.position)}
                   />
                   <div
                     aria-hidden
-                    className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgb(0_0_0/0.94)_0%,rgb(0_0_0/0.8)_40%,rgb(0_0_0/0.05)_72%)]"
+                    className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0_0_0/0.94)_0%,rgb(0_0_0/0.8)_40%,rgb(0_0_0/0.05)_72%)]"
                   />
                 </>
               )}
 
-              <div className="flex flex-col items-center gap-3 px-6 pt-12 pb-8 sm:pt-14">
+              <div className="relative z-10 flex flex-col items-center gap-3 px-6 pt-12 pb-8 sm:pt-14">
                 <h2 className="text-3xl leading-[1.08] sm:text-[2.75rem]">
                   {service.name}
                 </h2>

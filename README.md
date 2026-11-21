@@ -307,6 +307,9 @@ attribution required). Only free photos are used — nothing from Unsplash+.
 | `aisle.webp`   | `photo-1584169417032-d34e8d805e8b`   |
 | `screens.webp` | `photo-1551288049-bebda4e38f71`      |
 | `code.webp`    | `photo-1489875347897-49f64b51c1f8`   |
+| `cabinets.webp` | `photo-1564457461758-8ff96e439e83`  |
+| `wires.webp`   | `photo-1682559736721-c2e77ff4c650`   |
+| `engineer.webp` | `photo-1550063873-ab792950096b`     |
 
 Layout note: `.container-page` runs almost edge to edge on purpose (no narrow
 centred column); text-led blocks use `.measure` for a readable width.
