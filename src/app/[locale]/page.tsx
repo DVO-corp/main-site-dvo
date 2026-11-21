@@ -10,7 +10,7 @@ import { Hero } from "@/components/sections/hero";
 import { ServicesGrid } from "@/components/sections/services-grid";
 import { InfraModels } from "@/components/sections/infra-models";
 import { Proof } from "@/components/sections/proof";
-import { Process } from "@/components/sections/process";
+import { ProcessVisual } from "@/components/sections/process-visual";
 import { TechStack } from "@/components/sections/tech-stack";
 import { Faq } from "@/components/sections/faq";
 import { CtaSection } from "@/components/sections/cta-section";
@@ -69,7 +69,7 @@ export default async function HomePage({
 
       <Proof dict={dict} />
 
-      <Process
+      <ProcessVisual
         title={dict.home.process.title}
         subtitle={dict.home.process.subtitle}
         steps={dict.home.process.steps}

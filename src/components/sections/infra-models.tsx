@@ -4,6 +4,7 @@ import * as React from "react";
 import { ArrowRight, Check } from "lucide-react";
 import type { Dictionary } from "@/content/locales";
 import { Icon } from "@/lib/icons";
+import { ModelIllustration } from "@/components/visuals/model-illustration";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /**
@@ -49,8 +50,8 @@ export function InfraModels({ dict }: { dict: Dictionary }) {
                 <li
                   className={
                     index === 2
-                      ? "flex items-center gap-3 rounded-lg border border-primary bg-primary/10 px-4 py-3"
-                      : "flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3"
+                      ? "flex items-center gap-3 rounded-2xl bg-primary/10 px-4 py-3 ring-1 ring-primary"
+                      : "flex items-center gap-3 rounded-2xl bg-card px-4 py-3"
                   }
                 >
                   <Icon
@@ -62,34 +63,27 @@ export function InfraModels({ dict }: { dict: Dictionary }) {
               </React.Fragment>
             ))}
           </ol>
-          <div className="grid gap-8 rounded-2xl border border-border bg-card p-6 sm:p-8 lg:grid-cols-[1fr_1fr]">
-            <div className="flex flex-col gap-4">
-              <span className="inline-flex size-12 items-center justify-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
-                <Icon name={model.icon} className="size-5" />
-              </span>
-              <h3 className="text-xl font-semibold">{model.title}</h3>
-              <p className="leading-relaxed text-muted-foreground">
-                {model.text}
+          <div className="grid items-center gap-8 rounded-[1.75rem] bg-card p-6 sm:p-9 lg:grid-cols-[1.15fr_1fr]">
+            {/* The picture stands in for the description; the text stays
+                available to screen readers and search engines. */}
+            <div className="flex flex-col gap-5">
+              <h3 className="text-2xl leading-tight font-semibold">
+                {model.title}
+              </h3>
+              <ModelIllustration id={model.id} label={model.text} />
+              <p className="sr-only">
+                {model.text} {model.bestFor}
               </p>
-              <div className="mt-auto rounded-lg border border-border/70 bg-background/40 p-4">
-                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                  {dict.labels.bestFor}
-                </p>
-                <p className="mt-1.5 text-sm leading-relaxed">{model.bestFor}</p>
-              </div>
             </div>
 
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-3.5">
               {model.points.map((point) => (
-                <li
-                  key={point}
-                  className="flex items-start gap-3 rounded-lg border border-border/60 bg-background/30 px-4 py-3"
-                >
+                <li key={point} className="flex items-start gap-3 leading-snug">
                   <Check
-                    className="mt-0.5 size-4 shrink-0 text-accent"
+                    className="mt-0.5 size-5 shrink-0 text-primary"
                     aria-hidden
                   />
-                  <span className="text-sm leading-relaxed">{point}</span>
+                  {point}
                 </li>
               ))}
             </ul>
