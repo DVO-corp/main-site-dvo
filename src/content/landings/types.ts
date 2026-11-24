@@ -8,6 +8,24 @@
 export const LANDING_LOCALES = ["uk", "en"] as const;
 export type LandingLocale = (typeof LANDING_LOCALES)[number];
 
+/** A fixed-price package shown under the hero of a landing. */
+export interface LandingOffer {
+  title: string;
+  plans: {
+    name: string;
+    /** As shown, e.g. "$390". */
+    price: string;
+    /** The same amount as a number, for structured data (USD). */
+    amount: number;
+    /** What the price is for, e.g. "one-time". */
+    unit: string;
+    text: string;
+    points: string[];
+  }[];
+  note: string;
+  cta: string;
+}
+
 export interface Landing {
   seo: { title: string; description: string; keywords: string[] };
   /** Short name for breadcrumbs, cards and "related" links. */
@@ -25,6 +43,8 @@ export interface Landing {
   faq: { q: string; a: string }[];
   /** Slugs of 3 related landings. */
   related: string[];
+  /** Present on landings that sell a fixed-price package. */
+  offer?: LandingOffer;
 }
 
 export type LandingEntry = Record<LandingLocale, Landing>;

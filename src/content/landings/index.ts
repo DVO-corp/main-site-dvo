@@ -13,6 +13,10 @@ import { landing as managedHosting } from "./data/managed-hosting";
 import { landing as apiDevelopment } from "./data/api-development";
 import { landing as aiInfrastructure } from "./data/ai-infrastructure";
 import { landing as devopsForStartups } from "./data/devops-for-startups";
+import { landing as launchAiBuiltApp } from "./data/launch-ai-built-app";
+import { landing as deployLovableApp } from "./data/deploy-lovable-app";
+import { landing as replitMigration } from "./data/replit-migration";
+import { landing as boltAppHosting } from "./data/bolt-app-hosting";
 import {
   LANDING_LOCALES,
   type Landing,
@@ -37,6 +41,10 @@ export const LANDINGS: Record<string, LandingEntry> = {
   "api-development": apiDevelopment,
   "ai-infrastructure": aiInfrastructure,
   "devops-for-startups": devopsForStartups,
+  "launch-ai-built-app": launchAiBuiltApp,
+  "deploy-lovable-app": deployLovableApp,
+  "replit-migration": replitMigration,
+  "bolt-app-hosting": boltAppHosting,
 };
 
 export const LANDING_SLUGS = Object.keys(LANDINGS);

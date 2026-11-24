@@ -100,7 +100,7 @@ export const landing: LandingEntry = {
         a: "Yes. We set everything up in your account so the credits are used. The setup is designed for the bill you can pay after they end, not for the amount of credits: otherwise the first real invoice becomes a problem.",
       },
     ],
-    related: ["managed-hosting", "ci-cd", "devops-outsourcing"],
+    related: ["launch-ai-built-app", "managed-hosting", "ci-cd"],
   },
   uk: {
     seo: {
@@ -201,6 +201,6 @@ export const landing: LandingEntry = {
         a: "Так. Налаштовуємо все у вашому акаунті, щоб кредити використовувались. Інфраструктуру проєктуємо під рахунок, який ви зможете платити після їх закінчення, а не під суму кредитів: інакше перший справжній рахунок стає проблемою.",
       },
     ],
-    related: ["managed-hosting", "ci-cd", "devops-outsourcing"],
+    related: ["launch-ai-built-app", "managed-hosting", "ci-cd"],
   },
 };

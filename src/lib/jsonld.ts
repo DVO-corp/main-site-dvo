@@ -146,6 +146,8 @@ export function serviceSchema(service: {
   name: string;
   description: string;
   url: string;
+  /** Fixed prices in USD, when the service is sold as a package. */
+  offers?: { name: string; amount: number }[];
 }): Json {
   return {
     "@type": "Service",
@@ -155,6 +157,17 @@ export function serviceSchema(service: {
     provider: { "@id": ORG_ID },
     areaServed: AREA_SERVED,
     url: service.url,
+    ...(service.offers?.length
+      ? {
+          offers: service.offers.map((offer) => ({
+            "@type": "Offer",
+            name: offer.name,
+            price: offer.amount,
+            priceCurrency: "USD",
+            url: service.url,
+          })),
+        }
+      : {}),
   };
 }
 

@@ -19,6 +19,7 @@ import {
 import { buildLandingMetadata } from "@/lib/seo";
 import { faqSchema, graph, serviceSchema, trailSchema } from "@/lib/jsonld";
 import { JsonLd } from "@/components/common/json-ld";
+import { Button } from "@/components/ui/button";
 import { PhotoHero } from "@/components/common/photo-hero";
 import { SectionHeading } from "@/components/common/section-heading";
 import { Reveal } from "@/components/common/reveal";
@@ -60,6 +61,10 @@ const LANDING_PHOTO: Record<string, string> = {
   "cloud-cost-optimization": "/img/cabinets.webp",
   "ai-infrastructure": "/img/cabinets.webp",
   "cloud-migration": "/img/wires.webp",
+  "launch-ai-built-app": "/img/code.webp",
+  "deploy-lovable-app": "/img/screens.webp",
+  "replit-migration": "/img/wires.webp",
+  "bolt-app-hosting": "/img/engineer.webp",
 };
 
 /** Landings that show a console mock-up under the hero. */
@@ -70,6 +75,7 @@ const DASHBOARD_LANDINGS = [
   "high-load",
   "devops-outsourcing",
   "kubernetes",
+  "launch-ai-built-app",
 ];
 
 export const dynamicParams = false;
@@ -121,6 +127,10 @@ export default async function LandingPage({ params }: { params: Params }) {
             name: landing.name,
             description: landing.seo.description,
             url,
+            offers: landing.offer?.plans.map((plan) => ({
+              name: plan.name,
+              amount: plan.amount,
+            })),
           }),
           faqSchema(landing.faq),
         ])}
@@ -135,6 +145,61 @@ export default async function LandingPage({ params }: { params: Params }) {
         title={landing.h1}
         subtitle={landing.lead}
       />
+
+      {landing.offer && (
+        <section className="section">
+          <div className="container-page flex flex-col gap-12">
+            <SectionHeading title={landing.offer.title} />
+            <ul className="grid gap-3 md:grid-cols-2">
+              {landing.offer.plans.map((plan) => (
+                <li
+                  key={plan.name}
+                  className="flex flex-col gap-6 rounded-[1.75rem] bg-card p-7 sm:p-10"
+                >
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-2xl leading-tight font-semibold">
+                      {plan.name}
+                    </h3>
+                    <p className="flex items-baseline gap-3">
+                      <span className="text-5xl font-semibold tracking-tight sm:text-6xl">
+                        {plan.price}
+                      </span>
+                      <span className="text-lg text-muted-foreground">
+                        {plan.unit}
+                      </span>
+                    </p>
+                  </div>
+                  <p className="text-lg leading-snug text-muted-foreground">
+                    {plan.text}
+                  </p>
+                  <ul className="flex flex-col gap-3">
+                    {plan.points.map((point) => (
+                      <li key={point} className="flex gap-3 leading-snug">
+                        <Check
+                          className="mt-0.5 size-5 shrink-0 text-primary"
+                          aria-hidden
+                        />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col items-center gap-6 text-center">
+              <p className="measure max-w-3xl leading-snug text-muted-foreground">
+                {landing.offer.note}
+              </p>
+              <Button asChild size="lg">
+                <Link href={path(typedLocale, "contact")}>
+                  {landing.offer.cta}
+                  <ArrowRight aria-hidden />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="container-page flex flex-col gap-12">
